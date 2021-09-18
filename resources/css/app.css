@@ -1,0 +1,145 @@
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+    background: #ffffff;
+    margin-bottom: 0 !important;
+}
+.header-logo {
+    width: 150px;
+}
+.addShadow {
+    box-shadow: rgb(0 0 0 / 20%) 0px 3px 3px -2px,
+        rgb(0 0 0 / 14%) 0px 3px 4px 0px, rgb(0 0 0 / 12%) 0px 1px 8px 0px;
+}
+.head-search-box {
+    width: 370px !important;
+}
+.header-phone-wrapper {
+    padding-right: 16px;
+    min-width: 135px;
+}
+.head-phone-title {
+    font-size: 12px;
+}
+.head-phone-number {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: arial;
+}
+.btn-head-icon i {
+    color: #2f3945;
+    font-size: 1.75rem;
+}
+
+.breadcrumb-wrapper {
+    color: #ffffff;
+    padding: 0;
+    text-align: center;
+    font-size: 0.875rem;
+    background: #0343bf;
+}
+.breadcrumb-wrapper .breadcrumb {
+    margin-bottom: 0;
+}
+.breadcrumb-item,
+.breadcrumb-item a {
+    color: #ffffff !important;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    color: #ffffff;
+}
+.navbar-brand {
+    height: unset;
+}
+.form-group {
+    margin-bottom: 0;
+}
+.navbar::after,
+.navbar::before {
+    display: none !important;
+    width: 0;
+}
+.headnav {
+    display: grid !important;
+    grid-template-columns: 0 auto auto auto 0 !important;
+    justify-content: unset !important;
+}
+.header-search-wrap {
+    display: inline-table !important;
+}
+
+/** Login **/
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 163px);
+}
+
+.login-card {
+    width: 570px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px 6px;
+}
+
+.login-title {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.login-input-wrapper {
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: #0343c120 0 0 16px;
+}
+
+.login-input-icon {
+    display: flex;
+    color: #95969a;
+    font-size: 25px;
+    align-items: center;
+}
+
+.login-input {
+    border: none;
+    padding: 16px;
+}
+
+.login-input-icon-wrapper {
+    display: flex;
+    text-align: center;
+    position: relative;
+    align-items: center;
+    width: 100px !important;
+    justify-content: center;
+}
+
+.login-input-icon-wrapper:before {
+    top: 0;
+    left: 0;
+    width: 4px;
+    content: "";
+    height: 100%;
+    position: absolute;
+    background: #0343bf;
+}
+.login-input-icon-wrapper:after {
+    top: 50%;
+    right: 2px;
+    width: 2px;
+    content: "";
+    height: 20px;
+    position: absolute;
+    background: #a4bacf;
+    transform: translateY(-50%);
+}
+@media (min-width: 1200px) {
+    .container-xl,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container {
+        max-width: 1320px;
+    }
+}
