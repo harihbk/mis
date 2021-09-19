@@ -124,5 +124,6 @@ class OrderController extends Controller
         return redirect()->route('order.view', ['order_id' =>  $order_id ]);
 
 
+
     }
 }
