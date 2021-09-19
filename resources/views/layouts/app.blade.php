@@ -12,7 +12,7 @@
 
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
           rel="stylesheet">
-
+          <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- AdminLTE -->
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css"
           integrity="sha512-rVZC4rf0Piwtw/LsgwXxKXzWq3L0P6atiQKBNuXYRbg2FoRbSTIY0k2DxuJcs7dk4e/ShtMzglHKBOJxW8EQyQ=="
@@ -148,6 +148,11 @@
 <script src="{{ asset('assets/bootstrap-5-0-1/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/common.js') }}"></script>
 
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+
 <script>
     $(function () {
         bsCustomFileInput.init();
@@ -162,6 +167,36 @@
 
 
 </script>
+
+
+
+<script type="text/javascript">
+    $(function () {
+
+      var table = $('.yajra-datatable').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ route('order.list') }}",
+          columns: [
+              {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+              {data: 'billing_name', name: 'billing_name'},
+              {data: 'billing_email', name: 'billing_email'},
+              {data: 'billing_city', name: 'billing_city'},
+              {data: 'billing_phone', name: 'billing_phone'},
+              {data: 'order_status_id', name: 'order_status_id' },
+              {
+                  data: 'action',
+                  name: 'action',
+                  orderable: true,
+                  searchable: true
+              },
+          ]
+      });
+
+    });
+  </script>
+
+
 
 @yield('third_party_scripts')
 

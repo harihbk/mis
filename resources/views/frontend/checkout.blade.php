@@ -21,50 +21,80 @@
 
 
             <hr>
-            <h3 class="lead" style="font-size: 1.2em; margin-bottom: 1.6em;">Billing details</h3>
+            <div class="step1">
+            <h3 class="lead" style="font-size: 1.2em; margin-bottom: 1.6em;"><span  class="billingcheckout">Billing details</span></h3>
+
             <form action="{{ route('checkout.store') }}" method="POST">
                 @csrf()
+
+
+                <input type="radio" id="html" name="radio_address" value="exist" class="radioclass" checked>
+                <label for="html">I want to use an existing address</label><br>
+
+
+                <div class="form-group existaddress">
+                    <select name="existaddress" id="existaddress" class="form-control ">
+                        @foreach ($exist_address as $item)
+                            <option value="{{ $item->id }}">{{ $item->billing_email }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+
+
+                <input type="radio" id="css" name="radio_address" value="_new" class="radioclass">
+                <label for="css">I want to use a new address</label><br>
+
+
+
+                <div class="step1_toogle newaddress" style="display:none">
                 <div class="form-group">
                     <label for="email" class="light-text">Email Address</label>
                     @guest
-                        <input type="text" name="email" class="form-control my-input" required>
+                        <input type="text" name="email" class="form-control my-input" >
                     @else
                         <input type="text" name="email" class="form-control my-input" value="{{ auth()->user()->email }}" readonly required>
                     @endguest
                 </div>
                 <div class="form-group">
                     <label for="name" class="light-text">Name</label>
-                    <input type="text" name="name" class="form-control my-input" required>
+                    <input type="text" name="name" class="form-control my-input" >
                 </div>
                 <div class="form-group">
                     <label for="address" class="light-text">Address</label>
-                    <input type="text" name="address" class="form-control my-input" required>
+                    <input type="text" name="address" class="form-control my-input" >
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="city" class="light-text">City</label>
-                            <input type="text" name="city" class="form-control my-input" required>
+                            <input type="text" name="city" class="form-control my-input" >
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="province" class="light-text">Province</label>
-                        <input type="text" name="province" class="form-control my-input" required>
+                        <input type="text" name="province" class="form-control my-input" >
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="postal_code" class="light-text">Postal Code</label>
-                            <input type="text" name="postal_code" class="form-control my-input" required>
+                            <input type="text" name="postal_code" class="form-control my-input" >
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="phone" class="light-text">Phone</label>
-                        <input type="text" name="phone" class="form-control my-input" required>
+                        <input type="text" name="phone" class="form-control my-input" >
                     </div>
                 </div>
-                <h2 style="margin-top:1em; margin-bottom:1em;">Payment details</h2>
+
+            </div>
+
+
+{{--
+                <h2 style="margin-top:1em; margin-bottom:1em;"><span  class="paymentcheckout">Payment details</span></h2>
+                <div class="step2_toogle">
                 <div class="form-group">
                     <label for="name_on_card" class="light-text">Name on card</label>
                     <input type="text" name="name_on_card" class="form-control my-input" required>
@@ -73,9 +103,21 @@
                     <label for="credit_card" class="light-text">Credit Card</label>
                     <input type="text" name="credit_card" class="form-control my-input" required>
                 </div>
+                </div> --}}
+
+
                 <button type="submit" class="btn btn-success custom-border-success btn-block">Complete Order</button>
             </form>
+            </div>
+
+
         </div>
+
+
+
+
+
+
         <div class="col-md-5 offset-md-1">
             <hr>
             <h3>Your Order</h3>
@@ -191,5 +233,73 @@
     }
 
 </style>
+
+
+
+<script>
+    $(document).ready(function(){
+        $(".billingcheckout").click(function(){
+
+         // $(".step1_toogle").slideToggle(1000);
+        })
+
+
+        $(".radioclass").click(function(){
+            val = $(this).val();
+            if(val == "exist"){
+                $(".newaddress").hide();
+                $(".existaddress").show();
+                } else {
+                    $(".newaddress").show();
+                $(".existaddress").hide();
+                }
+
+
+        })
+    })
+
+
+
+
+
+
+
+
+    // Wait for the DOM to be ready
+$(function() {
+  // Initialize form validation on the registration form.
+  // It has the name attribute "registration"
+  $(".continue1").validate({
+    // Specify validation rules
+    rules: {
+      // The key name on the left side is the name attribute
+      // of an input field. Validation rules are defined
+      // on the right side
+      address: "required",
+      name: "required",
+      email: {
+        required: true,
+        // Specify that email should be validated
+        // by the built-in "email" rule
+        email: true
+      },
+
+    },
+    // Specify validation error messages
+    messages: {
+      address: "Please enter your firstname",
+      name: "Please enter your lastname",
+
+      email: "Please enter a valid email address"
+    },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
+        alert("dsf")
+    //  form.submit();
+    }
+  });
+});
+</script>
 
 @endsection

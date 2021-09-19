@@ -14,7 +14,7 @@
 
     <p>{{ $details['body'] }}</p>
 
-
+    {!!  $details['htmltemplate']  !!}
 
     <p>Thank you</p>
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Order_status;
 
 class Order extends Model
 {
@@ -22,10 +23,10 @@ class Order extends Model
 
 
 
-    protected $fillable = ['user_id', 'billing_email', 'billing_name', 'billing_address', 'billing_city',
+    protected $fillable = ['id','user_id', 'billing_email', 'billing_name', 'billing_address', 'billing_city',
                             'billing_province', 'billing_postalcode', 'billing_phone', 'billing_name_on_card',
                             'billing_discount', 'billing_discount_code', 'billing_subtotal', 'billing_tax',
-                            'billing_total', 'error'];
+                            'billing_total', 'error','created_at','order_status_id'];
 
 
 
@@ -33,5 +34,9 @@ class Order extends Model
         return $this->belongsTo(\App\Models\User::class);
     }
 
+    public function getStatus()
+    {
+        return $this->belongsTo(Order_status::class, 'order_status_id', 'order_status_id');
+    }
 
 }

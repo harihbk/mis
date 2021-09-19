@@ -44,7 +44,15 @@ Route::resource('specifications', App\Http\Controllers\SpecificationController::
 
 Route::resource('specificationTypes', App\Http\Controllers\Specification_typeController::class);
 
+
+
 Route::post('getspecificationtype',[App\Http\Controllers\Specification_typeController::class, 'getspecificationtype'])->name('getspecificationtype');
+
+Route::get('order', [App\Http\Controllers\OrderController::class,'index'])->name('order.index');
+Route::get('getOrders',  [App\Http\Controllers\OrderController::class,'getOrders'])->name('order.list');
+Route::get('view/{order_id}',  [App\Http\Controllers\OrderController::class,'orderview'])->name('order.view');
+Route::post('confirmorder',  [App\Http\Controllers\OrderController::class,'confirmorder'])->name('confirm.order');
+
 });
 
 
@@ -100,3 +108,5 @@ Route::get('/website/part/{product_id}', [App\Http\Controllers\FrontendControlle
 Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
 
+// checkout
+Route::get('/orderdetail', [App\Http\Controllers\CheckoutController::class, 'orderdetail'])->name('orderdetail');

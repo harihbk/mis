@@ -33,6 +33,7 @@ class Ordermail extends Mailable
     public function build()
     {
 
+
         return $this->subject('Confirm Order')
         ->view('auth.emails.orderemail');
 
