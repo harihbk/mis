@@ -82,15 +82,67 @@
         <tr>
       <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Sub-Total:</b></td>
       <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $i }}</td>
-    </tr>
-        {{-- <tr>
-      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Flat Shipping Rate:</b></td>
-      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹40</td>
-    </tr> --}}
+        </tr>
+
+        @if (isset($settings) && $settings->discount_status == 1)
+        @php
+        $discount = $i * (1 - $settings->discount / 100);
+        @endphp
+                <tr >
+            <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Discount({{ $settings->discount }})%:</b></td>
+            <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $discount }}</td>
+              </tr>
+            @else
+            @php
+            $discount = $i;
+             @endphp
+            @endif
+
+
+
+            @if (isset($settings) && $settings->igst)
+            @php
+               $igst =   ($i *  $settings->igst) / 100 ;
+            @endphp
+                    <tr>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>IGST({{ $settings->igst }})%:</b></td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $igst }}</td>
+                  </tr>
+            @else
+
+            @php
+            $igst =  0;
+            @endphp
+
+            @endif
+
+
+
+
+            @if (isset($settings) && $settings->cgst)
+            @php
+               $cgst =   ($i *  $settings->cgst) / 100 ;
+            @endphp
+                    <tr>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>CGST({{ $settings->cgst }})%:</b></td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $cgst }}</td>
+                  </tr>
+            @else
+
+            @php
+            $cgst =  0;
+            @endphp
+
+            @endif
+
+            @php
+            $total =  $discount + $igst + $cgst ;
+             @endphp
+
         <tr>
       <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Total:</b></td>
-      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $i }}</td>
-    </tr>
+      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $total }}</td>
+        </tr>
           </tfoot>
 
   </table>

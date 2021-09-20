@@ -53,6 +53,9 @@ Route::get('getOrders',  [App\Http\Controllers\OrderController::class,'getOrders
 Route::get('view/{order_id}',  [App\Http\Controllers\OrderController::class,'orderview'])->name('order.view');
 Route::post('confirmorder',  [App\Http\Controllers\OrderController::class,'confirmorder'])->name('confirm.order');
 
+Route::get('settings', [App\Http\Controllers\SettingController::class,'index'])->name('settings');
+Route::post('store', [App\Http\Controllers\SettingController::class,'store'])->name('setting.store');
+
 });
 
 

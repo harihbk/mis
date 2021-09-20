@@ -17,6 +17,7 @@ use App\Models\Product_part_number;
 use App\Models\Order;
 use App\Models\Order_product;
 use App\Models\Order_history;
+use App\Models\Setting;
 use Auth;
 use View;
 
@@ -37,10 +38,10 @@ class CheckoutController extends Controller
             $exist_address = "";
         }
 
-
+        $settings = Setting::first();
 
         return view('frontend.checkout')
-            ->with(compact('exist_address','cart_data'));
+            ->with(compact('exist_address','cart_data' , 'settings'));
 
         // if (Cart::instance('default')->count() > 0) {
         //     $subtotal = Cart::instance('default')->subtotal() ?? 0;
@@ -107,7 +108,11 @@ class CheckoutController extends Controller
             $order = Order::where('id', $order->id)->first();
             $order_product = Order_product::where('order_id',$order->id)->get();
             $status = "Pending";
-            $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status'));
+            $settings     = Setting::first();
+            $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status' , 'settings' ));
+
+
+
             // SUCCESSFUL
 
             // store history of customer

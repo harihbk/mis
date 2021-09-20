@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Product_part_number;
+use App\Models\Setting;
 
 class CartController extends Controller
 {
@@ -106,9 +107,9 @@ class CartController extends Controller
     {
         $cookie_data = stripslashes(Cookie::get('shopping_cart'));
         $cart_data = json_decode($cookie_data, true);
-
+        $settings = Setting::first();
         return view('frontend.cart')
-            ->with('cart_data',$cart_data)
+            ->with(compact('cart_data','settings'))
         ;
     }
 
