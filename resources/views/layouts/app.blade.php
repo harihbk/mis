@@ -197,6 +197,29 @@
   </script>
 
 
+<!-- settings form-->
+<script>
+    $(document).ready(function(){
+
+        if($('#discount_status :selected').val() == 1){
+            $("#discount1").show();
+        } else {
+            $("#discount1").hide();
+        }
+
+        $("#discount_status").on('change',function(){
+
+            if($(this).val() == "0"){
+              $("#discount1").hide();
+            } else {
+                $("#discount1").show();
+            }
+        })
+    })
+</script>
+<!-- settings form-->
+
+
 
 @yield('third_party_scripts')
 

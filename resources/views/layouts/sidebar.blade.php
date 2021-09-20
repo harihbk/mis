@@ -58,6 +58,28 @@
                     </ul>
                 </div>
             </li>
+
+
+
+            <li class="mb-1">
+                <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse2" aria-expanded="false">
+                    <svg style="color: #1761fd; fill: rgba(23,97,253,0.12); margin-right: 8px;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box align-self-center menu-icon">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                    Company Settings
+                </button>
+                <div class="collapse" id="dashboard-collapse2">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('settings') }}" ><i class="ti-control-record"></i> Category</a></li>
+
+                    </ul>
+                </div>
+            </li>
+
+
+
             <li class="mb-1">
                 <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
                     <svg style="color: #1761fd; fill: rgba(23,97,253,0.12); margin-right: 8px;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home align-self-center menu-icon">

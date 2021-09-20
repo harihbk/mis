@@ -8,6 +8,7 @@ use App\Models\Order_history;
 use App\Models\Order_product;
 use App\Models\Order_status;
 use App\Models\Product_part_number;
+use App\Models\Setting;
 use DataTables;
 use View;
 
@@ -58,9 +59,9 @@ class OrderController extends Controller
 
        $order_status = Order_status::all();
 
+       $settings     = Setting::first();
 
-
-       $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status'));
+       $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status','settings'));
 
        $order_history = Order_history::where('order_id',$order_id)->get();
 
@@ -96,13 +97,16 @@ class OrderController extends Controller
         $order_product = Order_product::where('order_id',$order_id)->get();
 
         $status = $status->name;
+        $settings     = Setting::first();
+        $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status','settings'));
 
-        $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status'));
+
 
         $details = [
             'title' => 'Mail from BestindiaKart',
             'body' => "Your order is $status",
-            'htmltemplate' => $orderdetail
+            'htmltemplate' => $orderdetail,
+
         ];
 
         $useremail =  $order->user->email;

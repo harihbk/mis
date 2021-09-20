@@ -69,6 +69,8 @@
                                                 </td>
 
 
+
+
                                                 {{-- <td class="cart-product-quantity">
                                                      <input type="number" class="qty-input form-control" value="{{ $data['item_quantity'] }}" min="1" max="100"/>
                                                 </td> --}}
@@ -106,8 +108,91 @@
                                                 </h6>
                                             </div>
                                         </div>
+
+                                        {{-- dicount if present --}}
+
+                                        @if (isset($settings) && $settings->discount_status == 1)
+                                        @php
+                                            $discount = $total * (1 - $settings->discount / 100);
+                                        @endphp
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6 class="cart-subtotal-name">Discount({{ $settings->discount }})%</h6>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6 class="cart-subtotal-price">
+                                                    Rs.
+                                                    <span class="cart-grand-price-viewajax">{{ $total * (1 - $settings->discount / 100 )}}</span>
+                                                </h6>
+                                            </div>
+                                        </div>
+
+                                        @else
+                                        @php
+                                        $discount = $total;
+                                         @endphp
+                                        @endif
+
+                                        {{-- igst if present --}}
+                                        @if (isset($settings) && $settings->igst)
+                                        @php
+                                           $igst =   ($total *  $settings->igst) / 100 ;
+                                        @endphp
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6 class="cart-subtotal-name">IGST({{ $settings->igst }})%</h6>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6 class="cart-subtotal-price">
+                                                    Rs.
+                                                    <span class="cart-grand-price-viewajax">{{ ($total *  $settings->igst) / 100}}</span>
+                                                </h6>
+                                            </div>
+                                        </div>
+
+                                        @else
+
+                                        @php
+                                        $igst =  0;
+                                        @endphp
+
+                                        @endif
+
+
+                                        {{-- cgst if present --}}
+                                        @if (isset($settings) && $settings->cgst)
+                                        @php
+                                           $cgst =   ($total *  $settings->cgst) / 100 ;
+                                        @endphp
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6 class="cart-subtotal-name">CGST({{ $settings->cgst }})%</h6>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6 class="cart-subtotal-price">
+                                                    Rs.
+                                                    <span class="cart-grand-price-viewajax">{{ ($total *  $settings->cgst) / 100}}</span>
+                                                </h6>
+                                            </div>
+                                        </div>
+
+                                        @else
+
+                                        @php
+                                        $cgst =  0;
+                                        @endphp
+
+                                        @endif
+
+
+
+
+
                                         <hr>
                                         <div class="row">
+                                            @php
+                                              $total =  $discount + $igst + $cgst ;
+                                            @endphp
                                             <div class="col-md-6">
                                                 <h6 class="cart-grand-name">Grand Total</h6>
                                             </div>
