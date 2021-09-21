@@ -72,7 +72,7 @@
                 </button>
                 <div class="collapse" id="dashboard-collapse2">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('settings') }}" ><i class="ti-control-record"></i> Category</a></li>
+                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('settings') }}" ><i class="ti-control-record"></i> Tax</a></li>
 
                     </ul>
                 </div>
