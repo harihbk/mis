@@ -56,6 +56,7 @@ Route::post('confirmorder',  [App\Http\Controllers\OrderController::class,'confi
 Route::get('settings', [App\Http\Controllers\SettingController::class,'index'])->name('settings');
 Route::post('store', [App\Http\Controllers\SettingController::class,'store'])->name('setting.store');
 
+Route::resource('users', App\Http\Controllers\UserTypeController::class);
 });
 
 

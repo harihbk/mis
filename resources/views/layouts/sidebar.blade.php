@@ -34,7 +34,7 @@
                 <div class="collapse " id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <li><a href="#"><i class="ti-control-record"></i> Vendors</a></li>
-                        <li><a href="#"><i class="ti-control-record"></i> Users</a></li>
+                        <li  class=" {{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}" ><i class="ti-control-record"></i> Users</a></li>
                     </ul>
                 </div>
             </li>
@@ -72,7 +72,7 @@
                 </button>
                 <div class="collapse" id="dashboard-collapse2">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('settings') }}" ><i class="ti-control-record"></i> Tax</a></li>
+                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('settings') }}" ><i class="ti-control-record"></i> Category</a></li>
 
                     </ul>
                 </div>
