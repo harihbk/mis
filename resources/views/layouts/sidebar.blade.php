@@ -33,7 +33,7 @@
                 </button>
                 <div class="collapse " id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#"><i class="ti-control-record"></i> Vendors</a></li>
+                        <li  class=" {{ Request::is('vendors*') ? 'active' : '' }}"><a href="{{ route('vendors.index') }}" ><i class="ti-control-record"></i> Vendors</a></li>
                         <li  class=" {{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}" ><i class="ti-control-record"></i> Users</a></li>
                     </ul>
                 </div>

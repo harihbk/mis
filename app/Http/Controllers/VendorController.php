@@ -1,18 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\UpdateUserTypeRequest;
 use App\Http\Requests\UserTypeRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Notification;
 use App\Notifications\UserCreationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Laracasts\Flash\Flash;
 
-class UserTypeController extends Controller
+class VendorController extends Controller
 {
+
     /**
      * Display a listing of the Users.
      *
@@ -22,8 +22,8 @@ class UserTypeController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::where('status',1)->where('userType',3)->get();
-        return view('users.index')
+        $users = User::where('status',1)->where('userType',2)->get();
+        return view('vendors.index')
             ->with('users', $users);
     }
 
@@ -34,7 +34,7 @@ class UserTypeController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('vendors.create');
     }
 
     /**
@@ -54,14 +54,12 @@ class UserTypeController extends Controller
             'password' => Hash::make($input['password']),
             'mobileno' =>  $input['mobileno'],
             'status' =>  1,
-            'userType' => 3,
+            'userType' => 2,
             'user_status' => @$input['user_status'] ? @$input['user_status'] : 0
         ]);
-
-        Flash::success('User saved successfully.');
         Notification::send($user, new UserCreationNotification($user));
-
-        return redirect(route('users.index'));
+        Flash::success('User saved successfully.');
+        return redirect(route('vendors.index'));
     }
 
     /**
@@ -76,12 +74,12 @@ class UserTypeController extends Controller
         $user = User::find($id);
 
         if (empty($user)) {
-            Flash::error('user not found');
+            Flash::error('Vendor not found');
 
-            return redirect(route('users.index'));
+            return redirect(route('vendors.index'));
         }
 
-        return view('users.show')->with('user', $user);
+        return view('vendors.show')->with('user', $user);
     }
 
     /**
@@ -96,11 +94,11 @@ class UserTypeController extends Controller
         $user = User::find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::error('Vendor not found');
 
-            return redirect(route('users.index'));
+            return redirect(route('vendors.index'));
         }
-        return view('users.edit') ->with('user', $user);
+        return view('vendors.edit') ->with('user', $user);
     }
 
 
@@ -115,11 +113,11 @@ class UserTypeController extends Controller
     public function update($id, UpdateUserTypeRequest $request)
     {
         $user = User::find($id);
-
+        // dd(url('/password/resets/'.base64_decode($user->email)));
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::error('Vendor not found');
 
-            return redirect(route('users.index'));
+            return redirect(route('vendors.index'));
         }
         $input = $request->all();
         // dd($input);
@@ -136,7 +134,7 @@ class UserTypeController extends Controller
 
         Flash::success('User updated successfully.');
 
-        return redirect(route('users.index'));
+        return redirect(route('vendors.index'));
     }
 
 
@@ -154,16 +152,16 @@ class UserTypeController extends Controller
         $user = User::find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::error('Vendor not found');
 
-            return redirect(route('users.index'));
+            return redirect(route('vendors.index'));
         }
 
         User::where('id',$id)->delete();
 
         Flash::success('User deleted successfully.');
 
-        return redirect(route('users.index'));
+        return redirect(route('vendors.index'));
     }
 
 

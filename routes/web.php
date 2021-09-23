@@ -57,6 +57,18 @@ Route::get('settings', [App\Http\Controllers\SettingController::class,'index'])-
 Route::post('store', [App\Http\Controllers\SettingController::class,'store'])->name('setting.store');
 
 Route::resource('users', App\Http\Controllers\UserTypeController::class);
+Route::resource('vendors', App\Http\Controllers\VendorController::class);
+});
+
+Route::group(['prefix' => 'subadmin','middleware' => ['auth','subadminauth'],'as'=>'subamin.'], function()
+{
+    Route::get('dashboard', [App\Http\Controllers\USerController::class,'subadminDashboard'])->name('dashboard');
+});
+
+
+Route::group(['prefix' => 'vendor','middleware' => ['auth','vendorauth'],'as'=>'vendor.'], function()
+{
+    Route::get('dashboard', [App\Http\Controllers\USerController::class,'vendorDashboard'])->name('dashboard');
 });
 
 
@@ -86,6 +98,9 @@ Route::post('adminauth',[App\Http\Controllers\Auth\LoginController::class, 'admi
 
 Route::post('emailcheck',[App\Http\Controllers\Auth\RegisterController::class, 'emailcheck'])->name('emailcheck');
 Route::post('mobilecheck',[App\Http\Controllers\Auth\RegisterController::class, 'mobilecheck'])->name('mobilecheck');
+
+Route::get('password/resets/{email}',[App\Http\Controllers\UserController::class, 'passwordResetEmail']);
+Route::post('userpassword',[App\Http\Controllers\UserController::class, 'userpassword'])->name('userpassword');
 
 
 Route::post('authlogin',[App\Http\Controllers\UserController::class, 'postlogin'])->name('authlogin');
