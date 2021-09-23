@@ -10,8 +10,8 @@
         <tbody>
         @foreach($subcategories as $subcategory)
             <tr>
-                <td>{{ $subcategory->name }}</td>
-                <td>{{ $subcategory->category->name }}</td>
+                <td>{{ $subcategory->name ?? '' }}</td>
+                <td>{{ $subcategory->category->name ?? '' }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['subcategories.destroy', $subcategory->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
