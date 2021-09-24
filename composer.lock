@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd47b8f0dc35724a3d262cc76bee6e36",
+    "content-hash": "ff5c35eb78b34d7f9841af5c8b9ff972",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5650,6 +5650,70 @@
                 }
             ],
             "time": "2021-06-28T01:24:17+00:00"
+        },
+        {
+            "name": "zgabievi/promocodes",
+            "version": "8.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zgabievi/laravel-promocodes.git",
+                "reference": "dca1090ccdbeefcadda3ba4d8aa5aee62f5718b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zgabievi/laravel-promocodes/zipball/dca1090ccdbeefcadda3ba4d8aa5aee62f5718b1",
+                "reference": "dca1090ccdbeefcadda3ba4d8aa5aee62f5718b1",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^2.10||^3.0",
+                "laravel/framework": "~5.7||~5.8||~6.0||~7.0||~8.0",
+                "php": "^7.2||^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~4.0",
+                "phpunit/phpunit": "^8.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Gabievi\\Promocodes\\PromocodesServiceProvider"
+                    ],
+                    "aliases": {
+                        "Promocodes": "Gabievi\\Promocodes\\Facades\\Promocodes"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Gabievi\\Promocodes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zura Gabievi",
+                    "email": "zura.gabievi@gmail.com"
+                }
+            ],
+            "description": "Promotional Codes Generator for Laravel 5",
+            "homepage": "https://github.com/zgabievi/promocodes",
+            "keywords": [
+                "coupon code",
+                "discount code",
+                "laravel",
+                "php",
+                "promo code"
+            ],
+            "support": {
+                "issues": "https://github.com/zgabievi/laravel-promocodes/issues",
+                "source": "https://github.com/zgabievi/laravel-promocodes/tree/8.1.2"
+            },
+            "time": "2021-01-26T13:09:56+00:00"
         }
     ],
     "packages-dev": [

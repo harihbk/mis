@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
@@ -39,12 +40,28 @@ class UserController extends Controller
 
         }
         if (Auth::attempt($credentials)) {
-
-            return redirect('website');
+            $this->authenticated();
         }
         return Redirect::back()->with('message', 'Username or password is invalid');
     }
 
+    public function authenticated() {
+        $role = Auth::user()->user_role;
+        switch ($role) {
+          case 'Admin':
+            return redirect('/categorys');
+            break;
+          case 'Vendor':
+            return redirect('/vendor/dashboard');
+            break;
+        case 'Sub Admin':
+            return redirect('/subadmin/dashboard');
+            break;
+          default:
+            return redirect('/website');
+          break;
+        }
+   }
 
     public function authlogout(Request $request){
         Auth::logout();
@@ -54,4 +71,36 @@ class UserController extends Controller
     public function profile(){
       return view('frontend.profile');
     }
+
+    public function passwordResetEmail($email){
+        if($email) {
+            $decoded_email = base64_decode($email);
+            $user = User::where('email',$decoded_email)->first();
+        }
+        return view('paswordReset')->with('user',$user);
+      }
+
+      public function userpassword(Request $request){
+        $user = User::where('id',$request->user_id)->first();
+        $user->password = Hash::make($request->password);
+        $user->email_verified_at = \Carbon\Carbon::now();
+        $user->save();
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            if($user->userType == 2){
+                return redirect()->intended('/vendor/dashboard')->withSuccess('You have Successfully loggedin');
+            } else {
+                return redirect()->intended('/subadmin/dashboard')->withSuccess('You have Successfully loggedin');
+            }
+        }
+        return view('')->with('user',$user);
+      }
+
+      public function subadminDashboard(){
+        return view('subadmin.dashboard');
+      }
+
+      public function vendorDashboard(){
+        return view('vendor.dashboard');
+      }
 }

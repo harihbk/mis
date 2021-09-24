@@ -6,7 +6,9 @@
 
 <!-- start page content -->
 <div class="container">
+
     <div class="row">
+
         <div class="col-md-5 offset-md-1">
             <hr>
             <h1 class="lead" style="font-size: 1.5em">Checkout</h1>
@@ -91,24 +93,10 @@
 
             </div>
 
-
-{{--
-                <h2 style="margin-top:1em; margin-bottom:1em;"><span  class="paymentcheckout">Payment details</span></h2>
-                <div class="step2_toogle">
-                <div class="form-group">
-                    <label for="name_on_card" class="light-text">Name on card</label>
-                    <input type="text" name="name_on_card" class="form-control my-input" required>
-                </div>
-                <div class="form-group">
-                    <label for="credit_card" class="light-text">Credit Card</label>
-                    <input type="text" name="credit_card" class="form-control my-input" required>
-                </div>
-                </div> --}}
-
-
                 <button type="submit" class="btn btn-success custom-border-success btn-block">Complete Order</button>
             </form>
             </div>
+
 
 
         </div>
@@ -119,6 +107,10 @@
 
 
         <div class="col-md-5 offset-md-1">
+
+        <input type="text" name="couponcode" id="couponcode" class="couponcode form-control" placeholder="Apply Coupon Code">
+
+
             <hr>
             <h3>Your Order</h3>
             <hr>
@@ -335,7 +327,9 @@
                 </form>
             @endif --}}
         </div>
+
     </div>
+
 </div>
 <!-- end page content -->
 

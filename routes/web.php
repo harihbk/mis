@@ -54,11 +54,31 @@ Route::get('view/{order_id}',  [App\Http\Controllers\OrderController::class,'ord
 Route::post('confirmorder',  [App\Http\Controllers\OrderController::class,'confirmorder'])->name('confirm.order');
 
 Route::get('settings', [App\Http\Controllers\SettingController::class,'index'])->name('settings');
+// promocode create
+Route::post('promocode', [App\Http\Controllers\SettingController::class,'promocodesave'])->name('promocode');
+Route::get('promocodelist', [App\Http\Controllers\SettingController::class,'promocodelist'])->name('promocodelist');
+Route::get('getPromo', [App\Http\Controllers\SettingController::class,'p_list'])->name('promo.list');
+Route::get('createcoupon', [App\Http\Controllers\SettingController::class,'createcoupon'])->name('createcoupon');
+
+
 Route::post('store', [App\Http\Controllers\SettingController::class,'store'])->name('setting.store');
+
 
 Route::get('coupon', [App\Http\Controllers\SettingController::class,'couponlist'])->name('coupon');
 
+Route::resource('users', App\Http\Controllers\UserTypeController::class);
+Route::resource('vendors', App\Http\Controllers\VendorController::class);
+});
 
+Route::group(['prefix' => 'subadmin','middleware' => ['auth','subadminauth'],'as'=>'subamin.'], function()
+{
+    Route::get('dashboard', [App\Http\Controllers\USerController::class,'subadminDashboard'])->name('dashboard');
+});
+
+
+Route::group(['prefix' => 'vendor','middleware' => ['auth','vendorauth'],'as'=>'vendor.'], function()
+{
+    Route::get('dashboard', [App\Http\Controllers\USerController::class,'vendorDashboard'])->name('dashboard');
 });
 
 
@@ -88,6 +108,9 @@ Route::post('adminauth',[App\Http\Controllers\Auth\LoginController::class, 'admi
 
 Route::post('emailcheck',[App\Http\Controllers\Auth\RegisterController::class, 'emailcheck'])->name('emailcheck');
 Route::post('mobilecheck',[App\Http\Controllers\Auth\RegisterController::class, 'mobilecheck'])->name('mobilecheck');
+
+Route::get('password/resets/{email}',[App\Http\Controllers\UserController::class, 'passwordResetEmail']);
+Route::post('userpassword',[App\Http\Controllers\UserController::class, 'userpassword'])->name('userpassword');
 
 
 Route::post('authlogin',[App\Http\Controllers\UserController::class, 'postlogin'])->name('authlogin');
