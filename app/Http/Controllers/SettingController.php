@@ -29,4 +29,10 @@ class SettingController extends Controller
         return redirect()->route('settings')->with('successMsg','Settings Updated');
 
     }
+
+    public function couponlist(Request $request){
+         return view('settings.couponlist');
+    }
+
+
 }
