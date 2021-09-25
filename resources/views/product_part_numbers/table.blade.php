@@ -15,14 +15,14 @@
         <tbody>
         @foreach($productPartNumbers as $productPartNumber)
             <tr>
-                <td>{{ $productPartNumber->part_number }}</td>
-            <td>{{ $productPartNumber->dates_to_ship }}</td>
-            <td>{{ $productPartNumber->nominal_thread_m }}</td>
+                <td>{{ $productPartNumber->part_number ?? '' }}</td>
+            <td>{{ $productPartNumber->dates_to_ship ?? '' }}</td>
+            <td>{{ $productPartNumber->nominal_thread_m ?? '' }}</td>
             {{-- <td>{{ $productPartNumber->nominal_thread_inch }}</td> --}}
-            <td> <img src="{{url('/uploads/')}}/{{ $productPartNumber->icon }}" alt="Image" width="40px" height="40px"/></td>
+            <td> <img src="{{url('/uploads/')}}/{{ $productPartNumber->icon ?? '' }}" alt="Image" width="40px" height="40px"/></td>
 
 
-            <td>{{ $productPartNumber->product->name }}</td>
+            <td>{{ $productPartNumber->product->name ?? '' }}</td>
 
             <td>
             @foreach($productPartNumber->specification as $spec)

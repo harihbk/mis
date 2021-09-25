@@ -24,7 +24,9 @@
                     <td>{{ $item->reward ?? '' }}</td>
                     <td>{{ $item->quantity ?? '' }}</td>
                     <td>{{ $item->expires_at ?? '' }}</td>
-                    <td>{{ $item->users }}</td>
+                    <td>@foreach ( $item->users as $user)
+                         {{ $user->email ?? ''}}<br>
+                    @endforeach</td>
                 </tr>
 
             @endforeach

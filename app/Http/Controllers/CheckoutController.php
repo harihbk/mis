@@ -20,7 +20,8 @@ use App\Models\Order_history;
 use App\Models\Setting;
 use Auth;
 use View;
-
+use Session;
+use Promocodes;
 
 class CheckoutController extends Controller
 {
@@ -184,6 +185,20 @@ class CheckoutController extends Controller
 
         }
 
+        if(session('coupon')){
+
+           $co =  Promocodes::apply(session('coupon')['name']);
+
+          $promocode = $co->users[0]->pivot->id;
+
+        } else {
+            $promocode = 0;
+        }
+
+
+
+
+
         $order = Order::create([
             'user_id' => auth()->user() ? auth()->user()->id : null,
             'billing_email' => $request->email,
@@ -199,6 +214,7 @@ class CheckoutController extends Controller
             'billing_subtotal' =>$total,
             'billing_tax' => 0,
             'billing_total' =>$total,
+            'coupon_id' => $promocode,  // promocode id   from promocode user
             'order_status_id' => 1, //pending status
             'error' => $error
         ]);
