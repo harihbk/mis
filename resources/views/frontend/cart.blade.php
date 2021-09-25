@@ -109,29 +109,8 @@
                                             </div>
                                         </div>
 
-                                        {{-- dicount if present --}}
+                                      
 
-                                        @if (isset($settings) && $settings->discount_status == 1)
-                                        @php
-                                            $discount = $total * (1 - $settings->discount / 100);
-                                        @endphp
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-name">Discount({{ $settings->discount }})%</h6>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-price">
-                                                    Rs.
-                                                    <span class="cart-grand-price-viewajax">{{ $total * (1 - $settings->discount / 100 )}}</span>
-                                                </h6>
-                                            </div>
-                                        </div>
-
-                                        @else
-                                        @php
-                                        $discount = $total;
-                                         @endphp
-                                        @endif
 
                                         {{-- igst if present --}}
                                         @if (isset($settings) && $settings->igst)
@@ -191,7 +170,7 @@
                                         <hr>
                                         <div class="row">
                                             @php
-                                              $total =  $discount + $igst + $cgst ;
+                                              $total =  $total + $igst + $cgst ;
                                             @endphp
                                             <div class="col-md-6">
                                                 <h6 class="cart-grand-name">Grand Total</h6>
