@@ -193,6 +193,31 @@
           ]
       });
 
+
+
+
+
+
+    //   var table = $('.promocode-datatable').DataTable({
+    //       processing: true,
+    //       serverSide: true,
+    //       ajax: "{{ route('promo.list') }}",
+    //       columns: [
+    //           {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+    //           {data: 'code', name: 'code'},
+    //           {data: 'reward', name: 'reward'},
+    //           {data: 'quantity', name: 'quantity'},
+    //           {data: 'expired_at', name: 'expired_at'},
+
+    //       ]
+    //   });
+
+
+
+
+
+
+
     });
   </script>
 

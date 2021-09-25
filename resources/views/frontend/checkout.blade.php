@@ -6,7 +6,27 @@
 
 <!-- start page content -->
 <div class="container">
+                @if (session()->has('success_message'))
+                <div class="spacer"></div>
+                <div class="alert alert-success">
+                    {{ session()->get('success_message') }}
+                </div>
+            @endif
+
+            @if(count($errors) > 0)
+            <div class="spacer"></div>
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{!! $error !!}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
     <div class="row">
+
+
         <div class="col-md-5 offset-md-1">
             <hr>
             <h1 class="lead" style="font-size: 1.5em">Checkout</h1>
@@ -91,24 +111,10 @@
 
             </div>
 
-
-{{--
-                <h2 style="margin-top:1em; margin-bottom:1em;"><span  class="paymentcheckout">Payment details</span></h2>
-                <div class="step2_toogle">
-                <div class="form-group">
-                    <label for="name_on_card" class="light-text">Name on card</label>
-                    <input type="text" name="name_on_card" class="form-control my-input" required>
-                </div>
-                <div class="form-group">
-                    <label for="credit_card" class="light-text">Credit Card</label>
-                    <input type="text" name="credit_card" class="form-control my-input" required>
-                </div>
-                </div> --}}
-
-
                 <button type="submit" class="btn btn-success custom-border-success btn-block">Complete Order</button>
             </form>
             </div>
+
 
 
         </div>
@@ -119,6 +125,10 @@
 
 
         <div class="col-md-5 offset-md-1">
+
+        <input type="text" name="couponcode" id="couponcode" class="couponcode form-control" placeholder="Apply Coupon Code">
+
+
             <hr>
             <h3>Your Order</h3>
             <hr>
@@ -168,7 +178,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h6 class="cart-subtotal-name">Subtotal</h6>
+                    <h6 class="cart-subtotal-name">Total</h6>
                 </div>
                 <div class="col-md-6">
                     <h6 class="cart-subtotal-price">
@@ -184,7 +194,7 @@
 
                     {{-- dicount if present --}}
 
-                    @if (isset($settings) && $settings->discount_status == 1)
+                    {{-- @if (isset($settings) && $settings->discount_status == 1)
                     @php
                         $discount = $total * (1 - $settings->discount / 100);
                     @endphp
@@ -204,7 +214,71 @@
                     @php
                     $discount = $total;
                     @endphp
+                    @endif --}}
+
+
+
+
+
+                {{-- dicount if present --}}
+                    @if (session()->has('coupon'))
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="cart-subtotal-name">Discount({{ session('coupon')['name'] ?? '' }})%</h6>
+                            <form class="form-inline" action="{{ route('coupon.destroy') }}" method="POST" style="display:inline">
+                                @csrf()
+                                @method('DELETE')
+                                <button class="inline-form-button" type="submit">Remove</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="cart-subtotal-price">
+                                Rs.
+                                <span class="cart-grand-price-viewajax">{{ session('coupon')['discount'] ?? '' }}</span>
+                            </h6>
+                        </div>
+                    </div>
+
+                    @php
+                    $discount = (isset(session('coupon')['discount']) && session('coupon')['discount']) ? session('coupon')['discount'] : 0;
+                    @endphp
+
+                   <hr>
+                    {{-- <div class="row">
+                        <div class="col-md-4">
+                            <span class="light-text">New Subtotal</span>
+                        </div>
+                        <div class="col-md-4 offset-md-4">
+                            <span class="light-text" style="display: inline-block"></span>
+                        </div>
+                    </div> --}}
+
+                    @else
+                    @php
+                    $discount = 0;
+                    @endphp
                     @endif
+
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="cart-subtotal-name">SubTotal</h6>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="cart-subtotal-price">
+                                Rs.
+                                <span class="cart-grand-price-viewajax">{{ abs($discount-$total) }}</span>
+                            </h6>
+                        </div>
+                    </div>
+                    @php
+                        $total = abs($discount-$total);
+                    @endphp
+
+
+
 
                     {{-- igst if present --}}
                     @if (isset($settings) && $settings->igst)
@@ -264,7 +338,8 @@
                     <hr>
                     <div class="row">
                         @php
-                        $total =  $discount + $igst + $cgst ;
+
+                        $total =   $total + $igst + $cgst ;
                         @endphp
                         <div class="col-md-6">
                             <h6 class="cart-grand-name">Grand Total</h6>
@@ -284,47 +359,6 @@
 
 
 
-            {{-- @if (session()->has('coupon'))
-                <div class="row">
-                    <div class="col-md-4">
-                        <span class="light-text inline">Discount({{ session('coupon')['code'] }})</span>
-                    </div>
-                    <div class="col-md-4">
-                        <form class="form-inline" action="{{ route('coupon.destroy') }}" method="POST" style="display:inline">
-                            @csrf()
-                            @method('DELETE')
-                            <button class="inline-form-button" type="submit">Remove</button>
-                        </form>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="light-text" style="display: inline">- ${{ format($discount) }}</span>
-                    </div>
-                </div><hr>
-                <div class="row">
-                    <div class="col-md-4">
-                        <span class="light-text">New Subtotal</span>
-                    </div>
-                    <div class="col-md-4 offset-md-4">
-                        <span class="light-text" style="display: inline-block">${{ format($newSubtotal) }}</span>
-                    </div>
-                </div>
-            @endif
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="light-text">Tax(21%)</span>
-                </div>
-                <div class="col-md-4 offset-md-4">
-                    <span class="light-text" style="display: inline-block">${{ format($tax) }}</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <span>Total</span>
-                </div>
-                <div class="col-md-4 offset-md-4">
-                    <span class="text-right" style="display: inline-block">${{ format($total) }}</span>
-                </div>
-            </div>
             <hr>
             @if (!session()->has('coupon'))
                 <form action="{{ route('coupon.store') }}" method="POST">
@@ -333,9 +367,11 @@
                     <input type="text" name="coupon_code" id="coupon" class="form-control my-input" placeholder="123456" required>
                     <button type="submit" class="btn btn-success custom-border-success btn-block">Apply Coupon</button>
                 </form>
-            @endif --}}
+            @endif
         </div>
+
     </div>
+
 </div>
 <!-- end page content -->
 

@@ -80,11 +80,13 @@
     <tfoot>
 
         <tr>
-      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Sub-Total:</b></td>
+      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Total:</b></td>
       <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $i }}</td>
         </tr>
 
-        @if (isset($settings) && $settings->discount_status == 1)
+
+
+        {{-- @if (isset($settings) && $settings->discount_status == 1)
         @php
         $discount = $i * (1 - $settings->discount / 100);
         @endphp
@@ -96,7 +98,32 @@
             @php
             $discount = $i;
              @endphp
+            @endif --}}
+
+
+            @if ($discount)
+            <tr >
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Discount({{ $discount->code }})%:</b></td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $discount->reward }}</td>
+                  </tr>
+                  @php
+                  $discount = $discount->reward;
+              @endphp
+            @else
+
+            @php
+           $discount = 0;
+            @endphp
             @endif
+
+            <tr >
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>SubTotal:</b></td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ abs($i-$discount) }}</td>
+            </tr>
+
+            @php
+                  $subtotal = abs($i-$discount);
+            @endphp
 
 
 
@@ -104,10 +131,10 @@
             @php
                $igst =   ($i *  $settings->igst) / 100 ;
             @endphp
-                    <tr>
+                <tr>
                 <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>IGST({{ $settings->igst }})%:</b></td>
                 <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $igst }}</td>
-                  </tr>
+                </tr>
             @else
 
             @php
@@ -136,7 +163,7 @@
             @endif
 
             @php
-            $total =  $discount + $igst + $cgst ;
+            $total =  $subtotal + $igst + $cgst ;
              @endphp
 
         <tr>

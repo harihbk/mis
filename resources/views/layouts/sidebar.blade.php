@@ -68,11 +68,12 @@
                         <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
                         <line x1="12" y1="22.08" x2="12" y2="12"></line>
                     </svg>
-                    Company Settings
+                    Product Settings
                 </button>
                 <div class="collapse" id="dashboard-collapse2">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('settings') }}" ><i class="ti-control-record"></i> Category</a></li>
+                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('settings') }}" ><i class="ti-control-record"></i> Tax</a></li>
+                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('coupon') }}" ><i class="ti-control-record"></i> Coupon</a></li>
 
                     </ul>
                 </div>
