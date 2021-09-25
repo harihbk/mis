@@ -13,7 +13,7 @@
         </div>
 
             <div class="form-group">
-                <label for="amount">Amount</label>
+                <label for="amount">Discount(%)</label>
                 <input type="text" name="reward" id="reward" class="form-control">
             </div>
             <div class="form-group">
