@@ -11,7 +11,7 @@
         <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:left;padding:7px">
             <b>Order ID:</b> {{ $item->order_id ?? ''}}<br>
             <b>Order Status:</b> {{ $item->getStatus->name ?? ''}}<br>
-            <b>Order Date:</b> {{ $item->date_added ?? ''}}<br>
+            <b>Order Date:</b> {{ $item->created_at ?? ''}}<br>
         </td>
          </tr>
          @endforeach

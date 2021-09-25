@@ -54,7 +54,19 @@ Route::get('view/{order_id}',  [App\Http\Controllers\OrderController::class,'ord
 Route::post('confirmorder',  [App\Http\Controllers\OrderController::class,'confirmorder'])->name('confirm.order');
 
 Route::get('settings', [App\Http\Controllers\SettingController::class,'index'])->name('settings');
+// promocode create
+Route::post('promocode', [App\Http\Controllers\SettingController::class,'promocodesave'])->name('promocode');
+Route::get('promocodelist', [App\Http\Controllers\SettingController::class,'promocodelist'])->name('promocodelist');
+Route::get('getPromo', [App\Http\Controllers\SettingController::class,'p_list'])->name('promo.list');
+Route::get('createcoupon', [App\Http\Controllers\SettingController::class,'createcoupon'])->name('createcoupon');
+
+
 Route::post('store', [App\Http\Controllers\SettingController::class,'store'])->name('setting.store');
+
+
+
+Route::get('couponlist', [App\Http\Controllers\SettingController::class,'couponlist'])->name('couponlist');
+Route::get('coupon', [App\Http\Controllers\SettingController::class,'couponlist'])->name('coupon');
 
 Route::resource('users', App\Http\Controllers\UserTypeController::class);
 Route::resource('vendors', App\Http\Controllers\VendorController::class);
@@ -129,3 +141,11 @@ Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store
 
 // checkout
 Route::get('/orderdetail', [App\Http\Controllers\CheckoutController::class, 'orderdetail'])->name('orderdetail');
+
+
+//customer coupon code only if authenticated
+Route::post('/couponstore', [App\Http\Controllers\CouponController::class, 'store'])->name('coupon.store');
+Route::delete('/coupondestroy', [App\Http\Controllers\CouponController::class, 'destroy'])->name('coupon.destroy');
+
+
+//
