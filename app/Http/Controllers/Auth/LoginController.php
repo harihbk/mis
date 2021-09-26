@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
+
 class LoginController extends Controller
 {
     /*
@@ -69,4 +71,31 @@ class LoginController extends Controller
 
         return redirect("adminlogin")->withSuccess('Oppes! You have entered invalid credentials');
     }
+
+    public function LoginUserShow(){
+        return view('loginuser');
+    }
+
+    public function LoginUser($type,Request $request){
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        $credentials = $request->only('email', 'password');
+        $user = User::where([ ['email', $request->only('email')]])->first();
+        if(!$user){
+            return Redirect::back()->withSuccess('Oppes! You have entered invalid credentials');
+        }
+        if($user->email_verified_at == null){
+            return Redirect::back()->with('message', 'Please Verify Your email');
+        }
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('dashboard')
+                        ->withSuccess('You have Successfully loggedin');
+        }
+
+        return Redirect::back()->withSuccess('Oppes! You have entered invalid credentials');
+    }
+
+
 }

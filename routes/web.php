@@ -27,6 +27,16 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => ['auth','adminauth']], function()
 {
+Route::resource('roles', App\Http\Controllers\RoleController::class);
+// Route::resource('users', App\Http\Controllers\UserController::class);
+Route::get('users/{type}',[App\Http\Controllers\UserController::class,'index']);
+Route::get('users/create/{type}',[App\Http\Controllers\UserController::class,'create']);
+Route::post('users/store/{type}',[App\Http\Controllers\UserController::class,'store']);
+Route::get('users/show/{type}/{val}',[App\Http\Controllers\UserController::class,'show']);
+Route::get('users/edit/{type}/{id}',[App\Http\Controllers\UserController::class,'edit']);
+Route::patch('users/update/{type}/{id}',[App\Http\Controllers\UserController::class,'update']);
+Route::delete('users/delete/{type}/{id}',[App\Http\Controllers\UserController::class,'destroy']);
+
 
 Route::resource('categorys', App\Http\Controllers\CategorysController::class);
 
@@ -56,19 +66,11 @@ Route::post('confirmorder',  [App\Http\Controllers\OrderController::class,'confi
 Route::get('settings', [App\Http\Controllers\SettingController::class,'index'])->name('settings');
 Route::post('store', [App\Http\Controllers\SettingController::class,'store'])->name('setting.store');
 
-Route::resource('users', App\Http\Controllers\UserTypeController::class);
+// Route::resource('users', App\Http\Controllers\UserTypeController::class);
 Route::resource('vendors', App\Http\Controllers\VendorController::class);
 });
-
-Route::group(['prefix' => 'subadmin','middleware' => ['auth','subadminauth'],'as'=>'subamin.'], function()
-{
-    Route::get('dashboard', [App\Http\Controllers\USerController::class,'subadminDashboard'])->name('dashboard');
-});
-
-
-Route::group(['prefix' => 'vendor','middleware' => ['auth','vendorauth'],'as'=>'vendor.'], function()
-{
-    Route::get('dashboard', [App\Http\Controllers\USerController::class,'vendorDashboard'])->name('dashboard');
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('dashboard', [App\Http\Controllers\UserController::class,'dashboard'])->name('dashboard');
 });
 
 
@@ -92,7 +94,8 @@ Route::get('registermail', [App\Http\Controllers\VerificationController::class, 
 
 
 Route::get('adminlogin',[App\Http\Controllers\Auth\LoginController::class, 'adminlogin'])->name('adminlogin');
-
+Route::get('/login/{type}',[App\Http\Controllers\Auth\LoginController::class, 'LoginUserShow']);
+Route::post('/login/{type}',[App\Http\Controllers\Auth\LoginController::class, 'LoginUser']);
 Route::post('adminauth',[App\Http\Controllers\Auth\LoginController::class, 'adminauth'])->name('adminauth');
 
 

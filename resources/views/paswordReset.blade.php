@@ -32,7 +32,7 @@
 
     <div class="card">
         <div class="card-body login-card-body">
-            @if(!empty($user) && $user->email_verified_at == null)
+            @if(!empty($user) && $user->email_verified_at)
             <p class="login-box-msg">Please reset your password and login!</p>
             <form action="{{ route('userpassword') }}" method="POST">
                 @csrf
@@ -82,7 +82,7 @@
                 </div>
             </form>
             @else
-                <div class="alert alert-error">{{$user->email_verified_at ? 'You are already logged in' : 'Please check with admin'}}</div>
+                <div class="alert alert-error">{{$user->email_verified_at ? 'You email is already verified' : 'Please check with admin'}}</div>
             @endif
         </div>
         <!-- /.login-card-body -->

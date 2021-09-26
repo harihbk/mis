@@ -65,5 +65,8 @@ class Kernel extends HttpKernel
         'adminauth' => \App\Http\Middleware\AdminAuthenticated::class,
         'subadminauth' => \App\Http\Middleware\SubadminAuthenticated::class,
         'vendorauth' => \App\Http\Middleware\VendorAuthenticated::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 }

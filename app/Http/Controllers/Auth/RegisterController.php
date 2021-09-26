@@ -103,7 +103,7 @@ class RegisterController extends Controller
 
         $id = $this->create($request->all())->id;
         $user = User::find($id);
-
+        $user->assignRole('Customer');
         $user->sendEmailVerificationNotification();
        // return  redirect()->intended('website')->with('message', 'Please Verify email with in 60 minutes.');
      //  return redirect(RouteServiceProvider::HOME);

@@ -5,10 +5,10 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>{{base64_decode(request()->route('type'))}} Details</h1>
+                <h1>Users Details</h1>
             </div>
             <div class="col-sm-6">
-                <a class="btn btn-default float-right" href="{{url('users/'. request()->route('type'))}}">
+                <a class="btn btn-default float-right" href="{{ route('users.index') }}">
                     Back
                 </a>
             </div>

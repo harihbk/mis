@@ -28,16 +28,28 @@
                 <button class="btn btn-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
                     <svg style="color: #1761fd; fill: rgba(23,97,253,0.12); margin-right: 8px;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home align-self-center menu-icon">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        {{-- <polyline points="9 22 9 12 15 12 15 22"></polyline> --}}
                     </svg> Dashboard
                 </button>
+                @role('Admin|Sub admin')
+                @role('Admin')
                 <div class="collapse " id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li  class=" {{ Request::is('vendors*') ? 'active' : '' }}"><a href="{{ route('vendors.index') }}" ><i class="ti-control-record"></i> Vendors</a></li>
-                        <li  class=" {{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}" ><i class="ti-control-record"></i> Users</a></li>
+                        <li  class=" {{ Request::is('roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}" ><i class="ti-control-record"></i> Roles</a></li>
+                @endrole
+                @role('Sub admin')
+                        <li  class=" {{ Request::is('vendors*') ? 'active' : '' }}"><a href="{{url('users/'. base64_encode('Vendor'))}}" ><i class="ti-control-record"></i> Vendors</a></li>
+                @endrole
+                @role('Admin')
+
+                        <li  class=" {{ Request::is('users*') ? 'active' : '' }}"><a href="{{url('users/'. base64_encode('Sub admin'))}}" ><i class="ti-control-record"></i> Users</a></li>
                     </ul>
+                    @endrole
                 </div>
+                @endrole
+
             </li>
+            @role('Admin|Sub admin|Vendor')
             <li class="mb-1">
                 <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
                     <svg style="color: #1761fd; fill: rgba(23,97,253,0.12); margin-right: 8px;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box align-self-center menu-icon">
@@ -58,9 +70,10 @@
                     </ul>
                 </div>
             </li>
+            @endrole
 
 
-
+            @role('Admin')
             <li class="mb-1">
                 <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse2" aria-expanded="false">
                     <svg style="color: #1761fd; fill: rgba(23,97,253,0.12); margin-right: 8px;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box align-self-center menu-icon">
@@ -77,9 +90,10 @@
                     </ul>
                 </div>
             </li>
+            @endrole
 
 
-
+            @role('Admin')
             <li class="mb-1">
                 <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
                     <svg style="color: #1761fd; fill: rgba(23,97,253,0.12); margin-right: 8px;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home align-self-center menu-icon">
@@ -96,7 +110,7 @@
                     </ul>
                 </div>
             </li>
-
+            @endrole
 
             <li class="mb-1">
                 <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#orders-collapse1" aria-expanded="false">
