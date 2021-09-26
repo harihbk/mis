@@ -44,8 +44,8 @@
 
                         <li  class=" {{ Request::is('users*') ? 'active' : '' }}"><a href="{{url('users/'. base64_encode('Sub admin'))}}" ><i class="ti-control-record"></i> Users</a></li>
                     </ul>
-                    @endrole
                 </div>
+                @endrole
                 @endrole
 
             </li>
@@ -83,12 +83,14 @@
                     </svg>
                     Company Settings
                 </button>
-                <div                    Product Settings
-                </button>
                 <div class="collapse" id="dashboard-collapse2">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('settings') }}" ><i class="ti-control-record"></i> Tax</a></li>
-                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('coupon') }}" ><i class="ti-control-record"></i> Coupon</a></li>
+                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('settings') }}" ><i class="ti-control-record"></i> Category</a></li>
+<a href="{{ route('coupon') }}" ><i class="ti-control-record"></i> Coupon</a></li>
+        </ul>
+    </div>
+</li>
+@endrole
        @role('Admin')
             <li class="mb-1">
                 <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">

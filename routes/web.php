@@ -63,8 +63,17 @@ Route::get('getOrders',  [App\Http\Controllers\OrderController::class,'getOrders
 Route::get('view/{order_id}',  [App\Http\Controllers\OrderController::class,'orderview'])->name('order.view');
 Route::post('confirmorder',  [App\Http\Controllers\OrderController::class,'confirmorder'])->name('confirm.order');
 
+// promocode create
+Route::post('promocode', [App\Http\Controllers\SettingController::class,'promocodesave'])->name('promocode');
+Route::get('promocodelist', [App\Http\Controllers\SettingController::class,'promocodelist'])->name('promocodelist');
+Route::get('getPromo', [App\Http\Controllers\SettingController::class,'p_list'])->name('promo.list');
+Route::get('createcoupon', [App\Http\Controllers\SettingController::class,'createcoupon'])->name('createcoupon');
+
+
 Route::get('settings', [App\Http\Controllers\SettingController::class,'index'])->name('settings');
 Route::post('store', [App\Http\Controllers\SettingController::class,'store'])->name('setting.store');
+Route::get('couponlist', [App\Http\Controllers\SettingController::class,'couponlist'])->name('couponlist');
+Route::get('coupon', [App\Http\Controllers\SettingController::class,'couponlist'])->name('coupon');
 
 // Route::resource('users', App\Http\Controllers\UserTypeController::class);
 Route::resource('vendors', App\Http\Controllers\VendorController::class);
