@@ -39,5 +39,28 @@
         </div>
 
     </div>
+    <div class="table-responsive">
+        <table class="table align-items-center table-flush" id="products-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Childcategory</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($user->products as $product)
+                <tr>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->description }}</td>
+                    <td>@if($product->image)<img src="{{url('/uploads/')}}/{{ $product->image }}" alt="Image" width="40px" height="40px" />@endif</td>
+                    <td>{{ $product->childcategory->name }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
+
 @endsection

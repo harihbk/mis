@@ -50,6 +50,7 @@
             <form action="{{ url('/login/'.request()->route('type')) }}" class="form-horizontal form-material" id="loginform"  method="post">
                     @csrf
                 <p class="login-title">Login into your account</p>
+                <input type="hidden" value="{{request()->route('email')}}" name="encoded_email">
                 <div class="mb-2">
                     <input required type="text" class="form-control form-control-lg" name="email" id="email" value="{{ old('email') }}" placeholder="E-Mail Id">
                     @error('email')

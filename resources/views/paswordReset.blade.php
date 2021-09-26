@@ -32,7 +32,7 @@
 
     <div class="card">
         <div class="card-body login-card-body">
-            @if(!empty($user) && $user->email_verified_at)
+            @if(!empty($user) && $user->email_verified_at == null)
             <p class="login-box-msg">Please reset your password and login!</p>
             <form action="{{ route('userpassword') }}" method="POST">
                 @csrf

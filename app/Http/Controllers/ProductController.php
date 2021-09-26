@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Models\Childcategory;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends AppBaseController
 {
@@ -58,7 +59,7 @@ class ProductController extends AppBaseController
     {
       //  $input = $request->all();
         $input = $request->except('image');
-
+        $input['created_by'] = Auth::user()->id;
         if($request->hasFile('image')) {
             $image = time().'_'.$request->image->getClientOriginalName();
             $request->image->move(public_path('uploads'), $image);

@@ -87,7 +87,13 @@ class LoginController extends Controller
             return Redirect::back()->withSuccess('Oppes! You have entered invalid credentials');
         }
         if($user->email_verified_at == null){
-            return Redirect::back()->with('message', 'Please Verify Your email');
+            if($request->encoded_email) {
+                $decoded_email = base64_decode($request->encoded_email);
+                $user = User::where('email',$decoded_email)->first();
+                return view('paswordReset')->with('user',$user);
+            } else {
+                return Redirect::back()->withSuccess('Please Verify Your email');
+            }
         }
         if (Auth::attempt($credentials)) {
             return redirect()->intended('dashboard')

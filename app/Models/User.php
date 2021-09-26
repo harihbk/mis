@@ -11,7 +11,6 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, HasRoles;
-    protected $appends = ['user_role'];
 
     /**
      * The attributes that are mass assignable.
@@ -51,21 +50,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function getUserRoleAttribute()
-    {
-        $role = '';
-        if($this->status == 0){
-            $role = 'Admin';
-        } else if($this->status == 1){
-            if($this->userType == 1){
-                $role = 'Customer';
-            } else if($this->userType == 2){
-                $role = 'Vendor';
-            } else if($this->userType == 3){
-                $role = 'Sub Admin';
-            }
-        }
-        return $role;
+    public function products(){
+        return $this->hasMany('App\Models\Product', 'created_by', 'id');
     }
 
 }

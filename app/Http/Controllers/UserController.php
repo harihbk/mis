@@ -135,16 +135,22 @@ class UserController extends Controller
     public function store(UserTypeRequest $request,$type)
     {
         $input = $request->all();
-        // dd($input);
+        $pwd = $input['password'];
         $input['password'] = Hash::make($input['password']);
         $input['status'] = 1;
-        // $input['status'] = 1;
         $role_name = base64_decode($type);
         $user = User::create($input);
-        // $role = Role::wherE('name',$role_name)
         $user->assignRole($role_name);
+        $url_name = str_replace(' ', '', $role_name);
+        $url = 'login/'.strtolower($url_name).'/'.base64_encode($user->email);
         Flash::success('User saved successfully.');
-        Notification::send($user, new UserCreationNotification($user));
+        $data = [
+            'user' => $user,
+            'url' => $url,
+            'role' => $role_name,
+            'password' => $pwd,
+        ];
+        Notification::send($user, new UserCreationNotification($data));
         return redirect('/users/'.$type)
                         ->with('success',$role_name.' created successfully');
     }
@@ -157,7 +163,8 @@ class UserController extends Controller
      */
     public function show($type,$id)
     {
-        $user = User::find($id);
+        $user = User::with('products')->find($id);
+        // dd($user);
         return view('users.show',compact('user'));
     }
 
