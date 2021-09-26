@@ -10,15 +10,15 @@ use Illuminate\Notifications\Notification;
 class UserCreationNotification extends Notification
 {
     use Queueable;
-    public $user;
+    public $data;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($data)
     {
-        $this->user = $user;
+        $this->data = $data;
     }
 
     /**
@@ -44,8 +44,8 @@ class UserCreationNotification extends Notification
             ->subject('Welcome to Best India Kart')
             ->view(
             'emails.useremail',
-            ['user' => $this->user]
-        );
+                $this->data
+            );
     }
 
     /**
