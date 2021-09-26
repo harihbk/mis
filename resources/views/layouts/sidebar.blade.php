@@ -83,17 +83,13 @@
                     </svg>
                     Company Settings
                 </button>
+                <div                    Product Settings
+                </button>
                 <div class="collapse" id="dashboard-collapse2">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('settings') }}" ><i class="ti-control-record"></i> Category</a></li>
-
-                    </ul>
-                </div>
-            </li>
-            @endrole
-
-
-            @role('Admin')
+                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('settings') }}" ><i class="ti-control-record"></i> Tax</a></li>
+                        <li  class=" {{ Request::is('settings*') ? 'active' : '' }}"><a href="{{ route('coupon') }}" ><i class="ti-control-record"></i> Coupon</a></li>
+       @role('Admin')
             <li class="mb-1">
                 <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
                     <svg style="color: #1761fd; fill: rgba(23,97,253,0.12); margin-right: 8px;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home align-self-center menu-icon">

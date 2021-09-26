@@ -132,3 +132,6 @@ Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store
 
 // checkout
 Route::get('/orderdetail', [App\Http\Controllers\CheckoutController::class, 'orderdetail'])->name('orderdetail');
+
+
+//

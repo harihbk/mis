@@ -57,11 +57,19 @@ class OrderController extends Controller
        $status = $status->name;
 
 
+
+     if(isset($order->getCoupon->getcoupondata) && $order->getCoupon->getcoupondata){
+         $discount = $order->getCoupon->getcoupondata;
+     } else {
+         $discount = 0;
+     }
+
+
        $order_status = Order_status::all();
 
        $settings     = Setting::first();
 
-       $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status','settings'));
+       $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status','settings','discount'));
 
        $order_history = Order_history::where('order_id',$order_id)->get();
 
@@ -98,7 +106,16 @@ class OrderController extends Controller
 
         $status = $status->name;
         $settings     = Setting::first();
-        $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status','settings'));
+
+
+        if(isset($order->getCoupon->getcoupondata) && $order->getCoupon->getcoupondata){
+            $discount = $order->getCoupon->getcoupondata;
+        } else {
+            $discount = 0;
+        }
+
+
+        $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status','settings','discount'));
 
 
 
