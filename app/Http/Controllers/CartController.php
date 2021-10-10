@@ -67,8 +67,8 @@ class CartController extends Controller
                     'item_price' => $priceval,
                     'item_image' => $prod_image,
                     'product_length' => $products->product_length,
-                    'product_quantity' => $products->quantity
-
+                    'product_quantity' => $products->quantity,
+                    'weight_price' => $products->dash_price
                 );
                 $cart_data[] = $item_array;
 

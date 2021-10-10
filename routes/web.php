@@ -144,4 +144,12 @@ Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store
 Route::get('/orderdetail', [App\Http\Controllers\CheckoutController::class, 'orderdetail'])->name('orderdetail');
 
 
-//
+//customer coupon code only if authenticated
+Route::post('/couponstore', [App\Http\Controllers\CouponController::class, 'store'])->name('coupon.store');
+Route::delete('/coupondestroy', [App\Http\Controllers\CouponController::class, 'destroy'])->name('coupon.destroy');
+
+Route::post('payment',  [App\Http\Controllers\CheckoutController::class, 'payment'])->name('payment');
+
+Route::get('/calculation', [App\Http\Controllers\CheckoutController::class, 'calculation'])->name('calculation');
+
+Route::get('/success',[App\Http\Controllers\CheckoutController::class, 'success'])->name('success');

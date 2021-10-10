@@ -192,7 +192,7 @@
 
 <!-- Sale price Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('sale_discount', 'Dash Price:') !!}
+    {!! Form::label('sale_discount', 'Weight Price:') !!}
     {!! Form::text('dash_price', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 

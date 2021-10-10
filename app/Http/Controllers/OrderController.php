@@ -9,6 +9,7 @@ use App\Models\Order_product;
 use App\Models\Order_status;
 use App\Models\Product_part_number;
 use App\Models\Setting;
+use App\Models\Oc_address;
 use DataTables;
 use View;
 
@@ -32,6 +33,19 @@ class OrderController extends Controller
                     $status = Order_status::where('order_status_id',$row->order_status_id)->first();
                     return  $status->name;
                 })
+                ->addColumn('billing_name', function($row){
+                    return  $row->getCustomer->billing_name ?? '';
+                })
+                ->addColumn('billing_email', function($row){
+                    return  $row->getCustomer->billing_email ?? '';
+                })
+                ->addColumn('billing_city', function($row){
+                    return  $row->getCustomer->billing_city ?? '';
+                })
+                ->addColumn('billing_phone', function($row){
+                    return  $row->getCustomer->billing_phone ?? '';
+                })
+
                 ->addColumn('action', function($row){
                     $route = route('order.view',$row->id);
                     $actionBtn = '<a href="'.$route.'" class="edit btn btn-success btn-sm">View</a>';
@@ -69,7 +83,8 @@ class OrderController extends Controller
 
        $settings     = Setting::first();
 
-       $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status','settings','discount'));
+       $oc_address = Oc_address::where('address_id',$orders->address_id )->first();
+       $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status','settings','discount','oc_address'));
 
        $order_history = Order_history::where('order_id',$order_id)->get();
 
@@ -114,8 +129,8 @@ class OrderController extends Controller
             $discount = 0;
         }
 
-
-        $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status','settings','discount'));
+        $oc_address = Oc_address::where('address_id',$order->address_id )->first();
+        $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status','settings','discount','oc_address'));
 
 
 

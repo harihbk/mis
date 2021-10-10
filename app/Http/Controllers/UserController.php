@@ -31,13 +31,12 @@ class UserController extends Controller
 
 
 
-
         if($user){
             if($user->email_verified_at == null){
                 return Redirect::back()->with('message', 'Please Verify Your email');
             }
 
-       if($user->role('customer')->first()){
+       if($user->status != 1){
         return Redirect::back()->with('message', 'Please check the login');
        }
 
@@ -47,6 +46,13 @@ class UserController extends Controller
 
 
         }
+
+        if (Auth::attempt($credentials)) {
+            return redirect('website');
+        }
+
+
+
         return Redirect::back()->with('message', 'Username or password is invalid');
     }
 
