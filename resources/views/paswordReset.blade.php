@@ -82,7 +82,7 @@
                 </div>
             </form>
             @else
-                <div class="alert alert-error">{{$user->email_verified_at ? 'You are already logged in' : 'Please check with admin'}}</div>
+                <div class="alert alert-error">{{$user->email_verified_at ? 'You email is already verified' : 'Please check with admin'}}</div>
             @endif
         </div>
         <!-- /.login-card-body -->

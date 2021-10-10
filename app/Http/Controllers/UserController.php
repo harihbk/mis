@@ -6,7 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\UpdateUserTypeRequest;
+use Laracasts\Flash\Flash;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\UserCreationNotification;
+use App\Http\Requests\UserTypeRequest;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -20,7 +28,6 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
         $status = $request->only('status');
         $user = User::where([ ['email', $request->only('email')]])->first();
-
 
 
 
@@ -39,9 +46,13 @@ class UserController extends Controller
 
 
         }
+
         if (Auth::attempt($credentials)) {
-            $this->authenticated();
+            return redirect('website');
         }
+
+
+
         return Redirect::back()->with('message', 'Username or password is invalid');
     }
 
@@ -87,20 +98,133 @@ class UserController extends Controller
         $user->save();
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            if($user->userType == 2){
-                return redirect()->intended('/vendor/dashboard')->withSuccess('You have Successfully loggedin');
-            } else {
-                return redirect()->intended('/subadmin/dashboard')->withSuccess('You have Successfully loggedin');
-            }
+            return redirect()->intended('dashboard')
+            ->withSuccess('You have Successfully loggedin');
         }
-        return view('')->with('user',$user);
+        return Redirect::back()->withSuccess('Oppes! You have entered invalid credentials');
       }
 
-      public function subadminDashboard(){
-        return view('subadmin.dashboard');
+      public function dashboard(){
+        return view('dashboard');
       }
 
-      public function vendorDashboard(){
-        return view('vendor.dashboard');
-      }
+
+      /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request,$type)
+    {
+        $role = base64_decode($type);
+        $data = User::role($role)->orderBy('id','DESC')->paginate(5);
+        return view('users.index',compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(UserTypeRequest $request,$type)
+    {
+        $input = $request->all();
+        $pwd = $input['password'];
+        $input['password'] = Hash::make($input['password']);
+        $input['status'] = 1;
+        $role_name = base64_decode($type);
+        $user = User::create($input);
+        $user->assignRole($role_name);
+        $url_name = str_replace(' ', '', $role_name);
+        $url = 'login/'.strtolower($url_name).'/'.base64_encode($user->email);
+        Flash::success('User saved successfully.');
+        $data = [
+            'user' => $user,
+            'url' => $url,
+            'role' => $role_name,
+            'password' => $pwd,
+        ];
+        Notification::send($user, new UserCreationNotification($data));
+        return redirect('/users/'.$type)
+                        ->with('success',$role_name.' created successfully');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($type,$id)
+    {
+        $user = User::with('products')->find($id);
+        // dd($user);
+        return view('users.show',compact('user'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($type,$id)
+    {
+        $user = User::find($id);
+        return view('users.edit',compact('user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateUserTypeRequest $request,$type, $id)
+    {
+        $input = $request->all();
+        $role_name = base64_decode($type);
+        if(!empty($input['password'])){
+            $input['password'] = Hash::make($input['password']);
+        }else{
+            $input = Arr::except($input,array('password'));
+        }
+
+        $user = User::find($id);
+        $user->update($input);
+        // DB::table('model_has_roles')->where('model_id',$id)->delete();
+
+        // $user->assignRole($request->input('roles'));
+
+        return redirect('/users/'.$type)
+                        ->with('success',$role_name.' updated successfully');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($type,$id)
+    {
+        $role_name = base64_decode($type);
+        User::find($id)->delete();
+        return redirect('/users/'.$type)
+                        ->with('success',$role_name.' deleted successfully');
+    }
+
 }

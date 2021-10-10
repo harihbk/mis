@@ -25,7 +25,7 @@ class Product extends Model
     use HasFactory;
 
     public $table = 'product';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -39,7 +39,8 @@ class Product extends Model
         'description',
       //  'modified_by',
         'image',
-        'childcategory_id'
+        'childcategory_id',
+        'created_by'
     ];
 
     /**
@@ -85,5 +86,5 @@ class Product extends Model
         return $this->hasMany(\App\Models\Product_part_number::class, 'product_id');
     }
 
-   
+
 }

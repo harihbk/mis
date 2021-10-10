@@ -27,60 +27,60 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => ['auth','adminauth']], function()
 {
+Route::resource('roles', App\Http\Controllers\RoleController::class);
+// Route::resource('users', App\Http\Controllers\UserController::class);
 
-Route::resource('categorys', App\Http\Controllers\CategorysController::class);
-
-Route::resource('subcategories', App\Http\Controllers\SubcategoryController::class);
-
-Route::resource('parentcategories', App\Http\Controllers\ParentcategoryController::class);
-
-Route::resource('childcategories', App\Http\Controllers\ChildcategoryController::class);
-
-Route::resource('products', App\Http\Controllers\ProductController::class);
-
-Route::resource('productPartNumbers', App\Http\Controllers\Product_part_numberController::class);
-
-Route::resource('specifications', App\Http\Controllers\SpecificationController::class);
-
-Route::resource('specificationTypes', App\Http\Controllers\Specification_typeController::class);
-
-
-
-Route::post('getspecificationtype',[App\Http\Controllers\Specification_typeController::class, 'getspecificationtype'])->name('getspecificationtype');
-
-Route::get('order', [App\Http\Controllers\OrderController::class,'index'])->name('order.index');
-Route::get('getOrders',  [App\Http\Controllers\OrderController::class,'getOrders'])->name('order.list');
-Route::get('view/{order_id}',  [App\Http\Controllers\OrderController::class,'orderview'])->name('order.view');
-Route::post('confirmorder',  [App\Http\Controllers\OrderController::class,'confirmorder'])->name('confirm.order');
-
-Route::get('settings', [App\Http\Controllers\SettingController::class,'index'])->name('settings');
 // promocode create
 Route::post('promocode', [App\Http\Controllers\SettingController::class,'promocodesave'])->name('promocode');
 Route::get('promocodelist', [App\Http\Controllers\SettingController::class,'promocodelist'])->name('promocodelist');
 Route::get('getPromo', [App\Http\Controllers\SettingController::class,'p_list'])->name('promo.list');
 Route::get('createcoupon', [App\Http\Controllers\SettingController::class,'createcoupon'])->name('createcoupon');
 
-
+Route::get('settings', [App\Http\Controllers\SettingController::class,'index'])->name('settings');
 Route::post('store', [App\Http\Controllers\SettingController::class,'store'])->name('setting.store');
-
-
-
 Route::get('couponlist', [App\Http\Controllers\SettingController::class,'couponlist'])->name('couponlist');
 Route::get('coupon', [App\Http\Controllers\SettingController::class,'couponlist'])->name('coupon');
 
-Route::resource('users', App\Http\Controllers\UserTypeController::class);
+// Route::resource('users', App\Http\Controllers\UserTypeController::class);
 Route::resource('vendors', App\Http\Controllers\VendorController::class);
 });
-
-Route::group(['prefix' => 'subadmin','middleware' => ['auth','subadminauth'],'as'=>'subamin.'], function()
-{
-    Route::get('dashboard', [App\Http\Controllers\USerController::class,'subadminDashboard'])->name('dashboard');
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('dashboard', [App\Http\Controllers\UserController::class,'dashboard'])->name('dashboard');
 });
 
+Route::group(['middleware' => ['auth','role:Admin|Sub admin']], function(){
+    Route::get('users/{type}',[App\Http\Controllers\UserController::class,'index']);
+    Route::get('users/create/{type}',[App\Http\Controllers\UserController::class,'create']);
+    Route::post('users/store/{type}',[App\Http\Controllers\UserController::class,'store']);
+    Route::get('users/show/{type}/{val}',[App\Http\Controllers\UserController::class,'show']);
+    Route::get('users/edit/{type}/{id}',[App\Http\Controllers\UserController::class,'edit']);
+    Route::patch('users/update/{type}/{id}',[App\Http\Controllers\UserController::class,'update']);
+    Route::delete('users/delete/{type}/{id}',[App\Http\Controllers\UserController::class,'destroy']);
+});
+Route::group(['middleware' => ['auth','role:Admin|Vendor']], function(){
 
-Route::group(['prefix' => 'vendor','middleware' => ['auth','vendorauth'],'as'=>'vendor.'], function()
-{
-    Route::get('dashboard', [App\Http\Controllers\USerController::class,'vendorDashboard'])->name('dashboard');
+    Route::resource('categorys', App\Http\Controllers\CategorysController::class);
+
+    Route::resource('subcategories', App\Http\Controllers\SubcategoryController::class);
+
+    Route::resource('parentcategories', App\Http\Controllers\ParentcategoryController::class);
+
+    Route::resource('childcategories', App\Http\Controllers\ChildcategoryController::class);
+
+    Route::resource('products', App\Http\Controllers\ProductController::class);
+
+    Route::resource('productPartNumbers', App\Http\Controllers\Product_part_numberController::class);
+
+    Route::resource('specifications', App\Http\Controllers\SpecificationController::class);
+
+    Route::resource('specificationTypes', App\Http\Controllers\Specification_typeController::class);
+
+    Route::post('getspecificationtype',[App\Http\Controllers\Specification_typeController::class, 'getspecificationtype'])->name('getspecificationtype');
+
+    Route::get('order', [App\Http\Controllers\OrderController::class,'index'])->name('order.index');
+    Route::get('getOrders',  [App\Http\Controllers\OrderController::class,'getOrders'])->name('order.list');
+    Route::get('view/{order_id}',  [App\Http\Controllers\OrderController::class,'orderview'])->name('order.view');
+    Route::post('confirmorder',  [App\Http\Controllers\OrderController::class,'confirmorder'])->name('confirm.order');
 });
 
 
@@ -104,7 +104,8 @@ Route::get('registermail', [App\Http\Controllers\VerificationController::class, 
 
 
 Route::get('adminlogin',[App\Http\Controllers\Auth\LoginController::class, 'adminlogin'])->name('adminlogin');
-
+Route::get('/login/{type}/{email?}',[App\Http\Controllers\Auth\LoginController::class, 'LoginUserShow']);
+Route::post('/login/{type}',[App\Http\Controllers\Auth\LoginController::class, 'LoginUser']);
 Route::post('adminauth',[App\Http\Controllers\Auth\LoginController::class, 'adminauth'])->name('adminauth');
 
 
@@ -147,5 +148,8 @@ Route::get('/orderdetail', [App\Http\Controllers\CheckoutController::class, 'ord
 Route::post('/couponstore', [App\Http\Controllers\CouponController::class, 'store'])->name('coupon.store');
 Route::delete('/coupondestroy', [App\Http\Controllers\CouponController::class, 'destroy'])->name('coupon.destroy');
 
+Route::post('payment',  [App\Http\Controllers\CheckoutController::class, 'payment'])->name('payment');
 
-//
+Route::get('/calculation', [App\Http\Controllers\CheckoutController::class, 'calculation'])->name('calculation');
+
+Route::get('/success',[App\Http\Controllers\CheckoutController::class, 'success'])->name('success');

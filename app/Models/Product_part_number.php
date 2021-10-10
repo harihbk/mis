@@ -80,7 +80,8 @@ class Product_part_number extends Model
         'icon',
         'quantity',
         'original_price',
-        'dash_price'
+        'dash_price',
+
     ];
 
     /**
