@@ -13,8 +13,8 @@
           <b>Payment Method:</b> Cash On Delivery<br>
 
           </td>
-        <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:left;padding:7px"><b>E-mail:</b> <a href="mailto:{{ $order->billing_email ?? ''}}" target="_blank">{{ $order->billing_email ?? ''}}</a><br>
-          <b>Mobile NO:</b> {{ $order->billing_phone ?? ''}}<br>
+        <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:left;padding:7px"><b>E-mail:</b> <a href="mailto:{{ $oc_address->billing_email ?? ''}}" target="_blank">{{ $oc_address->billing_email ?? ''}}</a><br>
+          <b>Mobile NO:</b> {{ $oc_address->billing_phone ?? ''}}<br>
 
           <b>Order Status:</b> {{ $status}}<br></td>
       </tr>
@@ -33,11 +33,11 @@
     <tbody>
       <tr>
         <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:left;padding:7px">
-            {{ $order->billing_name ?? ''}}
-            <br>{{ $order->billing_address ?? ''}}
-            <br>{{ $order->billing_city ?? ''}} {{ $order->billing_postalcode ?? ''}}
-            <br>{{ $order->billing_province ?? ''}}
-            <br>{{ $order->billing_phone ?? ''}}
+            {{ $oc_address->billing_name ?? ''}}
+            <br>{{ $oc_address->billing_address ?? ''}}
+            <br>{{ $oc_address->billing_city ?? ''}} {{ $oc_address->billing_postalcode ?? ''}}
+            <br>{{ $oc_address->billing_province ?? ''}}
+            <br>{{ $oc_address->billing_phone ?? ''}}
         </td>
          </tr>
     </tbody>
@@ -99,7 +99,7 @@
             $discount = $i;
              @endphp
             @endif --}}
-
+{{--
 
             @if ($discount)
             <tr >
@@ -114,15 +114,15 @@
             @php
            $discount = 0;
             @endphp
-            @endif
+            @endif --}}
 
             <tr >
                 <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>SubTotal:</b></td>
-                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ abs($i-$discount) }}</td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ abs($i) }}</td>
             </tr>
 
             @php
-                  $subtotal = abs($i-$discount);
+                  $subtotal = abs($i);
             @endphp
 
 
@@ -162,8 +162,17 @@
 
             @endif
 
+
+            <tr>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Shipping Price:</b></td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $order->shipping_price }}</td>
+                  </tr>
+
+
+
+
             @php
-            $total =  $subtotal + $igst + $cgst ;
+            $total =  $order->shipping_price + $subtotal + $igst + $cgst ;
              @endphp
 
         <tr>

@@ -44,7 +44,7 @@
             <div class="step1">
             <h3 class="lead" style="font-size: 1.2em; margin-bottom: 1.6em;"><span  class="billingcheckout">Billing details</span></h3>
 
-            <form action="{{ route('checkout.store') }}" method="POST">
+            <form action='#' method="POST">
                 @csrf()
 
 
@@ -55,7 +55,7 @@
                 <div class="form-group existaddress">
                     <select name="existaddress" id="existaddress" class="form-control ">
                         @foreach ($exist_address as $item)
-                            <option value="{{ $item->id }}">{{ $item->billing_email }}</option>
+                            <option value="{{ $item->address_id }}">{{ $item->billing_name }} {{ $item->billing_email }} {{ $item->billing_address }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -112,6 +112,12 @@
             </div>
 
                 <button type="submit" class="btn btn-success custom-border-success btn-block">Complete Order</button>
+
+
+
+
+
+
             </form>
             </div>
 
@@ -135,10 +141,12 @@
             <table class="table table-borderless table-responsive">
                 <tbody>
                     @php $total="0" @endphp
-
+                    @php $weight_price="0" @endphp
                     @if (isset($cart_data) and count($cart_data) > 0)
 
                         @foreach ($cart_data as $data)
+                        @php $weight_price +=$data['weight_price']*$data['item_quantity'] @endphp
+
                             <tr>
                                    <td>
                                     <a class="entry-thumbnail" href="javascript:void(0)">
@@ -331,6 +339,18 @@
 
                     @endif
 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="cart-subtotal-name">Shipping Charge</h6>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="cart-subtotal-price">
+                                Rs.
+                                <span class="cart-grand-price-viewajax">{{ number_format($weight_price, 2)  }}</span>
+                            </h6>
+                        </div>
+                    </div>
+
 
 
 
@@ -347,12 +367,15 @@
                         <div class="col-md-6">
                             <h6 class="cart-grand-price">
                                 Rs.
-                                <span class="cart-grand-price-viewajax">{{ number_format($total, 2) }}</span>
+                                <span class="cart-grand-price-viewajax">{{ $weight_price + number_format($total, 2) }}</span>
                             </h6>
                         </div>
                     </div>
 
+                    @php
 
+                    $total =  $weight_price + number_format($total, 2);
+                    @endphp
 
 
 
@@ -370,11 +393,13 @@
             @endif
         </div>
 
+
+
     </div>
 
 </div>
 <!-- end page content -->
-
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
     .quantity-square{
     border: 1px solid #222;
@@ -387,6 +412,102 @@
 
 <script>
     $(document).ready(function(){
+        var SITEURL = '{{URL::to('')}}';
+
+
+        jQuery('.custom-border-success').click(function(e){
+               e.preventDefault();
+               $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                  }
+              });
+
+              var data = {
+            'radio_address' : $('[name="radio_address"]').val(),
+            'existaddress' : $('[name="existaddress"]').val(),
+              'email' : $('[name="email"]').val(),
+              'name' : $('[name="name"]').val(),
+              'address' : $('[name="address"]').val(),
+              'city' : $('[name="city"]').val(),
+              'province' : $('[name="province"]').val(),
+              'postal_code' : $('[name="postal_code"]').val(),
+              'phone' : $('[name="phone"]').val(),
+          }
+
+               jQuery.ajax({
+                  url: "{{ route('checkout.store') }}",
+                  method: 'post',
+                  data: data,
+                  success: function(result){
+                      var result = JSON.parse(result);
+                      console.log(result.status);
+                     if(result.status == 200){
+                    var orderid = result.order_id;
+                    let amount = result.total;
+
+
+                    //payment gateway
+                    var SITEURL = '{{URL::to('')}}';
+
+                                var total_amount = 1 * 100;
+                                var options = {
+                                    "key": "{{ env('RAZOR_KEY') }}", // Enter the Key ID generated from the Dashboard
+                                    "amount": total_amount, // Amount is in currency subunits. Default currency is INR. Hence, 10 refers to 1000 paise
+                                    "currency": "INR",
+                                    "name": "BestIndiaKart",
+                                    "description": "Transaction",
+                                    "image": "{{ asset('/images/logo.svg') }}",
+                                    "order_id": "", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                                    "handler": function (response){
+                                        $.ajaxSetup({
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                            }
+                                        });
+                                        $.ajax({
+                                            type:'POST',
+                                            url:"{{ route('payment') }}",
+                                            data:{razorpay_payment_id:response.razorpay_payment_id,amount:amount},
+                                            success:function(data){
+                                                window.location.href = SITEURL + '/success';
+                                                $('.success-message').text(data.success);
+                                                $('.success-alert').fadeIn('slow', function(){
+                                                $('.success-alert').delay(5000).fadeOut();
+                                                });
+                                                $('.amount').val('');
+                                            }
+                                        });
+                                    },
+                                    "prefill": {
+                                        "name": "{{ auth()->user()->name }}",
+                                        "email": "{{ auth()->user()->email }}",
+                                        "contact": "{{ auth()->user()->mobileno }}"
+                                    },
+                                    "notes": {
+                                        "address": "payment"
+                                    },
+                                    "theme": {
+                                        "color": "#F37254"
+                                    }
+                                };
+                                var rzp1 = new Razorpay(options);
+                                rzp1.open();
+
+
+                    //pyment gateway
+
+
+                     }
+                  }
+                  });
+               });
+
+
+
+
+
+
         $(".billingcheckout").click(function(){
 
          // $(".step1_toogle").slideToggle(1000);
