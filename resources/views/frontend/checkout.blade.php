@@ -111,7 +111,7 @@
 
             </div>
 
-                <button type="submit" class="btn btn-success custom-border-success btn-block">Complete Order</button>
+                <button type="submit" class="btn btn-success completed_order btn-block">Complete Order</button>
 
 
 
@@ -415,7 +415,7 @@
         var SITEURL = '{{URL::to('')}}';
 
 
-        jQuery('.custom-border-success').click(function(e){
+        jQuery('.completed_order').click(function(e){
                e.preventDefault();
                $.ajaxSetup({
                   headers: {
