@@ -44,7 +44,7 @@
             <div class="step1">
             <h3 class="lead" style="font-size: 1.2em; margin-bottom: 1.6em;"><span  class="billingcheckout">Billing details</span></h3>
 
-            <form action='#' method="POST">
+            <form  id="checkoutform">
                 @csrf()
 
 
@@ -71,51 +71,53 @@
                 <div class="form-group">
                     <label for="email" class="light-text">Email Address</label>
                     @guest
-                        <input type="text" name="email" class="form-control my-input" >
+                        <input type="text" name="email" class="form-control my-input email" id="email">
                     @else
-                        <input type="text" name="email" class="form-control my-input" value="{{ auth()->user()->email }}" readonly required>
+                        <input type="text" name="email" class="form-control my-input email" id="email" value="{{ auth()->user()->email }}" readonly required>
                     @endguest
                 </div>
                 <div class="form-group">
                     <label for="name" class="light-text">Name</label>
-                    <input type="text" name="name" class="form-control my-input" >
+                    <input type="text" name="name" class="form-control my-input name" id="name">
                 </div>
                 <div class="form-group">
                     <label for="address" class="light-text">Address</label>
-                    <input type="text" name="address" class="form-control my-input" >
+                    <input type="text" name="address" class="form-control my-input address" id="address">
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="city" class="light-text">City</label>
-                            <input type="text" name="city" class="form-control my-input" >
+                            <input type="text" name="city" class="form-control my-input city" id="city">
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <div class="form-group">
                         <label for="province" class="light-text">Province</label>
-                        <input type="text" name="province" class="form-control my-input" >
+                        <input type="text" name="province" class="form-control my-input province" id="province">
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="postal_code" class="light-text">Postal Code</label>
-                            <input type="text" name="postal_code" class="form-control my-input" >
+                            <input type="text" name="postal_code" class="form-control my-input postal_code" id="postal_code">
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <div class="form-group">
                         <label for="phone" class="light-text">Phone</label>
-                        <input type="text" name="phone" class="form-control my-input" >
+                        <input type="text" name="phone" class="form-control my-input phone" id="phone">
+                        </div>
                     </div>
                 </div>
 
             </div>
 
-                <button type="submit" class="btn btn-success completed_order btn-block">Complete Order</button>
+                <input type="submit" class="btn btn-success completed_order btn-block" value="Complete Order">
 
-
-
-
+                {{-- <button type="button" class="btn btn-success completed_order btn-block">Complete Order</button> --}}
 
 
             </form>
@@ -406,17 +408,136 @@
     padding: 0.5em;
     }
 
+    .error{
+        color : red;
+    }
+
 </style>
 
 
 
 <script>
-    $(document).ready(function(){
+
+
+
+
+
+
+
+
+
+
+    // Wait for the DOM to be ready
+    $(function() {
+  // Initialize form validation on the registration form.
+  // It has the name attribute "registration"
+  $("#checkoutform").submit(function(e) {
+    e.preventDefault();
+}).validate({
+    // Specify validation rules
+    rules: {
+
+      address:
+      {
+        required: function(element) {
+
+                    if (jQuery('.radioclass:checked').val() == "_new") {
+
+                        return true;
+                    }
+                    return false;
+                }
+      },
+
+      name:  {
+        required: function(element) {
+                    if (jQuery('.radioclass:checked').val() == "_new") {
+
+                        return true;
+                    }
+                    return false;
+                }
+      },
+
+      email: {
+        required: true,
+        // Specify that email should be validated
+        // by the built-in "email" rule
+        email: true
+      },
+      city :  {
+        required: function(element) {
+                    if (jQuery('.radioclass:checked').val() == "_new") {
+
+                        return true;
+                    }
+                    return false;
+                }
+      },
+
+      province :  {
+        required: function(element) {
+                    if (jQuery('.radioclass:checked').val() == "_new") {
+
+                        return true;
+                    }
+                    return false;
+                }
+      },
+
+      postal_code :  {
+        required: function(element) {
+                    if (jQuery('.radioclass:checked').val() == "_new") {
+
+                        return true;
+                    }
+                    return false;
+                }
+      },
+
+      phone :  {
+        required: function(element) {
+                    if (jQuery('.radioclass:checked').val() == "_new") {
+
+                        return true;
+                    }
+                    return false;
+                }
+      },
+
+    },
+    // Specify validation error messages
+    messages: {
+      address: "Please enter your address",
+      name: "Please enter your name",
+      city: "Please enter your city",
+      province: "Please enter your province",
+      postal_code: "Please enter your postal code",
+      phone: "Please enter your phone",
+
+      email: "Please enter a valid email address"
+    },
+    errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        },
+
+    submitHandler: function(form) {
+
+
+
         var SITEURL = '{{URL::to('')}}';
 
 
-        jQuery('.completed_order').click(function(e){
-               e.preventDefault();
+   //     jQuery('.completed_order').click(function(e){
+
                $.ajaxSetup({
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -501,11 +622,27 @@
                      }
                   }
                   });
-               });
+            //   });
 
 
 
 
+
+
+
+
+
+
+
+
+    }
+  });
+});
+
+
+
+
+$(document).ready(function(){
 
 
         $(".billingcheckout").click(function(){
@@ -534,42 +671,6 @@
 
 
 
-
-    // Wait for the DOM to be ready
-$(function() {
-  // Initialize form validation on the registration form.
-  // It has the name attribute "registration"
-  $(".continue1").validate({
-    // Specify validation rules
-    rules: {
-      // The key name on the left side is the name attribute
-      // of an input field. Validation rules are defined
-      // on the right side
-      address: "required",
-      name: "required",
-      email: {
-        required: true,
-        // Specify that email should be validated
-        // by the built-in "email" rule
-        email: true
-      },
-
-    },
-    // Specify validation error messages
-    messages: {
-      address: "Please enter your firstname",
-      name: "Please enter your lastname",
-
-      email: "Please enter a valid email address"
-    },
-    // Make sure the form is submitted to the destination defined
-    // in the "action" attribute of the form when valid
-    submitHandler: function(form) {
-        alert("dsf")
-    //  form.submit();
-    }
-  });
-});
 </script>
 
 @endsection
