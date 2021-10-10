@@ -153,3 +153,7 @@ Route::post('payment',  [App\Http\Controllers\CheckoutController::class, 'paymen
 Route::get('/calculation', [App\Http\Controllers\CheckoutController::class, 'calculation'])->name('calculation');
 
 Route::get('/success',[App\Http\Controllers\CheckoutController::class, 'success'])->name('success');
+
+Route::get('/history',[App\Http\Controllers\OrderController::class, 'orderhistory'])->name('history');
+Route::get('getuseOrders',  [App\Http\Controllers\OrderController::class,'getuserOrders'])->name('order.getuseOrders');
+Route::get('userview/{order_id}',  [App\Http\Controllers\OrderController::class,'orderuserview'])->name('order.userview');
