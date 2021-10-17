@@ -57,7 +57,12 @@ Route::group(['middleware' => ['auth','role:Admin|Sub admin']], function(){
     Route::patch('users/update/{type}/{id}',[App\Http\Controllers\UserController::class,'update']);
     Route::delete('users/delete/{type}/{id}',[App\Http\Controllers\UserController::class,'destroy']);
 });
-Route::group(['middleware' => ['auth','role:Admin|Vendor']], function(){
+Route::group(['middleware' => ['auth','role:Admin|vendor']], function(){
+
+
+
+    Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
+
 
     Route::resource('categorys', App\Http\Controllers\CategorysController::class);
 
@@ -77,8 +82,8 @@ Route::group(['middleware' => ['auth','role:Admin|Vendor']], function(){
 
     Route::post('getspecificationtype',[App\Http\Controllers\Specification_typeController::class, 'getspecificationtype'])->name('getspecificationtype');
 
-    Route::get('order', [App\Http\Controllers\OrderController::class,'index'])->name('order.index');
-    Route::get('getOrders',  [App\Http\Controllers\OrderController::class,'getOrders'])->name('order.list');
+    Route::get('order/{order_status_id?}', [App\Http\Controllers\OrderController::class,'index'])->name('order.index');
+    Route::get('getOrders/{order_status_id?}',  [App\Http\Controllers\OrderController::class,'getOrders'])->name('order.list');
     Route::get('view/{order_id}',  [App\Http\Controllers\OrderController::class,'orderview'])->name('order.view');
     Route::post('confirmorder',  [App\Http\Controllers\OrderController::class,'confirmorder'])->name('confirm.order');
 });
@@ -153,3 +158,7 @@ Route::post('payment',  [App\Http\Controllers\CheckoutController::class, 'paymen
 Route::get('/calculation', [App\Http\Controllers\CheckoutController::class, 'calculation'])->name('calculation');
 
 Route::get('/success',[App\Http\Controllers\CheckoutController::class, 'success'])->name('success');
+
+Route::get('/history',[App\Http\Controllers\OrderController::class, 'orderhistory'])->name('history');
+Route::get('getuseOrders',  [App\Http\Controllers\OrderController::class,'getuserOrders'])->name('order.getuseOrders');
+Route::get('userview/{order_id}',  [App\Http\Controllers\OrderController::class,'orderuserview'])->name('order.userview');

@@ -17,6 +17,12 @@ class SubcategoryController extends AppBaseController
 
     public function __construct(SubcategoryRepository $subcategoryRepo  )
     {
+
+        $this->middleware('permission:subcategories-list|subcategories-create|subcategories-edit|subcategories-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:subcategories-create', ['only' => ['create','store']]);
+        $this->middleware('permission:subcategories-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:subcategories-delete', ['only' => ['destroy']]);
+
         $this->subcategoryRepository = $subcategoryRepo;
     }
 
@@ -30,8 +36,8 @@ class SubcategoryController extends AppBaseController
     public function index(Request $request)
     {
         $subcategories = $this->subcategoryRepository->all();
-      
-       
+
+
         return view('subcategories.index')
             ->with('subcategories', $subcategories);
     }
@@ -42,9 +48,9 @@ class SubcategoryController extends AppBaseController
      * @return Response
      */
     public function create()
-    { 
+    {
         $category = Categorys::all();
-       
+
         return view('subcategories.create')->with(compact('category'));
     }
 
@@ -106,7 +112,7 @@ class SubcategoryController extends AppBaseController
         $data = [
             'subcategory'  => $subcategory,
             'category'   =>  $category,
-            
+
         ];
         return view('subcategories.edit')->with($data);
     }

@@ -12,6 +12,7 @@ use App\Models\Setting;
 use App\Models\Oc_address;
 use DataTables;
 use View;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -25,7 +26,13 @@ class OrderController extends Controller
     public function getOrders(Request $request)
     {
         if ($request->ajax()) {
-            $data = Order::latest()->groupby('id')->orderby('id', 'DESC')->get();
+
+            if($request->key){
+                $data = Order::latest()->where('order_status_id',$request->key)->groupby('id')->orderby('id', 'DESC')->get();
+            } else {
+                $data = Order::latest()->groupby('id')->orderby('id', 'DESC')->get();
+            }
+
 
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -47,7 +54,9 @@ class OrderController extends Controller
                 })
 
                 ->addColumn('action', function($row){
+
                     $route = route('order.view',$row->id);
+
                     $actionBtn = '<a href="'.$route.'" class="edit btn btn-success btn-sm">View</a>';
                     return $actionBtn;
                 })
@@ -55,6 +64,62 @@ class OrderController extends Controller
                 ->make(true);
         }
     }
+
+
+
+
+
+
+
+
+    public function getuserOrders(Request $request)
+    {
+        $customer_id = auth()->user()->id;
+        if ($request->ajax()) {
+            $data = Order::where('user_id', $customer_id)->latest()->groupby('id')->orderby('id', 'DESC')->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('order_status_id', function($row){
+                    $status = Order_status::where('order_status_id',$row->order_status_id)->first();
+                    return  $status->name;
+                })
+                ->addColumn('billing_name', function($row){
+                    return  $row->getCustomer->billing_name ?? '';
+                })
+                ->addColumn('billing_email', function($row){
+                    return  $row->getCustomer->billing_email ?? '';
+                })
+                ->addColumn('billing_city', function($row){
+                    return  $row->getCustomer->billing_city ?? '';
+                })
+                ->addColumn('billing_phone', function($row){
+                    return  $row->getCustomer->billing_phone ?? '';
+                })
+
+                ->addColumn('action', function($row){
+
+                    $route = route('order.userview',$row->id);
+
+                    $actionBtn = '<a href="'.$route.'" class="edit btn btn-success btn-sm">View</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function orderview(Request $request){
@@ -69,7 +134,6 @@ class OrderController extends Controller
        $order_product = Order_product::where('order_id',$order_id)->get();
        $status = Order_status::where('order_status_id',$orders->order_status_id)->first();
        $status = $status->name;
-
 
 
      if(isset($order->getCoupon->getcoupondata) && $order->getCoupon->getcoupondata){
@@ -163,5 +227,49 @@ class OrderController extends Controller
 
 
 
+    }
+
+    public function orderhistory(){
+        $customer_id = auth()->user()->id;
+        $order_history = Order::where('user_id',$customer_id)->get();
+
+
+        return view('frontend.profile')->with(compact('order_history'));
+
+    }
+
+    public function orderuserview(Request $request){
+        $order_id = $request->order_id;   // order_id
+
+        $order = Order::where('id', $order_id)->first();
+
+
+        $orders = Order::where('id',$order_id)->first();
+       // $order_product_first = Order::where('id',$order_id)->first();
+        $order_product = Order_product::where('order_id',$order_id)->get();
+        $status = Order_status::where('order_status_id',$orders->order_status_id)->first();
+        $status = $status->name;
+
+
+      if(isset($order->getCoupon->getcoupondata) && $order->getCoupon->getcoupondata){
+          $discount = $order->getCoupon->getcoupondata;
+      } else {
+          $discount = 0;
+      }
+
+
+        $order_status = Order_status::all();
+
+        $settings     = Setting::first();
+
+        $oc_address = Oc_address::where('address_id',$orders->address_id )->first();
+        $orderdetail =  View::make('orderdetail')->with(compact('order','order_product','status','settings','discount','oc_address'));
+
+        $order_history = Order_history::where('order_id',$order_id)->get();
+
+
+        $orderhistory =  View::make('adminorder.orderhistory')->with(compact('order_history'));
+
+         return view('frontend.profiles.orderview')->with(compact('orderdetail','order_status','orderhistory','order_id'));
     }
 }
