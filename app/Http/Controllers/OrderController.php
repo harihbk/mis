@@ -26,7 +26,13 @@ class OrderController extends Controller
     public function getOrders(Request $request)
     {
         if ($request->ajax()) {
-            $data = Order::latest()->groupby('id')->orderby('id', 'DESC')->get();
+
+            if($request->key){
+                $data = Order::latest()->where('order_status_id',$request->key)->groupby('id')->orderby('id', 'DESC')->get();
+            } else {
+                $data = Order::latest()->groupby('id')->orderby('id', 'DESC')->get();
+            }
+
 
             return Datatables::of($data)
                 ->addIndexColumn()

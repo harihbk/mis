@@ -18,6 +18,11 @@ class ChildcategoryController extends AppBaseController
 
     public function __construct(ChildcategoryRepository $childcategoryRepo)
     {
+        $this->middleware('permission:childcategories-list|childcategories-create|childcategories-edit|childcategories-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:childcategories-create', ['only' => ['create','store']]);
+        $this->middleware('permission:childcategories-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:childcategories-delete', ['only' => ['destroy']]);
+
         $this->childcategoryRepository = $childcategoryRepo;
     }
 

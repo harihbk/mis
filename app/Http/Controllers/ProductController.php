@@ -19,6 +19,12 @@ class ProductController extends AppBaseController
 
     public function __construct(ProductRepository $productRepo)
     {
+        $this->middleware('permission:productPartNumbers-list|productPartNumbers-create|productPartNumbers-edit|productPartNumbers-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:productPartNumbers-create', ['only' => ['create','store']]);
+        $this->middleware('permission:productPartNumbers-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:productPartNumbers-delete', ['only' => ['destroy']]);
+
+
         $this->productRepository = $productRepo;
     }
 
