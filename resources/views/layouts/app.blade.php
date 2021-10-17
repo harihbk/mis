@@ -102,10 +102,10 @@
     <!-- Main Footer -->
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.0.5
+            <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-        reserved.
+        {{-- <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+        reserved. --}}
     </footer>
 </div>
 <script src="{{ asset('js/custom.js') }}" defer></script>
@@ -176,7 +176,12 @@
       var table = $('.yajra-datatable').DataTable({
           processing: true,
           serverSide: true,
-          ajax: "{{ route('order.list') }}",
+          "ajax": {
+                "url": "{{ route('order.list') }}",
+                "data": {"key" : "{{ request()->route('order_status_id')}}"},
+                "type": "GET"
+          },
+         // ajax: "{{ route('order.list',request()->route('id')) }}",
           columns: [
               {data: 'DT_RowIndex', name: 'DT_RowIndex'},
               {data: 'billing_name', name: 'billing_name'},

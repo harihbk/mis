@@ -17,6 +17,7 @@ class SubadminAuthenticated
      */
     public function handle(Request $request, Closure $next)
     {
+
         if (Auth::user()->userType != 3) {
               return redirect('website');
         }

@@ -17,7 +17,13 @@ class CategorysController extends AppBaseController
 
     public function __construct(CategorysRepository $categorysRepo)
     {
+
+        $this->middleware('permission:categorys-list|categorys-create|categorys-edit|categorys-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:categorys-create', ['only' => ['create','store']]);
+        $this->middleware('permission:categorys-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:categorys-delete', ['only' => ['destroy']]);
         $this->categorysRepository = $categorysRepo;
+
     }
 
     /**
@@ -29,6 +35,7 @@ class CategorysController extends AppBaseController
      */
     public function index(Request $request)
     {
+
         $categorys = $this->categorysRepository->all();
 
         return view('categorys.index')

@@ -20,7 +20,7 @@
 <div class="left-sidenav">
     <div class="flex-shrink-0 bg-white">
         <a href="/" class="d-flex align-items-center pb-3 mb-3 text-decoration-none border-bottom">
-            <img src="./images/logo.svg" alt="Logo" style="width: 100px;">
+            <img src="{{  asset('/images/logo.svg') }}" alt="Logo" style="width: 100px;">
         </a>
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
@@ -34,20 +34,27 @@
                         {{-- <polyline points="9 22 9 12 15 12 15 22"></polyline> --}}
                     </svg> Dashboard
                 </button>
-                @role('Admin|Sub admin')
-                @role('Admin')
+                @role('Admin|Sub admin|vendor')
+
+
+                 @role('Admin|Sub admin|vendor')
                 <div class="collapse " id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+
+                        <li class=" {{ Request::is('vendors*') ? 'active' : '' }}"><a
+                            href="{{url('dashboard/')}}"><i class="ti-control-record"></i>
+                            Dashboard</a></li>
+
                         <li class=" {{ Request::is('roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}"><i
                                     class="ti-control-record"></i> Roles</a></li>
                         @endrole
-                        {{-- @role('Sub admin') --}}
+
                         @canany('user-list','user-create','user-edit','user-delete')
                         <li class=" {{ Request::is('vendors*') ? 'active' : '' }}"><a
                                 href="{{url('users/'. base64_encode('Vendor'))}}"><i class="ti-control-record"></i>
                                 Vendors</a></li>
                         @endcan
-                        {{-- @endrole --}}
+
                         @role('Admin')
 
                         <li class=" {{ Request::is('users*') ? 'active' : '' }}"><a
@@ -59,7 +66,7 @@
                 @endrole
 
             </li>
-            @role('Admin|Sub admin|Vendor')
+            @role('Admin|Sub admin|vendor')
             <li class="mb-1">
                 <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
                     aria-expanded="false">

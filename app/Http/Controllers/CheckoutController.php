@@ -149,6 +149,9 @@ class CheckoutController extends Controller
             $this->decreaseQuantities();
 
 
+            $product = Order::find($order->id);
+            $product->update(['total_price' => $calc]);
+
 
             $details = [
                 'title' => 'Mail from BestindiaKart',
