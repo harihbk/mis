@@ -3,17 +3,39 @@
         <a class="navbar-brand" href="#">
             <img class="header-logo" src="{{ asset('/images/logo.svg') }}" alt="bumaas">
         </a>
-        <form class="form-group">
+
+        <form action="{{ route('search') }}" class="form-group" method="post" id="form1">
+            @csrf
             <div class="input-group">
+
                 <input type="text" class="form-control head-search-box"
-                    placeholder="Enter Product, part Number (English Only)">
+                    placeholder="Enter Product, part Number (English Only)" name="partno">
+
+
+<input type="hidden"
+name="n_id" value="{{ request()->segment(3) ?? '' }}">
+
+                    <input type="hidden"
+                    name="childategory_id" value="{{ request()->route()->childategory_id ?? '' }}">
+
+                    <input type="hidden"
+                    name="prevurl" value="{{ Route::current()->getName() }}">
+
+
                 <div class="input-group-btn header-search-wrap">
-                    <button class="btn btn-primary rounded-end" type="submit">
-                        Search
-                    </button>
+                    <input type="submit" class="btn btn-primary rounded-end" value="Search" form="form1">
                 </div>
             </div>
+            @if(Session::has('partno'))
+            <div class="alert" style="color:red">No Part number found.Please Search another partnumber</div>
+            @endif
+
+
+
         </form>
+
+
+
         <ul class="navbar-nav d-flex align-items-center justify-content-end">
             <li class="nav-item">
                 <div class="d-flex align-items-center">
@@ -75,6 +97,9 @@
         </ul>
     </div>
 </nav>
+
+
+
 <!-- <nav style="--bs-breadcrumb-divider: '>';" class="breadcrumb-wrapper" aria-label="breadcrumb"> -->
 <!-- <nav class="breadcrumb-wrapper" aria-label="breadcrumb">
     <ol class="breadcrumb justify-content-center">
