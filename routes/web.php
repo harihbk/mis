@@ -103,6 +103,9 @@ Route::prefix('website')->group(function () {
 
 });
 
+Route::post('partno',[ App\Http\Controllers\Product_part_numberController::class,'partno'])->name('search');
+
+
 //Route::get('email/verify/{id}/{hash}', [App\Http\Controllers\VerificationController::class, 'verify']); // Make sure to keep this as your route name
 Route::get('email/verify/{id}/{hash}', [App\Http\Controllers\VerificationController::class, 'verify'])->name('verification.verify'); // Make sure to keep this as your route name
 Route::get('registermail', [App\Http\Controllers\VerificationController::class, 'registermail'])->name('registermail'); // Make sure to keep this as your route name

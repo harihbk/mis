@@ -146,7 +146,7 @@ class UserController extends Controller
         $input = $request->all();
         $pwd = $input['password'];
         $input['password'] = Hash::make($input['password']);
-        $input['status'] = 1;
+        $input['status'] = 2;
         $role_name = base64_decode($type);
         $user = User::create($input);
         $user->assignRole($role_name);

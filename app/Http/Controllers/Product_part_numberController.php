@@ -13,6 +13,8 @@ use App\Models\Product;
 use App\Models\Specification;
 use App\Models\Partnofield;
 use App\Models\Partno_filters;
+use App\Models\Product_part_number;
+use Session;
 class Product_part_numberController extends AppBaseController
 {
 
@@ -298,5 +300,43 @@ $icon = "";
         Flash::success('Product Part Number deleted successfully.');
 
         return redirect(route('productPartNumbers.index'));
+    }
+
+
+
+    public function partno(Request $request){
+
+        $search_partno =  $request->partno;
+        $childcategory =$request->childategory_id;
+        $routeName = $request->prevurl;
+        $n_id      = $request->n_id;
+
+        $filterData = Product_part_number::where('part_number','LIKE','%'.$search_partno.'%')
+        ->first();
+         if($filterData == null){
+            Session::flash('partno','Part number Doest not exist, search another product');
+
+          if($routeName == "website.parentcats"){
+            return redirect()->route($routeName, ['subcat_id' => $n_id]);
+          }
+
+          if($routeName == "website.partnumberpage"){
+            return redirect()->route($routeName, ['partno_id' => $n_id]);
+          }
+
+          if($routeName == "website.products"){
+            return redirect()->route($routeName, ['childategory_id' => $n_id]);
+          }
+
+
+            return redirect()->route($routeName);
+         }
+        $childcategory = $filterData->product->childcategory->id;
+
+        return redirect()->route('website.products', ['childategory_id' => $childcategory]);
+       // return redirect(route("products/10"));
+
+
+
     }
 }

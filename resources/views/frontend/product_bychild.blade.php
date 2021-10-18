@@ -1,5 +1,7 @@
 @extends('frontend.theme')
 @section('content')
+
+
 <div class="container">
     <div class="my-3">
         <div class="row">
