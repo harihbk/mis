@@ -174,9 +174,9 @@ if (page === 'home.php') {
             });
         }, updater: function (query_s) {
           //  partnumber/14
+          p = "<?=url('/')?>";
 
-
-            window.location.href = "website/partnumber/"+query_s.id;
+            window.location.href = p+"/website/partnumber/"+query_s.id;
         }
     });
 
