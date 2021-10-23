@@ -163,6 +163,53 @@ if (page === 'home.php') {
 
 
 
+// autocomplete
+
+     var path = "{{ route('orderuserview') }}";
+    $('input.typeahead').typeahead({
+        source:  function (query, process) {
+        return $.get(path, { query: query }, function (data) {
+
+                return process(data);
+            });
+        }, updater: function (query_s) {
+          //  partnumber/14
+
+
+            window.location.href = "website/partnumber/"+query_s.id;
+        }
+    });
+
+
+
+//     $(document).ready(function() {
+//     $( "#autocompletename" ).autocomplete({
+
+//         source: function(request, response) {
+//             $.ajax({
+//             url:"{{ route('orderuserview') }}",
+//             data: {
+//                     term : request.term
+//              },
+//             dataType: "json",
+//             success: function(data){
+//                var resp = $.map(data,function(obj){
+//                     return obj.name;
+//                });
+
+//                response(resp);
+//             }
+//         });
+//     },
+//     minLength: 2
+//  });
+// });
+
+
+
+
+
+
 
 </script>
 

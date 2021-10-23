@@ -1,17 +1,26 @@
+
 <nav class="navbar navbar-expand-md sticky-top addShadow no-radius">
     <div class="container headnav">
         <a class="navbar-brand" href="#">
             <img class="header-logo" src="{{ asset('/images/logo.svg') }}" alt="bumaas">
         </a>
-
+{{--
         <form action="{{ route('search') }}" class="form-group" method="post" id="form1">
-            @csrf
+            @csrf --}}
+
+
+
+
+
             <div class="input-group">
 
-                <input type="text" class="form-control head-search-box"
-                    placeholder="Enter Product, part Number (English Only)" name="partno">
+
+                <input class="typeahead form-control head-search-box" type="text"
+                placeholder="Enter Product, part Number (English Only)" id="autocompletename">
 
 
+
+{{--
 <input type="hidden"
 name="n_id" value="{{ request()->segment(3) ?? '' }}">
 
@@ -19,21 +28,20 @@ name="n_id" value="{{ request()->segment(3) ?? '' }}">
                     name="childategory_id" value="{{ request()->route()->childategory_id ?? '' }}">
 
                     <input type="hidden"
-                    name="prevurl" value="{{ Route::current()->getName() }}">
+                    name="prevurl" value="{{ Route::current()->getName() }}"> --}}
 
 
                 <div class="input-group-btn header-search-wrap">
                     <input type="submit" class="btn btn-primary rounded-end" value="Search" form="form1">
                 </div>
             </div>
-            @if(Session::has('partno'))
+            {{-- @if(Session::has('partno'))
             <div class="alert" style="color:red">No Part number found.Please Search another partnumber</div>
             @endif
 
 
 
-        </form>
-
+        </form> --}}
 
 
         <ul class="navbar-nav d-flex align-items-center justify-content-end">
@@ -97,7 +105,6 @@ name="n_id" value="{{ request()->segment(3) ?? '' }}">
         </ul>
     </div>
 </nav>
-
 
 
 <!-- <nav style="--bs-breadcrumb-divider: '>';" class="breadcrumb-wrapper" aria-label="breadcrumb"> -->
