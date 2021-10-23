@@ -165,3 +165,6 @@ Route::get('/success',[App\Http\Controllers\CheckoutController::class, 'success'
 Route::get('/history',[App\Http\Controllers\OrderController::class, 'orderhistory'])->name('history');
 Route::get('getuseOrders',  [App\Http\Controllers\OrderController::class,'getuserOrders'])->name('order.getuseOrders');
 Route::get('userview/{order_id}',  [App\Http\Controllers\OrderController::class,'orderuserview'])->name('order.userview');
+
+// autocomlete
+Route::get('autocomplete',  [App\Http\Controllers\FrontendController::class,'orderuserview'])->name('orderuserview');

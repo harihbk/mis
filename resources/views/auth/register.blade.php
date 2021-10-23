@@ -136,9 +136,9 @@
                             <label class="form-check-label" for="radioNo">No</label>
                         </div>
                     </div>
-                    <button class="btn btn-primary my-3 py-2 px-5" type="submit" name="submit" id="RegisterSubmit">Submit</button>
+                    <button class="btn btn-primary my-3 py-2 px-5" type="submit" >Submit</button>
                 </form>
-                <a href="{{ route('login') }}" class="text-center">Login</a>
+
             </div>
         </div>
 
@@ -185,31 +185,12 @@
                 $('#userCompanydiv').show();
             }
         });
-        $('#RegisterSubmit').on('click', function() {
+
+
+
+       // $('#RegisterSubmit').on('click', function() {
             $("#regfrm").validate({
-                //onfocusout: false,
-                ignore: "",
-                invalidHandler: function(form, validator) {
-                    var errors = validator.numberOfInvalids();
-                    if (errors) {
-                        //alert(validator.errorList[0].message);
-                        validator.errorList[0].element.focus();
-                    }
-                },
-                errorElement: 'label',
-                errorClass: 'error',
-                highlight: function(element, errorClass, validClass) {
-                    $(element).closest('.form-control').addClass("has-error");
-                    $(element).closest('td').addClass("has-error");
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).closest('.form-control').removeClass("has-error");
-                    $(element).closest('td').removeClass("has-error");
-                },
-                normalizer: function(value) {
-                    // Trim the value of every element
-                    return $.trim(value);
-                },
+
                 rules: {
                     userName: {
                         required: true,
@@ -328,7 +309,11 @@
                         minlength: "Please enter at least 3 characters  Company GST.",
                         maxlength: "Please enter only upto 25 characters  Company GST."
                     },
-                }
+                },
+                submitHandler: function(form) {
+
+                    form.submit();
+                    }
             });
             // Adding rules
             $.validator.addMethod("Numbers", function(value, element) {
@@ -347,7 +332,7 @@
                 return this.optional(element) || value != '0';
             });
         });
-    });
+   // });
 </script>
 
 
