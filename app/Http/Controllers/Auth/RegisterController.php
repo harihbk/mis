@@ -85,7 +85,7 @@ class RegisterController extends Controller
             'userLoginUserId' => $data['userLoginUserId'],
             'userCompany'     => $data['userCompany'],
             'userCompanyGST'  => $data['userCompanyGST'],
-            'newsletter'      => $data['newsletter']
+            'newsletter'      => (isset($data['newsletter']) && $data['newsletter']) ? $data['newsletter'] : 'option2'
         ]);
     }
 

@@ -191,4 +191,22 @@ $specification = Product_part_number::with(['specification'=>function($query){
 
 
 
+
+
+    public function orderuserview(Request $request)
+    {
+
+        $data = Product_part_number::select(['id', 'part_number as name'])
+                ->where("part_number","LIKE","%{$request->query('query')}%")
+                ->get();
+
+            //    $filterData = Product_part_number::where('part_number','LIKE','%'.$search_partno.'%')
+
+      //  echo json_encode($data);
+
+        return response()->json($data);
+    }
+
+
+
 }
