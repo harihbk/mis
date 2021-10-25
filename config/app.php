@@ -163,6 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Gabievi\Promocodes\PromocodesServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -232,7 +234,9 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Flash'     => Laracasts\Flash\Flash::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'Promocodes' => Gabievi\Promocodes\Facades\Promocodes::class
+        'Promocodes' => Gabievi\Promocodes\Facades\Promocodes::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
+
     ],
 
 ];

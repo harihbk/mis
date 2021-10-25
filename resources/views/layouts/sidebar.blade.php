@@ -152,8 +152,34 @@
                 </li>
                 <li><a href="{{ route('specificationTypes.index') }}"><i class="ti-control-record"></i> Specification
                         Types</a></li>
+
+
+                    <li >
+                    <a href="{{ route('weights.index') }}"
+                    ><i class="ti-control-record"></i>
+                    Weights
+                    </a>
+                    </li>
+
+
+
+                    <li >
+                    <a href="{{ route('units.index') }}"
+                    ><i class="ti-control-record"></i>
+                    Units
+                    </a>
+                    </li>
+
+                    <li >
+                    <a href="{{ route('pricings.index') }}"
+                        ><i class="ti-control-record"></i>
+                        Pricings
+                    </a>
+                    </li>
+
+{{--
                 <li><a href="#"><i class="ti-control-record"></i> Shipped</a></li>
-                <li><a href="#"><i class="ti-control-record"></i> Returned</a></li>
+                <li><a href="#"><i class="ti-control-record"></i> Returned</a></li> --}}
             </ul>
         </div>
     </li>

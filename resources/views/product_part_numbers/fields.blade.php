@@ -114,7 +114,7 @@
 
 <!-- Sale Discount Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('sale_discount', 'Sale Discount:') !!}
+    {!! Form::label('sale_discount', 'Original Price:') !!}
     {!! Form::text('sale_discount', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
@@ -186,12 +186,12 @@
 
 <!-- Sale price Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('original_price', 'Original Price') !!}
+    {!! Form::label('original_price', 'Sale Price') !!}
     {!! Form::text('original_price', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
 <!-- Sale price Field -->
-<div class="form-group col-sm-6">
+ <div class="form-group col-sm-6">
     {!! Form::label('sale_discount', 'Weight Price:') !!}
     {!! Form::text('dash_price', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
@@ -203,11 +203,70 @@
 </div>
 
 
+
+    <div class="col-sm-6">
+        <div class="row">
+        <div class=" col-sm-4">
+            {!! Form::label('sale_discount', 'Product Weight:') !!}
+            {!! Form::text('product_weight', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+        </div>
+
+
+        <div class="col-sm-2">
+        {!! Form::label('Weight', 'Unit :') !!}
+        <select class="form-control" id="unit_id" name="unit_id">
+        @foreach($units as $unit):
+         <option value="{{ $unit->id }}" {{ ( (isset($productPartNumber) && $unit->id == $productPartNumber->unit_id) ? 'selected' : '') }}>{{ $unit->description }}</option>
+        @endforeach
+      </select>
+        </div>
+
+
+    </div>
+</div>
+
+
+
 <div class="form-group col-sm-6">
     {!! Form::label('icon', 'Icon:') !!}
     {!! Form::file('icon') !!}
 
 </div>
+
+
+
+<div class="form-group col-sm-6">
+    {!! Form::label('Weight', 'Weight :') !!}
+    <select class="form-control" id="weight_id" name="weight_id">
+    @foreach($weights as $weight):
+     <option value="{{ $weight->id }}" {{ ( (isset($productPartNumber) && $weight->id == $productPartNumber->weight_id) ? 'selected' : '') }}>{{ $weight->description }}</option>
+    @endforeach
+  </select>
+</div>
+
+
+<div class="form-group col-sm-6">
+    {!! Form::label('Weight', 'Minimum :') !!}
+
+    {!! Form::text('minimum', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
+
+<div class="form-group col-sm-6">
+    {!! Form::label('Weight', 'Maximum :') !!}
+
+    {!! Form::text('maximum', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
+
+
+<div class="form-group col-sm-6">
+    {!! Form::label('Weight', 'Step :') !!}
+
+    {!! Form::text('step', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
+
 
 <style>
     .specul{
