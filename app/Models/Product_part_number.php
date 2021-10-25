@@ -5,7 +5,8 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use App\Models\Weight;
+use App\Models\Unit;
 /**
  * Class Product_part_number
  * @package App\Models
@@ -81,7 +82,12 @@ class Product_part_number extends Model
         'quantity',
         'original_price',
         'dash_price',
-
+        'weight_id',
+        'minimum',
+        'maximum',
+        'step',
+        'product_weight',
+          'unit_id'
     ];
 
     /**
@@ -174,6 +180,23 @@ class Product_part_number extends Model
 
     }
 
+
+   /**
+    * Get the weight that owns the Product_part_number
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+   public function weight()
+   {
+       return $this->belongsTo(Weight::class, 'weight_id', 'id');
+   }
+
+
+  public function unit()
+   {
+
+       return $this->belongsTo(Unit::class, 'unit_id', 'id');
+   }
 
 
 

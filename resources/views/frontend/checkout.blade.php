@@ -145,14 +145,31 @@
                     @php $total="0" @endphp
                     @php $weight_price="0" @endphp
                     @if (isset($cart_data) and count($cart_data) > 0)
-
+                    @php   $weight = 0 @endphp
                         @foreach ($cart_data as $data)
-                        @php $weight_price +=$data['weight_price']*$data['item_quantity'] @endphp
+
+    @php
+
+
+if($data->associatedModel->unit->description == "gm"){
+    $weight += ($data->associatedModel->weight->name * $data->associatedModel->product_weight *  $data->quantity) /1000;
+} else {
+    $weight += $data->associatedModel->weight->name * $data->associatedModel->product_weight *  $data->quantity;
+}
+
+ // print_r($data->product_weight);
+
+ @endphp
+
+
+
+                        @php $weight_price +=$data->price*$data->quantity
+                         @endphp
 
                             <tr>
                                    <td>
                                     <a class="entry-thumbnail" href="javascript:void(0)">
-                                        <img src="{{url('')}}/uploads/{{ $data['item_image'] }}"  width="70px" alt="">
+                                        <img src="{{url('')}}/uploads/{{ $data->associatedModel->icon  }}"  width="70px" alt="">
                                     </a>
                                     {{-- <a href="{{ route('shop.show', $item->model->slug) }}">
                                         <img src="{{ productImage($item->model->image) }}" height="100px" width="100px"></td>
@@ -160,17 +177,17 @@
                                 <td>
                                 <td>
                                     <a href="#" class="text-decoration-none">
-                                        <h3 class="lead light-text">{{ $data['item_name'] }}</h3>
-                                        <p class="light-text">{{ $data['product_length'] }}</p>
-                                        <h3 class="light-text lead text-small"><span>&#8377;</span>{{ number_format($data['item_price'], 2) }}</h3>
+                                        <h3 class="lead light-text">{{ $data->name }}</h3>
+                                        <p class="light-text">{{ $data->associatedModel->product_length }}</p>
+                                        <h3 class="light-text lead text-small"><span>&#8377;</span>{{ number_format($data->price) }}</h3>
                                     </a>
                                 </td>
                                 <td>
 
-                                    <span class="quantity-square">{{ $data['item_quantity'] }}</span>
+                                    <span class="quantity-square">{{ $data->quantity }}</span>
                                 </td>
                             </tr>
-                            @php $total = $total + ($data["item_quantity"] * $data["item_price"]) @endphp
+                            @php $total = $total + ($data->quantity * $data->price * $data->associatedModel->weight->name) @endphp
                         @endforeach
                         @else
 
@@ -193,39 +210,10 @@
                 <div class="col-md-6">
                     <h6 class="cart-subtotal-price">
                         Rs.
-                        <span class="cart-grand-price-viewajax">{{$total }}</span>
+                        <span class="cart-grand-price-viewajax">{{ number_format($total,2) }}</span>
                     </h6>
                 </div>
             </div>
-
-
-
-
-
-                    {{-- dicount if present --}}
-
-                    {{-- @if (isset($settings) && $settings->discount_status == 1)
-                    @php
-                        $discount = $total * (1 - $settings->discount / 100);
-                    @endphp
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h6 class="cart-subtotal-name">Discount({{ $settings->discount }})%</h6>
-                        </div>
-                        <div class="col-md-6">
-                            <h6 class="cart-subtotal-price">
-                                Rs.
-                                <span class="cart-grand-price-viewajax">{{ $total * (1 - $settings->discount / 100 )}}</span>
-                            </h6>
-                        </div>
-                    </div>
-
-                    @else
-                    @php
-                    $discount = $total;
-                    @endphp
-                    @endif --}}
-
 
 
 
@@ -255,14 +243,6 @@
                     @endphp
 
                    <hr>
-                    {{-- <div class="row">
-                        <div class="col-md-4">
-                            <span class="light-text">New Subtotal</span>
-                        </div>
-                        <div class="col-md-4 offset-md-4">
-                            <span class="light-text" style="display: inline-block"></span>
-                        </div>
-                    </div> --}}
 
                     @else
                     @php
@@ -279,7 +259,7 @@
                         <div class="col-md-6">
                             <h6 class="cart-subtotal-price">
                                 Rs.
-                                <span class="cart-grand-price-viewajax">{{ abs($discount-$total) }}</span>
+                                <span class="cart-grand-price-viewajax">{{ number_format(abs($discount-$total),2) }}</span>
                             </h6>
                         </div>
                     </div>
@@ -290,7 +270,7 @@
 
 
 
-                    {{-- igst if present --}}
+
                     @if (isset($settings) && $settings->igst)
                     @php
                         $igst =   ($total *  $settings->igst) / 100 ;
@@ -316,7 +296,7 @@
                     @endif
 
 
-                    {{-- cgst if present --}}
+
                     @if (isset($settings) && $settings->cgst)
                     @php
                         $cgst =   ($total *  $settings->cgst) / 100 ;
@@ -341,14 +321,19 @@
 
                     @endif
 
-                    <div class="row">
+
+                    @php
+                    $shipping_price = App\Http\Controllers\CheckoutController::getAmount($weight);
+                    @endphp
+
+                     <div class="row">
                         <div class="col-md-6">
-                            <h6 class="cart-subtotal-name">Shipping Charge</h6>
+                            <h6 class="cart-subtotal-name">Shipping Charge </h6>
                         </div>
                         <div class="col-md-6">
                             <h6 class="cart-subtotal-price">
                                 Rs.
-                                <span class="cart-grand-price-viewajax">{{ number_format($weight_price, 2)  }}</span>
+                                <span class="cart-grand-price-viewajax">{{ $shipping_price  }}</span>
                             </h6>
                         </div>
                     </div>
@@ -361,7 +346,7 @@
                     <div class="row">
                         @php
 
-                        $total =   $total + $igst + $cgst ;
+                        $total =   $total + $igst + $cgst + $shipping_price;
                         @endphp
                         <div class="col-md-6">
                             <h6 class="cart-grand-name">Grand Total</h6>
@@ -369,14 +354,14 @@
                         <div class="col-md-6">
                             <h6 class="cart-grand-price">
                                 Rs.
-                                <span class="cart-grand-price-viewajax">{{ $weight_price + number_format($total, 2) }}</span>
+                                <span class="cart-grand-price-viewajax">{{ number_format($total,2 )}}</span>
                             </h6>
                         </div>
                     </div>
 
                     @php
 
-                    $total =  $weight_price + number_format($total, 2);
+                 //   $total =  $weight_price + number_format($total, 2);
                     @endphp
 
 

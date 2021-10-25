@@ -21,7 +21,7 @@ use App\Models\Order_product;
 use App\Models\Order_history;
 use App\Models\Setting;
 use App\Models\Oc_address;
-
+use App\Models\Pricing;
 use Auth;
 use View;
 use Session;
@@ -34,9 +34,9 @@ class CheckoutController extends Controller
     public function index()
     {
 
-        $cookie_data = stripslashes(Cookie::get('shopping_cart'));
-        $cart_data = json_decode($cookie_data, true);
-
+        // $cookie_data = stripslashes(Cookie::get('shopping_cart'));
+        // $cart_data = json_decode($cookie_data, true);
+        $cart_data = \Cart::getContent();
         if(Auth::id()){
             $exist_address = Oc_address::where('customer_id',Auth::id())->get();
         } else {
@@ -415,5 +415,17 @@ class CheckoutController extends Controller
         \Session::put('success', 'Payment successful, your order will be despatched in the next 48 hours.');
         echo json_encode(true);
       //  return redirect()->back();
+    }
+
+    public static function getAmount($weight){
+        $first = Pricing::where('slug','below-10-kg')->pluck('name')->first();
+        $second = Pricing::where('slug','above-10-kg')->pluck('name')->first();
+            if($weight <= 10){
+               return $first;
+            } else {
+               $w =  abs($weight - 10) * $second;
+              return  $first +  $w;
+            }
+
     }
 }

@@ -1,0 +1,44 @@
+[22-Sep-2021 11:44:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home1/bestinjt/public_html/mis/config/queue.php:16
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/queue.php on line 16
+[22-Sep-2021 11:44:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home1/bestinjt/public_html/mis/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/database.php on line 18
+[22-Sep-2021 11:44:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home1/bestinjt/public_html/mis/config/hashing.php:32
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/hashing.php on line 32
+[22-Sep-2021 11:44:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home1/bestinjt/public_html/mis/config/filesystems.php:16
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/filesystems.php on line 16
+[22-Sep-2021 11:44:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home1/bestinjt/public_html/mis/config/broadcasting.php:18
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/broadcasting.php on line 18
+[22-Sep-2021 11:44:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home1/bestinjt/public_html/mis/config/logging.php:20
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/logging.php on line 20
+[22-Sep-2021 11:45:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home1/bestinjt/public_html/mis/config/session.php:21
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/session.php on line 21
+[22-Sep-2021 11:49:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function resource_path() in /home1/bestinjt/public_html/mis/config/view.php:17
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/view.php on line 17
+[22-Sep-2021 11:52:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home1/bestinjt/public_html/mis/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/cache.php on line 18
+[22-Sep-2021 11:53:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home1/bestinjt/public_html/mis/config/mail.php:16
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/mail.php on line 16
+[22-Sep-2021 12:03:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home1/bestinjt/public_html/mis/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/app.php on line 16

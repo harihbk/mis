@@ -1,0 +1,20 @@
+[22-Sep-2021 11:45:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function database_path() in /home1/bestinjt/public_html/mis/config/infyom/laravel_generator.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/infyom/laravel_generator.php on line 14
+[22-Sep-2021 11:45:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function database_path() in /home1/bestinjt/public_html/mis/config/infyom/laravel_generator.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/infyom/laravel_generator.php on line 14
+[22-Sep-2021 11:51:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function database_path() in /home1/bestinjt/public_html/mis/config/infyom/laravel_generator.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/infyom/laravel_generator.php on line 14
+[22-Sep-2021 11:51:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function database_path() in /home1/bestinjt/public_html/mis/config/infyom/laravel_generator.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/infyom/laravel_generator.php on line 14
+[22-Sep-2021 12:04:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function database_path() in /home1/bestinjt/public_html/mis/config/infyom/laravel_generator.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/bestinjt/public_html/mis/config/infyom/laravel_generator.php on line 14
