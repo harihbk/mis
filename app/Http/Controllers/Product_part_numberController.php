@@ -186,7 +186,7 @@ class Product_part_numberController extends AppBaseController
              'productPartNumber' => $productPartNumber,
              'dynamicfield'       => Partnofield::where('product_part_number_id',$id)->get(),
              'weights'            => Weight::all(),
-             'units'              => unit::all()
+             'units'              => Unit::all()
         ];
         return view('product_part_numbers.edit')->with($data);
     }
