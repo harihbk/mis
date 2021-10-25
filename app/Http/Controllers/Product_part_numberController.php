@@ -15,7 +15,7 @@ use App\Models\Partnofield;
 use App\Models\Partno_filters;
 use App\Models\Product_part_number;
 use App\Models\Weight;
-use App\Models\unit;
+use App\Models\Unit;
 use Session;
 class Product_part_numberController extends AppBaseController
 {
@@ -59,7 +59,7 @@ class Product_part_numberController extends AppBaseController
         $dynamicfield = [];
         $specification = Specification::all();
         $weights = Weight::all();
-        $units   = unit::all();
+        $units   = Unit::all();
          return view('product_part_numbers.create')->with(compact('product','specification','dynamicfield','weights','units'));
     }
 
