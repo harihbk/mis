@@ -141,3 +141,35 @@
 
 
 
+<li class="nav-item">
+    <a href="{{ route('weights.index') }}"
+       class="nav-link {{ Request::is('weights*') ? 'active' : '' }}">
+        <p>Weights</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('units.index') }}"
+       class="nav-link {{ Request::is('units*') ? 'active' : '' }}">
+        <p>Units</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('units.index') }}"
+       class="nav-link {{ Request::is('units*') ? 'active' : '' }}">
+        <p>Units</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('pricings.index') }}"
+       class="nav-link {{ Request::is('pricings*') ? 'active' : '' }}">
+        <p>Pricings</p>
+    </a>
+</li>
+
+

@@ -168,3 +168,10 @@ Route::get('userview/{order_id}',  [App\Http\Controllers\OrderController::class,
 
 // autocomlete
 Route::get('autocomplete',  [App\Http\Controllers\FrontendController::class,'orderuserview'])->name('orderuserview');
+
+
+Route::resource('weights', App\Http\Controllers\WeightController::class);
+
+Route::resource('units', App\Http\Controllers\UnitController::class);
+
+Route::resource('pricings', App\Http\Controllers\PricingController::class);

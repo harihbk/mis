@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-12">
                 @if(isset($cart_data))
-                    @if(Cookie::get('shopping_cart'))
+
                         @php $total="0" @endphp
                         <div class="shopping-cart">
                             <div class="shopping-cart-table">
@@ -30,29 +30,40 @@
                                             <tr>
                                                 <th class="cart-description">Image</th>
                                                 <th class="cart-product-name">Product Name</th>
+                                                <th class="cart-price">SQB</th>
                                                 <th class="cart-price">Price</th>
                                                 <th class="cart-qty">Quantity</th>
-                                                <th class="cart-total">Grandtotal</th>
+                                                <th class="cart-total">Total</th>
                                                 <th class="cart-romove">Remove</th>
                                             </tr>
                                         </thead>
                                         <tbody class="my-auto">
                                             @foreach ($cart_data as $data)
-                                            <tr class="cartpage cartpage" id="{{ $data['item_id'] }}">
+
+
+                                            <tr class="cartpage cartpage" id="{{ $data['id'] }}">
 
                                                 <td class="cart-image">
-                                                    <input type="hidden" class="product_id" value="{{ $data['item_id'] }}" >
+                                                    <input type="hidden" class="product_id" value="{{ $data->id ?? '' }}" >
+
                                                     <a class="entry-thumbnail" href="javascript:void(0)">
-                                                        <img src="{{url('')}}/uploads/{{ $data['item_image'] }}"  width="70px" alt="">
+                                                        <img src="{{url('')}}/uploads/{{ $data->associatedModel->icon ?? '' }}"  width="70px" alt="">
                                                     </a>
                                                 </td>
+
+
                                                 <td class="cart-product-name-info">
                                                     <h4 class='cart-product-description'>
-                                                        <a href="javascript:void(0)">{{ $data['item_name'] }}</a>
+                                                        <a href="javascript:void(0)">{{ $data->name ?? '' }}</a>
                                                     </h4>
                                                 </td>
+
+                                                <td>
+                                                    <span class="cart-sub-total-price">{{ $data->associatedModel->weight->description ?? '' }}</span>
+                                                </td>
+
                                                 <td class="cart-product-sub-total">
-                                                    <span class="cart-sub-total-price">{{ number_format($data['item_price'], 2) }}</span>
+                                                    <span class="cart-sub-total-price">{{ $data->price ?? '' }}</span>
                                                 </td>
 
 
@@ -61,7 +72,7 @@
                                                         <div class="input-group-prepend decrement-btn changeQuantity" style="cursor: pointer">
                                                             <span class="input-group-text">-</span>
                                                         </div>
-                                                        <input type="text" class="qty-input form-control" maxlength="1" max="{{ $data['product_quantity'] }}" value="{{ $data['item_quantity'] }}">
+                                                        <input type="text" class="qty-input form-control" step="{{ $data->associatedModel->step == 0 ? 1 : $data->associatedModel->step }}" minlength="{{ $data->associatedModel->minimum }}" maxlength="{{ $data->associatedModel->maximum }}" max="{{ $data['quantity'] }}" value="{{ $data->quantity ?? '' }}">
                                                         <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">
                                                             <span class="input-group-text">+</span>
                                                         </div>
@@ -75,12 +86,12 @@
                                                      <input type="number" class="qty-input form-control" value="{{ $data['item_quantity'] }}" min="1" max="100"/>
                                                 </td> --}}
                                                 <td class="cart-product-grand-total">
-                                                    <span class="cart-grand-total-price">{{ number_format($data['item_quantity'] * $data['item_price'], 2) }}</span>
+                                                    <span class="cart-grand-total-price">{{ number_format($data->quantity * $data->price * $data->associatedModel->weight->name,2) }}</span>
                                                 </td>
                                                 <td style="font-size: 20px;">
                                                     <button type="button" class="delete_cart_data"><li class="fa fa-trash-o"></li> Delete</button>
                                                 </td>
-                                                @php $total = $total + ($data["item_quantity"] * $data["item_price"]) @endphp
+                                                @php $total = $total + ($data->quantity  * $data->price * $data->associatedModel->weight->name) @endphp
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -95,134 +106,14 @@
                                     </div>
                                 </div><!-- /.estimate-ship-tax -->
 
-                                <div class="col-md-4 col-sm-12 ">
-                                    <div class="cart-shopping-total">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-name">Subtotal</h6>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-price">
-                                                    Rs.
-                                                    <span class="cart-grand-price-viewajax">{{ number_format($total, 2) }}</span>
-                                                </h6>
-                                            </div>
-                                        </div>
 
-                                        {{-- dicount if present --}}
-
-                                        @if (isset($settings) && $settings->discount_status == 1)
-                                        @php
-                                            $discount = $total * (1 - $settings->discount / 100);
-                                        @endphp
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-name">Discount({{ $settings->discount }})%</h6>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-price">
-                                                    Rs.
-                                                    <span class="cart-grand-price-viewajax">{{ $total * (1 - $settings->discount / 100 )}}</span>
-                                                </h6>
-                                            </div>
-                                        </div>
-
-                                        @else
-                                        @php
-                                        $discount = $total;
-                                         @endphp
-                                        @endif
-
-                                        {{-- igst if present --}}
-                                        @if (isset($settings) && $settings->igst)
-                                        @php
-                                           $igst =   ($total *  $settings->igst) / 100 ;
-                                        @endphp
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-name">IGST({{ $settings->igst }})%</h6>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-price">
-                                                    Rs.
-                                                    <span class="cart-grand-price-viewajax">{{ ($total *  $settings->igst) / 100}}</span>
-                                                </h6>
-                                            </div>
-                                        </div>
-
-                                        @else
-
-                                        @php
-                                        $igst =  0;
-                                        @endphp
-
-                                        @endif
+                                @include('frontend.cart_total')
 
 
-                                        {{-- cgst if present --}}
-                                        @if (isset($settings) && $settings->cgst)
-                                        @php
-                                           $cgst =   ($total *  $settings->cgst) / 100 ;
-                                        @endphp
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-name">CGST({{ $settings->cgst }})%</h6>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-price">
-                                                    Rs.
-                                                    <span class="cart-grand-price-viewajax">{{ ($total *  $settings->cgst) / 100}}</span>
-                                                </h6>
-                                            </div>
-                                        </div>
-
-                                        @else
-
-                                        @php
-                                        $cgst =  0;
-                                        @endphp
-
-                                        @endif
-
-
-
-
-
-                                        <hr>
-                                        <div class="row">
-                                            @php
-                                              $total =  $discount + $igst + $cgst ;
-                                            @endphp
-                                            <div class="col-md-6">
-                                                <h6 class="cart-grand-name">Grand Total</h6>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6 class="cart-grand-price">
-                                                    Rs.
-                                                    <span class="cart-grand-price-viewajax">{{ number_format($total, 2) }}</span>
-                                                </h6>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="cart-checkout-btn text-center">
-                                                    @if (Auth::user())
-                                                        <a href="{{ route('checkout') }}" class="btn btn-success btn-block checkout-btn">PROCCED TO CHECKOUT</a>
-                                                    @else
-                                                        <a href="{{ url('login') }}" class="btn btn-success btn-block checkout-btn">PROCCED TO CHECKOUT</a>
-                                                        {{-- you add a pop modal for making a login --}}
-                                                    @endif
-                                                    <h6 class="mt-3">Checkout with Fabcart</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                         </div><!-- /.shopping-cart -->
-                    @endif
+
                 @else
                     <div class="row">
                         <div class="col-md-12 mycard py-5 text-center">
@@ -263,21 +154,32 @@ $('.clear_cart').click(function (e) {
 $('.increment-btn').click(function (e) {
             e.preventDefault();
             var incre_value = $(this).parents('.quantity').find('.qty-input').val();
-            var value = parseInt(incre_value, 10);
-            value = isNaN(value) ? 0 : value;
-            if(value<10){
+           // var value = parseInt(incre_value, 10);
+           // value = isNaN(value) ? 0 : value;
+            if($(this).parents('.quantity').find('.qty-input').attr("step") > 0){
+               value =  parseInt(incre_value)+parseInt($(this).parents('.quantity').find('.qty-input').attr("step"));
+            } else {
                 value++;
-                $(this).parents('.quantity').find('.qty-input').val(value);
             }
+                $(this).parents('.quantity').find('.qty-input').val(value);
+
         });
 
         $('.decrement-btn').click(function (e) {
             e.preventDefault();
             var decre_value = $(this).parents('.quantity').find('.qty-input').val();
-            var value = parseInt(decre_value, 10);
+            var minm_val = $(this).parents('.quantity').find('.qty-input').attr('minlength');
+            var step = $(this).parents('.quantity').find('.qty-input').attr("step") ;
+           // var value = parseInt(decre_value, 10);
+
+           if($(this).parents('.quantity').find('.qty-input').attr("step") > 0){
+               value =  parseInt(decre_value)-parseInt($(this).parents('.quantity').find('.qty-input').attr("step"));
+            } else {
+                value--;
+            }
+
             value = isNaN(value) ? 0 : value;
             if(value>1){
-                value--;
                 $(this).parents('.quantity').find('.qty-input').val(value);
             }
         });

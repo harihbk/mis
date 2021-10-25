@@ -14,6 +14,8 @@ use App\Models\Specification;
 use App\Models\Partnofield;
 use App\Models\Partno_filters;
 use App\Models\Product_part_number;
+use App\Models\Weight;
+use App\Models\unit;
 use Session;
 class Product_part_numberController extends AppBaseController
 {
@@ -56,7 +58,9 @@ class Product_part_numberController extends AppBaseController
         $product = Product::all();
         $dynamicfield = [];
         $specification = Specification::all();
-        return view('product_part_numbers.create')->with(compact('product','specification','dynamicfield'));
+        $weights = Weight::all();
+        $units   = unit::all();
+         return view('product_part_numbers.create')->with(compact('product','specification','dynamicfield','weights','units'));
     }
 
     /**
@@ -180,8 +184,9 @@ class Product_part_numberController extends AppBaseController
             'specification'      => $specification,
              'product'            => $product,
              'productPartNumber' => $productPartNumber,
-             'dynamicfield'       => Partnofield::where('product_part_number_id',$id)->get()
-
+             'dynamicfield'       => Partnofield::where('product_part_number_id',$id)->get(),
+             'weights'            => Weight::all(),
+             'units'              => unit::all()
         ];
         return view('product_part_numbers.edit')->with($data);
     }
