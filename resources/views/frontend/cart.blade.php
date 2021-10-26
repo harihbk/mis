@@ -86,7 +86,7 @@
                                                      <input type="number" class="qty-input form-control" value="{{ $data['item_quantity'] }}" min="1" max="100"/>
                                                 </td> --}}
                                                 <td class="cart-product-grand-total">
-                                                    <span class="cart-grand-total-price">{{ number_format($data->quantity * $data->price * $data->associatedModel->weight->name,2) }}</span>
+                                                    <span class="cart-grand-total-price">{{ $data->quantity * $data->price * $data->associatedModel->weight->name }}</span>
                                                 </td>
                                                 <td style="font-size: 20px;">
                                                     <button type="button" class="delete_cart_data"><li class="fa fa-trash-o"></li> Delete</button>
