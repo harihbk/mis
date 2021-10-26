@@ -29,7 +29,10 @@ class Order extends Model
                             'billing_province', 'billing_postalcode', 'billing_phone', 'billing_name_on_card',
                             'billing_discount', 'billing_discount_code', 'billing_subtotal', 'billing_tax',
                             'billing_total', 'error','created_at','order_status_id','coupon_id','razorpay_id',
-                            'razorpay_created_at','address_id','shipping_price','total_price'];
+                            'razorpay_created_at','address_id','shipping_price','total_price',
+                            'total','subtotal','igst','cgst','shippingcharge','coupon_amount','grand_total'
+
+                        ];
 
 
 

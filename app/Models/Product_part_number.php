@@ -87,7 +87,8 @@ class Product_part_number extends Model
         'maximum',
         'step',
         'product_weight',
-          'unit_id'
+          'unit_id',
+
     ];
 
     /**

@@ -215,6 +215,7 @@
         <div class="col-sm-2">
         {!! Form::label('Weight', 'Unit :') !!}
         <select class="form-control" id="unit_id" name="unit_id">
+            <option value="">--Select Unit--</option>
         @foreach($units as $unit):
          <option value="{{ $unit->id }}" {{ ( (isset($productPartNumber) && $unit->id == $productPartNumber->unit_id) ? 'selected' : '') }}>{{ $unit->description }}</option>
         @endforeach
@@ -238,6 +239,7 @@
 <div class="form-group col-sm-6">
     {!! Form::label('Weight', 'Weight :') !!}
     <select class="form-control" id="weight_id" name="weight_id">
+        <option value="">--Select Weight--</option>
     @foreach($weights as $weight):
      <option value="{{ $weight->id }}" {{ ( (isset($productPartNumber) && $weight->id == $productPartNumber->weight_id) ? 'selected' : '') }}>{{ $weight->description }}</option>
     @endforeach
