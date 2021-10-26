@@ -50,6 +50,7 @@
       <tr>
         <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;background-color:#efefef;font-weight:bold;text-align:left;padding:7px;color:#222222">Part Number</td>
         <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;background-color:#efefef;font-weight:bold;text-align:left;padding:7px;color:#222222">Model</td>
+        <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;background-color:#efefef;font-weight:bold;text-align:left;padding:7px;color:#222222">SQB</td>
         <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;background-color:#efefef;font-weight:bold;text-align:right;padding:7px;color:#222222">Quantity</td>
         <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;background-color:#efefef;font-weight:bold;text-align:right;padding:7px;color:#222222">Price</td>
         <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;background-color:#efefef;font-weight:bold;text-align:right;padding:7px;color:#222222">Total</td>
@@ -67,117 +68,50 @@
             <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:left;padding:7px"> {{ $item->partno->part_number ?? ''}}
               </td>
             <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:left;padding:7px">{{ $item->partno->nominal_thread_m ?? ''}}</td>
+            <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:left;padding:7px">{{ $item->partno->weight->description ?? ''}}</td>
             <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">{{ $item->quantity ?? '' }}</td>
             <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $item->partno->original_price ?? ''}}</td>
-            <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $item->partno->original_price * $item->quantity }}</td>
+            <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $item->partno->original_price * $item->quantity * $item->partno->weight->name }}</td>
           </tr>
-             <?php
-              $i +=$item->partno->original_price * $item->quantity ;
-             ?>
+
         @endforeach
       </tbody>
 
     <tfoot>
 
         <tr>
-      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Total:</b></td>
-      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $i }}</td>
+      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="5"><b>Total:</b></td>
+      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $order->total ?? '' }}</td>
         </tr>
 
 
-
-        {{-- @if (isset($settings) && $settings->discount_status == 1)
-        @php
-        $discount = $i * (1 - $settings->discount / 100);
-        @endphp
-                <tr >
-            <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Discount({{ $settings->discount }})%:</b></td>
-            <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $discount }}</td>
-              </tr>
-            @else
-            @php
-            $discount = $i;
-             @endphp
-            @endif --}}
-{{--
-
-            @if ($discount)
             <tr >
-                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Discount({{ $discount->code }})%:</b></td>
-                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $discount->reward }}</td>
-                  </tr>
-                  @php
-                  $discount = $discount->reward;
-              @endphp
-            @else
-
-            @php
-           $discount = 0;
-            @endphp
-            @endif --}}
-
-            <tr >
-                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>SubTotal:</b></td>
-                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ abs($i) }}</td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="5"><b>SubTotal:</b></td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $order->subtotal ?? '' }}</td>
             </tr>
 
-            @php
-                  $subtotal = abs($i);
-            @endphp
-
-
-
-            @if (isset($settings) && $settings->igst)
-            @php
-               $igst =   ($i *  $settings->igst) / 100 ;
-            @endphp
                 <tr>
-                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>IGST({{ $settings->igst }})%:</b></td>
-                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $igst }}</td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="5"><b>IGST({{ $settings->igst }})%:</b></td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $order->igst ?? '' }}</td>
                 </tr>
-            @else
-
-            @php
-            $igst =  0;
-            @endphp
-
-            @endif
 
 
 
-
-            @if (isset($settings) && $settings->cgst)
-            @php
-               $cgst =   ($i *  $settings->cgst) / 100 ;
-            @endphp
                     <tr>
-                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>CGST({{ $settings->cgst }})%:</b></td>
-                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $cgst }}</td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="5"><b>CGST({{ $settings->cgst }})%:</b></td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $order->cgst }}</td>
                   </tr>
-            @else
-
-            @php
-            $cgst =  0;
-            @endphp
-
-            @endif
 
 
             <tr>
-                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Shipping Price:</b></td>
-                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $order->shipping_price }}</td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="5"><b>Shipping Price:</b></td>
+                <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $order->shippingcharge }}</td>
                   </tr>
 
 
-
-
-            @php
-            $total =  $order->shipping_price + $subtotal + $igst + $cgst ;
-             @endphp
-
         <tr>
-      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="4"><b>Total:</b></td>
-      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $total }}</td>
+      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px" colspan="5"><b>Total:</b></td>
+      <td style="font-size:12px;border-right:1px solid #dddddd;border-bottom:1px solid #dddddd;text-align:right;padding:7px">₹{{ $order->grand_total }}</td>
         </tr>
           </tfoot>
 

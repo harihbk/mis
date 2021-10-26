@@ -48,7 +48,7 @@
                 @csrf()
 
 
-                <input type="radio" id="html" name="radio_address" value="exist" class="radioclass" checked>
+                <input type="radio" id="html" name="radio_address" value="exist" class="radioclass" >
                 <label for="html">I want to use an existing address</label><br>
 
 
@@ -134,7 +134,7 @@
 
         <div class="col-md-5 offset-md-1">
 
-        <input type="text" name="couponcode" id="couponcode" class="couponcode form-control" placeholder="Apply Coupon Code">
+        {{-- <input type="text" name="couponcode" id="couponcode" class="couponcode form-control" placeholder="Apply Coupon Code"> --}}
 
 
             <hr>
@@ -530,7 +530,7 @@ if($data->associatedModel->unit->description == "gm"){
               });
 
               var data = {
-            'radio_address' : $('[name="radio_address"]').val(),
+            'radio_address' : $('input[name="radio_address"]:checked').val(),
             'existaddress' : $('[name="existaddress"]').val(),
               'email' : $('[name="email"]').val(),
               'name' : $('[name="name"]').val(),

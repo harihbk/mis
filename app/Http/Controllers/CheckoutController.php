@@ -92,10 +92,11 @@ class CheckoutController extends Controller
     }
 
 
-        $cookie_data = stripslashes(Cookie::get('shopping_cart'));
-        $cart_data = json_decode($cookie_data, true);
+        // $cookie_data = stripslashes(Cookie::get('shopping_cart'));
+        // $cart_data = json_decode($cookie_data, true);
 
-        if(empty($cart_data)){
+        $items = \Cart::getContent();
+        if(\Cart::isEmpty()){
             echo json_encode('Sorry, one of the items on your cart is no longer available');
            // return  back()->with('error','Sorry, one of the items on your cart is no longer available');
         }
@@ -195,35 +196,46 @@ class CheckoutController extends Controller
 
     public function calculation(){
 
-        $cookie_data = stripslashes(Cookie::get('shopping_cart'));
-        $cart_data = json_decode($cookie_data, true);
+        $total=0;
+        $weight = 0 ;
+        $discount = 0;
 
-        $total = 0;
-        $weight_price = 0;
+         $items = \Cart::getContent();
+            foreach ($items as $item){
+                if($item->associatedModel->unit->description == "gm"){
+                    $weight += ($item->associatedModel->weight->name * $item->associatedModel->product_weight *  $item->quantity) /1000;
+                } else {
+                    $weight += $item->associatedModel->weight->name * $item->associatedModel->product_weight *  $item->quantity;
+                }
+                $total = $total + ($item->quantity * $item->price * $item->associatedModel->weight->name);
+            }
+
+
         $settings = Setting::first();
+            if (isset($settings) && $settings->igst){
+                $igst =   ($total *  $settings->igst) / 100 ;
+            } else {
+                $igst = 0;
+            }
 
-        foreach($cart_data as $item){
-            $weight_price +=$item['weight_price']*$item['item_quantity'];
-            $total += $total + ($item["item_quantity"] * $item["item_price"]);
+            if (isset($settings) && $settings->cgst){
+                $cgst =   ($total *  $settings->cgst) / 100 ;
+            } else {
+                $cgst = 0;
+            }
+        $shipping_price = $this->getAmount($weight);
+        $grand_total =   $total + $igst + $cgst + $shipping_price;
 
-        }
 
-        $cgst  = $total *  $settings->igst / 100;
 
-        $sgst  = $total *  $settings->cgst / 100;
-
-        $total  = $weight_price + $total +  $cgst +$sgst;
         if(session('coupon')){
-
             $co =  Promocodes::apply(session('coupon')['name']);
-
            $promocode = $co->users[0]->pivot->id;
-
          } else {
-             $promocode = 0;
+            $promocode = 0;
          }
 
- return  $total-$promocode;
+ return  $grand_total-$promocode;
     }
 
     private function getNumbers()
@@ -249,25 +261,56 @@ class CheckoutController extends Controller
 
     private function insertIntoOrdersTable($request, $error)
     {
-        $cookie_data = stripslashes(Cookie::get('shopping_cart'));
-        $cart_data = json_decode($cookie_data, true);
-        $total = 0;
-        $weight_price = 0;
-        foreach($cart_data as $item){
-            $weight_price +=$item['weight_price']*$item['item_quantity'];
-            $total = $total + ($item["item_quantity"] * $item["item_price"]);
+        // $cookie_data = stripslashes(Cookie::get('shopping_cart'));
+        // $cart_data = json_decode($cookie_data, true);
+        // $total = 0;
+        // $weight_price = 0;
+        // foreach($cart_data as $item){
+        //     $weight_price +=$item['weight_price']*$item['item_quantity'];
+        //     $total = $total + ($item["item_quantity"] * $item["item_price"]);
 
-        }
+        // }
+            $total=0;
+            $weight = 0 ;
+            $discount = 0;
 
-        if(session('coupon')){
+             $items = \Cart::getContent();
+                foreach ($items as $item){
+                    if($item->associatedModel->unit->description == "gm"){
+                        $weight += ($item->associatedModel->weight->name * $item->associatedModel->product_weight *  $item->quantity) /1000;
+                    } else {
+                        $weight += $item->associatedModel->weight->name * $item->associatedModel->product_weight *  $item->quantity;
+                    }
+                    $total = $total + ($item->quantity * $item->price * $item->associatedModel->weight->name);
+                }
 
-           $co =  Promocodes::apply(session('coupon')['name']);
 
-          $promocode = $co->users[0]->pivot->id;
+            $subtotal = abs($discount-$total);
+            $settings = Setting::first();
+                if (isset($settings) && $settings->igst){
+                    $igst =   ($total *  $settings->igst) / 100 ;
+                } else {
+                    $igst = 0;
+                }
 
-        } else {
-            $promocode = 0;
-        }
+                if (isset($settings) && $settings->cgst){
+                    $cgst =   ($total *  $settings->cgst) / 100 ;
+                } else {
+                    $cgst = 0;
+                }
+
+
+            $shipping_price = $this->getAmount($weight);
+
+            $grand_total =   $total + $igst + $cgst + $shipping_price;
+
+
+                    if(session('coupon')){
+                    $co =  Promocodes::apply(session('coupon')['name']);
+                    $promocode = $co->users[0]->pivot->id;
+                    } else {
+                        $promocode = 0;
+                    }
 
 
         if($request->radio_address == "exist"){
@@ -288,20 +331,12 @@ class CheckoutController extends Controller
                 ]);
         $address_id = $address->id;
 
-
         // new address
         }
 
 
         $order = Order::create([
             'user_id' => auth()->user() ? auth()->user()->id : null,
-            // 'billing_email' => $request->email,
-            // 'billing_name' => $request->name,
-            // 'billing_address' => $request->address,
-            // 'billing_city' => $request->city,
-            // 'billing_province' => $request->province,
-            // 'billing_postalcode' => $request->postal_code,
-            // 'billing_phone' => $request->phone,
             'billing_name_on_card' => 'test',
             'billing_discount' => 0,
             'billing_discount_code' =>0,
@@ -312,20 +347,27 @@ class CheckoutController extends Controller
             'order_status_id' => 1, //pending status
             'error' => $error,
             'address_id' =>  $address_id,
-            'shipping_price' =>$weight_price
+            'shipping_price' => 0,
+            'total' => $total,
+            'subtotal' =>$subtotal ,
+            'igst' =>$igst,
+            'cgst' => $cgst,
+            'shippingcharge' => $shipping_price,
+            'coupon_amount' => 0,
+            'grand_total' =>$grand_total
         ]);
 
 
 
 
-        $cookie_data = stripslashes(Cookie::get('shopping_cart'));
-        $cart_data = json_decode($cookie_data, true);
-        foreach($cart_data as $item){
+        // $cookie_data = stripslashes(Cookie::get('shopping_cart'));
+        // $cart_data = json_decode($cookie_data, true);
+        foreach($items as $item){
 
             Order_product::create([
-                'product_id' => $item['item_id'],
+                'product_id' => $item->id,
                 'order_id' => $order->id,
-                'quantity' => $item['item_quantity']
+                'quantity' => $item->quantity
             ]);
 
         }
@@ -337,14 +379,14 @@ class CheckoutController extends Controller
     private function decreaseQuantities()
     {
 
-        $cookie_data = stripslashes(Cookie::get('shopping_cart'));
-        $cart_data = json_decode($cookie_data, true);
+        // $cookie_data = stripslashes(Cookie::get('shopping_cart'));
+        // $cart_data = json_decode($cookie_data, true);
+        $items = \Cart::getContent();
 
 
-
-        foreach($cart_data as $item){
-            $product = Product_part_number::find($item['item_id']);
-            $product->update(['quantity' => (int)$product->quantity - (int)$item['item_quantity']]);
+        foreach($items as $item){
+            $product = Product_part_number::find($item->id);
+            $product->update(['quantity' => (int)$product->quantity - (int)$item->quantity]);
 
         }
 
@@ -353,18 +395,19 @@ class CheckoutController extends Controller
     private function productsAreNoLongerAvailable()
     {
 
+        $items = \Cart::getContent();
 
-        $cookie_data = stripslashes(Cookie::get('shopping_cart'));
-        $cart_data = json_decode($cookie_data, true);
-         if(empty($cart_data)){
+        // $cookie_data = stripslashes(Cookie::get('shopping_cart'));
+        // $cart_data = json_decode($cookie_data, true);
+         if(\Cart::isEmpty()){
             return false;
          }
-        $totalcart = count($cart_data);
+        $totalcart = $items->count();
         if($totalcart > 0){
 
-            foreach($cart_data as $item){
-                $product = Product_part_number::find($item['item_id']);
-                if ($product->quantity < $item['item_quantity']) {
+            foreach($items as $item){
+                $product = Product_part_number::find($item->id);
+                if ($product->quantity < $item->quantity) {
                     return true;
                 }
             }
