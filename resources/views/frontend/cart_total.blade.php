@@ -16,7 +16,7 @@
 
         {{-- dicount if present --}}
 
-        @if (isset($settings) && $settings->discount_status == 1)
+        @if (isset($settings) && isset($settings->discount) && $settings->discount > 0  && $settings->discount_status == 1)
         @php
             $discount = $total * (1 - $settings->discount / 100);
         @endphp
