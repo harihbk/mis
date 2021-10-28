@@ -148,14 +148,44 @@
                     @php   $weight = 0 @endphp
                         @foreach ($cart_data as $data)
 
+
     @php
+    if(isset($data->associatedModel->weight->name)){
 
 
-if($data->associatedModel->unit->description == "gm"){
-    $weight += ($data->associatedModel->weight->name * $data->associatedModel->product_weight *  $data->quantity) /1000;
-} else {
-    $weight += $data->associatedModel->weight->name * $data->associatedModel->product_weight *  $data->quantity;
-}
+    if(isset($data->associatedModel->unit->description)){
+        if($data->associatedModel->unit->description == "gm"){
+            $weight += ($data->associatedModel->weight->name * $data->associatedModel->product_weight *  $data->quantity) /1000;
+        } else {
+            $weight += $data->associatedModel->weight->name * $data->associatedModel->product_weight *  $data->quantity;
+        }
+
+    } else {
+        $weight += 0;
+    }
+
+
+
+
+
+    } else {
+
+
+        if(isset($data->associatedModel->unit->description)){
+
+        if($data->associatedModel->unit->description == "gm"){
+            $weight += (0 * $data->associatedModel->product_weight *  $data->quantity) /1000;
+        } else {
+            $weight += 0 * $data->associatedModel->product_weight *  $data->quantity;
+        }
+
+    } else {
+        $weight += 0;
+    }
+
+
+    }
+
 
  // print_r($data->product_weight);
 
@@ -187,7 +217,12 @@ if($data->associatedModel->unit->description == "gm"){
                                     <span class="quantity-square">{{ $data->quantity }}</span>
                                 </td>
                             </tr>
+                            @if (isset($data->associatedModel->weight->name))
                             @php $total = $total + ($data->quantity * $data->price * $data->associatedModel->weight->name) @endphp
+                            @else
+                            @php $total = $total + ($data->quantity * $data->price * 0) @endphp
+                            @endif
+
                         @endforeach
                         @else
 
