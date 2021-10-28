@@ -120,116 +120,11 @@
                                     </div>
                                 </div><!-- /.estimate-ship-tax -->
 
-<<<<<<< HEAD
-                                <div class="col-md-4 col-sm-12 ">
-                                    <div class="cart-shopping-total">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-name">Subtotal</h6>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-price">
-                                                    Rs.
-                                                    <span class="cart-grand-price-viewajax">{{ number_format($total, 2) }}</span>
-                                                </h6>
-                                            </div>
-                                        </div>
-
-                                      
-
-
-                                        {{-- igst if present --}}
-                                        @if (isset($settings) && $settings->igst)
-                                        @php
-                                           $igst =   ($total *  $settings->igst) / 100 ;
-                                        @endphp
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-name">IGST({{ $settings->igst }})%</h6>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-price">
-                                                    Rs.
-                                                    <span class="cart-grand-price-viewajax">{{ ($total *  $settings->igst) / 100}}</span>
-                                                </h6>
-                                            </div>
-                                        </div>
-
-                                        @else
-
-                                        @php
-                                        $igst =  0;
-                                        @endphp
-
-                                        @endif
-
-
-                                        {{-- cgst if present --}}
-                                        @if (isset($settings) && $settings->cgst)
-                                        @php
-                                           $cgst =   ($total *  $settings->cgst) / 100 ;
-                                        @endphp
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-name">CGST({{ $settings->cgst }})%</h6>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6 class="cart-subtotal-price">
-                                                    Rs.
-                                                    <span class="cart-grand-price-viewajax">{{ ($total *  $settings->cgst) / 100}}</span>
-                                                </h6>
-                                            </div>
-                                        </div>
-
-                                        @else
-
-                                        @php
-                                        $cgst =  0;
-                                        @endphp
-
-                                        @endif
-
-
-
-
-
-                                        <hr>
-                                        <div class="row">
-                                            @php
-                                              $total =  $total + $igst + $cgst ;
-                                            @endphp
-                                            <div class="col-md-6">
-                                                <h6 class="cart-grand-name">Grand Total</h6>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6 class="cart-grand-price">
-                                                    Rs.
-                                                    <span class="cart-grand-price-viewajax">{{ number_format($total, 2) }}</span>
-                                                </h6>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="cart-checkout-btn text-center">
-                                                    @if (Auth::user())
-                                                        <a href="{{ route('checkout') }}" class="btn btn-success btn-block checkout-btn">PROCCED TO CHECKOUT</a>
-                                                    @else
-                                                        <a href="{{ url('login') }}" class="btn btn-success btn-block checkout-btn">PROCCED TO CHECKOUT</a>
-                                                        {{-- you add a pop modal for making a login --}}
-                                                    @endif
-                                                    <h6 class="mt-3">Checkout with Fabcart</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-=======
 
                                 @include('frontend.cart_total')
 
 
->>>>>>> bd0788443a01e9a095106ef4841ddbbc224826b6
+
                             </div>
 
                         </div><!-- /.shopping-cart -->
