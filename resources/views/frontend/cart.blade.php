@@ -12,6 +12,10 @@
     </div>
 </section>
 
+
+
+
+
 <section class="section">
     <div class="container">
         <div class="row">
@@ -86,12 +90,22 @@
                                                      <input type="number" class="qty-input form-control" value="{{ $data['item_quantity'] }}" min="1" max="100"/>
                                                 </td> --}}
                                                 <td class="cart-product-grand-total">
+                                                    @if (isset($data->associatedModel->weight->name))
                                                     <span class="cart-grand-total-price">{{ $data->quantity * $data->price * $data->associatedModel->weight->name }}</span>
+                                                    @else
+                                                    <span class="cart-grand-total-price">{{ $data->quantity * $data->price * 0 }}</span>
+                                                    @endif
+
                                                 </td>
                                                 <td style="font-size: 20px;">
                                                     <button type="button" class="delete_cart_data"><li class="fa fa-trash-o"></li> Delete</button>
                                                 </td>
+                                                @if (isset($data->associatedModel->weight->name))
                                                 @php $total = $total + ($data->quantity  * $data->price * $data->associatedModel->weight->name) @endphp
+                                                @else
+                                                @php $total = $total + ($data->quantity  * $data->price * 0) @endphp
+                                                @endif
+
                                             </tr>
                                             @endforeach
                                         </tbody>
