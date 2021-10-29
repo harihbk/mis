@@ -466,7 +466,7 @@ class CheckoutController extends Controller
             if($weight <= 10){
                return $first;
             } else {
-               $w =  abs($weight - 10) * $second;
+               $w =  abs(ceil($weight) - 10) * $second;
               return  $first +  $w;
             }
 

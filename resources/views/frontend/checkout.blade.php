@@ -150,6 +150,8 @@
 
 
     @php
+
+
     if(isset($data->associatedModel->weight->name)){
 
 
@@ -358,6 +360,7 @@
 
 
                     @php
+
                     $shipping_price = App\Http\Controllers\CheckoutController::getAmount($weight);
                     @endphp
 
@@ -643,16 +646,6 @@
                   }
                   });
             //   });
-
-
-
-
-
-
-
-
-
-
 
 
     }
