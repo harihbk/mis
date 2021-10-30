@@ -15,6 +15,13 @@
             @endforeach
         </select>
     </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" name="description">
+    </div>
+
+
+
     <div class="form-group">
         <input type="submit" value="submit" class="form-control btn btn-success">
 
