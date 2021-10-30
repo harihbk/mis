@@ -12,6 +12,8 @@
             <b>Order ID:</b> {{ $item->order_id ?? ''}}<br>
             <b>Order Status:</b> {{ $item->getStatus->name ?? ''}}<br>
             <b>Order Date:</b> {{ $item->created_at ?? ''}}<br>
+            <b>Description:</b> {{ $item->description ?? ''}}<br>
+
         </td>
          </tr>
          @endforeach

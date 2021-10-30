@@ -224,6 +224,36 @@
 
 
     });
+
+
+
+
+    $(function () {
+
+var table = $('.customerdatatable').DataTable({
+    processing: true,
+    serverSide: true,
+    "ajax": {
+          "url": "{{ route('customer.list') }}",
+          "type": "GET"
+    },
+   // ajax: "{{ route('order.list',request()->route('id')) }}",
+    columns: [
+        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+        {data: 'name', name: 'name'},
+        {data: 'email', name: 'email'},
+        {data: 'status', name: 'status'},
+        {data: 'mobileno', name: 'mobileno'},
+
+    ]
+});
+});
+
+
+
+
+
+
   </script>
 
 

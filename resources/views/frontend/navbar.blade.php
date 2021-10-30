@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-md sticky-top addShadow no-radius">
     <div class="container headnav">
-        <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{{ route('home')}}">
             <img class="header-logo" src="{{ asset('/images/logo.svg') }}" alt="bumaas">
         </a>
 {{--

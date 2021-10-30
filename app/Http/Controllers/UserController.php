@@ -15,6 +15,8 @@ use App\Notifications\UserCreationNotification;
 use App\Http\Requests\UserTypeRequest;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use DataTables;
+
 
 class UserController extends Controller
 {
@@ -228,6 +230,33 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect('/users/'.$type)
                         ->with('success',$role_name.' deleted successfully');
+    }
+
+
+
+    public function customer(){
+        return view('admin.customer');
+    }
+
+
+    public function customerlist(Request $request){
+
+
+        if ($request->ajax()) {
+            $data = User::where('status', 1)->latest()->groupby('id')->orderby('id', 'DESC')->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+
+                ->addColumn('status', function($row){
+                    return  $row->email_verified_at != null ? 'Active' : 'Pending';
+                })
+
+
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
     }
 
 }
