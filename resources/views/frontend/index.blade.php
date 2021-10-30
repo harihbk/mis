@@ -101,7 +101,7 @@
                         </div>
                         <div class="customer-service-wrapper">
                             <h3>Customer Service</h3>
-                            <a class="btn customer-service-btn" href="register.php">New Register</a>
+                            <a class="btn customer-service-btn" href="{{ route('register') }}">New Register</a>
                             <a class="btn customer-service-btn" href="request-catalogs.php">Catalog Request</a>
                             <div class="customer-service-subtitle">Best Indiakart Contact</div>
                             <div>9:00AM - 5:30PM</div>

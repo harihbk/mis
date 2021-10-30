@@ -44,9 +44,18 @@ Route::get('coupon', [App\Http\Controllers\SettingController::class,'couponlist'
 // Route::resource('users', App\Http\Controllers\UserTypeController::class);
 Route::resource('vendors', App\Http\Controllers\VendorController::class);
 });
+
+
 Route::group(['middleware' => ['auth']], function(){
     Route::get('dashboard', [App\Http\Controllers\UserController::class,'dashboard'])->name('dashboard');
+    Route::get('customers', [App\Http\Controllers\UserController::class,'customer'])->name('customer');
+    Route::get('customerlist', [App\Http\Controllers\UserController::class,'customerlist'])->name('customer.list');
+
+
+
 });
+
+
 
 Route::group(['middleware' => ['auth','role:Admin|Sub admin']], function(){
     Route::get('users/{type}',[App\Http\Controllers\UserController::class,'index']);

@@ -77,6 +77,8 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
 
+
+
         if($request->radio_address == "_new"){
         $emailValidation = auth()->user() ? 'required|email' : 'required|email|unique:users';
 
@@ -145,7 +147,7 @@ class CheckoutController extends Controller
                 'order_status_id' => 1
             ]);
 
-           $calc =  $this->calculation();
+           $calc =  $this->calculation($order->id);
 
             $this->decreaseQuantities();
 
@@ -194,7 +196,7 @@ class CheckoutController extends Controller
         return view('frontend.confirmorder');
     }
 
-    public function calculation(){
+    public function calculation($order_id){
 
         $total=0;
         $weight = 0 ;
@@ -208,34 +210,47 @@ class CheckoutController extends Controller
                     $weight += $item->associatedModel->weight->name * $item->associatedModel->product_weight *  $item->quantity;
                 }
                 $total = $total + ($item->quantity * $item->price * $item->associatedModel->weight->name);
+
+
             }
 
 
+            if(session('coupon')){
+                // $co =  Promocodes::apply(session('coupon')['name']);
+
+                $orders = Order::where('id', $order_id)->first();
+                $promocode = $orders->Promocodes->reward;
+                $coupon_amount = $orders->Promocodes->reward;
+                $orders->coupon_amount = $coupon_amount;
+                $orders->save();
+
+
+               // $promocode = $co->users[0]->pivot->id;
+              } else {
+                 $promocode = 0;
+              }
+              $subtotal = $total - $promocode;
+
         $settings = Setting::first();
             if (isset($settings) && $settings->igst){
-                $igst =   ($total *  $settings->igst) / 100 ;
+                $igst =   ($subtotal *  $settings->igst) / 100 ;
             } else {
                 $igst = 0;
             }
 
             if (isset($settings) && $settings->cgst){
-                $cgst =   ($total *  $settings->cgst) / 100 ;
+                $cgst =   ($subtotal *  $settings->cgst) / 100 ;
             } else {
                 $cgst = 0;
             }
         $shipping_price = $this->getAmount($weight);
-        $grand_total =   $total + $igst + $cgst + $shipping_price;
+        $grand_total =   $subtotal + $igst + $cgst + $shipping_price;
 
 
 
-        if(session('coupon')){
-            $co =  Promocodes::apply(session('coupon')['name']);
-           $promocode = $co->users[0]->pivot->id;
-         } else {
-            $promocode = 0;
-         }
 
- return  $grand_total-$promocode;
+ return  $grand_total ;
+ //return  $grand_total-$promocode;
     }
 
     private function getNumbers()
@@ -307,7 +322,9 @@ class CheckoutController extends Controller
 
                     if(session('coupon')){
                     $co =  Promocodes::apply(session('coupon')['name']);
-                    $promocode = $co->users[0]->pivot->id;
+
+                   // $promocode = $co->users[0]->pivot->id;
+                    $promocode = $co->id;
                     } else {
                         $promocode = 0;
                     }

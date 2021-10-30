@@ -1,21 +1,21 @@
 <nav class="navbar-custom">
     <ul class="list-unstyled topbar-nav float-end mb-0">
         <li class="dropdown hide-phone">
-            <a class="nav-link waves-light waves-effect" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="true">
+            {{-- <a class="nav-link waves-light waves-effect" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search topbar-icon">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
-            </a>
-            <div class="dropdown-menu dropdown-menu-end dropdown-lg p-0" data-popper-placement="bottom-end">
-                <!-- Top Search Bar -->
+            </a> --}}
+            {{-- <div class="dropdown-menu dropdown-menu-end dropdown-lg p-0" data-popper-placement="bottom-end">
+
                 <div class="app-search-topbar">
                     <form action="#" method="get">
                         <input type="search" name="search" class="from-control top-search mb-0" placeholder="Type text...">
                         <button type="submit"><i class="ti-search"></i></button>
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </li>
         <li class="dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">

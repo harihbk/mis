@@ -8,6 +8,7 @@ use App\Models\Order_status;
 use App\Models\Promocode_user;
 use App\Models\Oc_address;
 use App\Models\Order_product;
+use App\Models\Promocodes;
 class Order extends Model
 {
 
@@ -52,6 +53,7 @@ class Order extends Model
     }
 
     public function getCoupon(){
+
         return $this->belongsTo(Promocode_user::class, 'coupon_id', 'id');
     }
 
@@ -61,6 +63,10 @@ class Order extends Model
 
     public function getOrder_product(){
         return $this->belongsTo(Order_product::class, 'id', 'product_id');
+    }
+
+    public function Promocodes(){
+        return $this->belongsTo(Promocodes::class, 'coupon_id', 'id');
     }
 
 
