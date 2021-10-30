@@ -164,6 +164,7 @@ class OrderController extends Controller
 
         $order_id = $request->only('order_id')['order_id'];
         $order_status_id = $request->only('order_status_id')['order_status_id'];
+        $description = $request->only('description')['description'];
 
         $order_product = Order_product::where('order_id',$order_id)->get();
 
@@ -211,6 +212,7 @@ class OrderController extends Controller
         Order_history::create([
             'order_id' => $order_id,
             'order_status_id' => $order_status_id,
+            'description' => $description,
             'date_added'    => date('Y-m-d H:i:s')
         ]);
 
