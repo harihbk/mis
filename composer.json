@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "infyomlabs/adminlte-templates": "^2.0",
         "infyomlabs/laravel-generator": "8.0.x-dev",
+        "lamalama/laravel-wishlist": "^0.2.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "3.0",

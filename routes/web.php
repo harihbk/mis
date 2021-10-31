@@ -184,3 +184,12 @@ Route::resource('weights', App\Http\Controllers\WeightController::class);
 Route::resource('units', App\Http\Controllers\UnitController::class);
 
 Route::resource('pricings', App\Http\Controllers\PricingController::class);
+
+
+//wishlist
+
+Route::post('wishlist',[App\Http\Controllers\WishlistController::class,'addtowishlist'])->name('add-to-wishlist');
+Route::get('wishlists',[App\Http\Controllers\WishlistController::class,'wishlists'])->name('wishlists');
+Route::post('unwish',[App\Http\Controllers\WishlistController::class,'unwish'])->name('unwish');
+
+

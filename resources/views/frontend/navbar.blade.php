@@ -85,8 +85,10 @@ name="n_id" value="{{ request()->segment(3) ?? '' }}">
             @endauth
 
             <li class="nav-item">
+                <a href="{{ route('wishlists')}}">
                 <button type="button" class="btn btn-link btn-head-icon"><i class="fa fa-heart-o"
                         aria-hidden="true"></i></button>
+                </a>
             </li>
             <li class="nav-item">
 
