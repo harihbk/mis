@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Weight;
 use App\Models\Unit;
+use LamaLama\Wishlist\Wishlistable;
+
+
 /**
  * Class Product_part_number
  * @package App\Models
@@ -37,11 +40,17 @@ use App\Models\Unit;
  * @property string $modified_by
  * @property integer $product_id
  */
+
+
+
+
 class Product_part_number extends Model
 {
     use SoftDeletes;
-
     use HasFactory;
+
+    use Wishlistable;
+
 
     public $table = 'product_part_number';
 
