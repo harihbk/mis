@@ -5,6 +5,11 @@
 
     <div id="content" class="col-sm-9">
         <h2>My Wish List</h2>
+        @if ( !$wishlist)
+        <h2 class="text-center">No Wish List Found</h2>
+        @else
+
+
               <div class="table-responsive">
           <table class="table table-bordered table-hover">
             <thead>
@@ -41,6 +46,10 @@
 
           </table>
         </div>
+
+        @endif
+
+
               <div class="buttons clearfix">
           <div class="pull-right"><a href="{{ route('home') }}" class="btn btn-primary">Continue</a></div>
         </div>
