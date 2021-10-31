@@ -28,11 +28,16 @@ class WishlistController extends Controller
 
 
     public function wishlists(Request $request){
-        $user = User::find(Auth::id());
-        $data = $user->wishlists();
+        if(Auth::id()){
+            $user = User::find(Auth::id());
+            $data = $user->wishlists();
 
 
-       $wishlist = (isset($data['default'][1]) && $data['default'][1]) ? $data['default'][1] : [];
+           $wishlist = (isset($data['default'][1]) && $data['default'][1]) ? $data['default'][1] : [];
+        } else {
+            $wishlist = [];
+        }
+
 
     return view('frontend.wishlist')->with(compact('wishlist'));
     }
