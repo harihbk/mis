@@ -86,6 +86,16 @@
             <input type="number" id="1" value="1" min="1" max="{{ $part_number->quantity}}" class="qty-input prod_id_{{ $part_number->id }}"/>
             <button type="button" id="add" class="add">+</button>
             <button type="button" class="add-to-cart-btn btn btn-primary">Add to Cart</button>
+
+
+            @if (Auth::user())
+            <button type="button" class="add-to-wishlist-btn btn btn-primary">Add to Wish List</button>
+
+        @else
+            <a href="{{ url('login') }}" class="bbtn btn-primary">Add to Wish List</a>
+
+        @endif
+
         </div>
 
 
@@ -99,7 +109,36 @@
 <script>
 
 
+$(document).ready(function(){
+    $('.add-to-wishlist-btn').click(function(e){
+        e.preventDefault();
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
+            let product_id = $('.product_id').val();
+
+
+            $.ajax({
+                url: "{{ route('add-to-wishlist') }}",
+                method: "POST",
+                data: {
+
+                    'product_id': product_id,
+                },
+                success: function (response) {
+
+
+                    alertify.set('notifier','position','top-right');
+                    alertify.success("Wishlist Added Successfully");
+                },
+            });
+
+
+    })
+})
 
 
 
