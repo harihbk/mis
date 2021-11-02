@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Weight;
 use App\Models\Unit;
 use LamaLama\Wishlist\Wishlistable;
-
+use App\Models\Partno_filters;
 
 /**
  * Class Product_part_number
@@ -210,4 +210,24 @@ class Product_part_number extends Model
 
 
 
+
+   /**
+    * Get all of the comments for the Product_part_number
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+   public function filterspec_type()
+   {
+    return $this->hasMany(\App\Models\Partno_filters::class,'product_part_number_id','id');
+}
+
+/**
+ * Get all of the comments for the Product_part_number
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasMany
+ */
+public function comments123()
+{
+    return $this->hasMany(Comment::class, 'foreign_key', 'local_key');
+}
 }

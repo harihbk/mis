@@ -13,6 +13,8 @@ use DB;
 use DataTables;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\URL;
+use App\Models\Specification;
+use App\Models\Partno_filters;
 
 class FrontendController extends Controller
 {
@@ -147,10 +149,25 @@ $specification = Product_part_number::with(['specification'=>function($query){
        $part_number = Product_part_number::whereIn('product_id',$product_ids)->get();
 
 
+
+
        if ($request->ajax()) {
         if($request->get('prod_id')){
             $part_number = Product_part_number::where('product_id',$request->get('prod_id'))->get();
         }
+
+        if($request->get('spec_type')){
+            $spec_type = $request->get('spec_type');
+            $childcategory_id = $request->route('childategory_id');
+            $products = Product::where('childcategory_id','=',$childcategory_id)->get();
+            $product_ids =  $products->pluck('id')->toArray();
+
+            $part_number = Product_part_number::query()->whereHas('filterspec_type',function($q) use($spec_type){
+                $q->whereIn('specification_type_id',$spec_type);
+            })->whereIn('product_id',$product_ids)->get();
+        }
+
+
 
 
         $data = $part_number;
@@ -175,9 +192,8 @@ $specification = Product_part_number::with(['specification'=>function($query){
     }
 
        $childcategory = Childcategory::where('id','=',$childategory_id)->first();
-
-
-       return view('frontend.product_bychild')->with(compact('products','childcategory'));
+       $specification = Specification::all();
+       return view('frontend.product_bychild')->with(compact('products','childcategory','specification'));
 
     }
 

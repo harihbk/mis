@@ -27,7 +27,10 @@
         </div>
         @endforeach
     </div>
-    <div class="card py-3">
+    <div class="col-md-3">
+        @include('frontend.parentlist.filters')
+    </div>
+    <div class="col-md-8">
         @include('frontend.parentlist.datatables')
     </div>
 </div>
@@ -53,13 +56,30 @@ $(function() {
        url =  "{{ route('website.products', request()->route('childategory_id') ) }}"
      }
 
-    datatables(null);
+
+    $(".spec_type").click(function(){
+
+        var searchIDs = $(".spec_type:checked").map(function(){
+          return $(this).val();
+        }).toArray();
+        $('.data-table').DataTable().destroy();
+        datatables(null,searchIDs);
+    })
+
+
+    datatables(null,null);
     $(".product_id").click(function() {
         var p_id = $(this).attr('id')
         $('.data-table').DataTable().destroy();
-        datatables(p_id);
+        datatables(p_id,null);
     })
-    function datatables(p_id) {
+
+
+
+
+
+
+    function datatables(p_id,searchIDs) {
         table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
@@ -68,6 +88,7 @@ $(function() {
                 type: 'GET',
                 data: function(d) {
                     d.prod_id = p_id;
+                    d.spec_type = searchIDs
                 }
             },
 
