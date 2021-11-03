@@ -68,7 +68,7 @@ trait HasWishlists
     {
 
         $items = DB::table('wishlist')
-            ->where('user_id', $this->id)
+            ->where(['user_id'=> $this->id,'model_type'=>'App\Models\Product_part_number'])
             ->get();
 
         return $this->wishlistResponse($items);
