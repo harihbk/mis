@@ -32,7 +32,6 @@ class WishlistController extends Controller
             $user = User::find(Auth::id());
             $data = $user->wishlists();
 
-
            $wishlist = (isset($data['default'][1]) && $data['default'][1]) ? $data['default'][1] : [];
         } else {
             $wishlist = [];
