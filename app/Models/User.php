@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use LamaLama\Wishlist\HasWishlists;
-
+use App\Traits\HasWishlists;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
