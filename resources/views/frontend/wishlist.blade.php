@@ -26,11 +26,12 @@
 
                @foreach ($wishlist as $item)
                <tr>
+
                 <td class="text-center"><img src="{{ url('')."/uploads/$item->icon" }}" >
-                <input type="hidden" value="{{ $item->id }}" class="product_id">
+                <input type="hidden" value="{{ $item->id ?? '' }}" class="product_id">
                 </td>
-                <td class="text-left"><a href="https://snappshoppy.com/index.php?route=product/product&amp;product_id=64">{{ $item->part_number }}</a></td>
-                <td class="text-left">{{ $item->weight->description }}</td>
+                <td class="text-left"><a href="https://snappshoppy.com/index.php?route=product/product&amp;product_id=64">{{ $item->part_number ?? '' }}</a></td>
+                <td class="text-left">{{ $item->weight->description ?? '' }}</td>
                 <td class="text-left">{{ $item->original_price ?? '' }}</td>
                 <td class="text-right">
                     <button type="button"  data-toggle="tooltip" title="" class="btn btn-primary add-to-cart-btn" data-original-title="Add to Cart"><i class="fa fa-shopping-cart"></i></button>
