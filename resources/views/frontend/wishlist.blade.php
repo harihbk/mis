@@ -27,7 +27,7 @@
                @foreach ($wishlist as $item)
                <tr>
 
-                <td class="text-center"><img src="{{ url('')."/uploads/$item->icon" }}" >
+                <td class="text-center"><img src="{{ url('')."/uploads/$item->icon" }}" width="50" height="50">
                 <input type="hidden" value="{{ $item->id ?? '' }}" class="product_id">
                 </td>
                 <td class="text-left"><a href="https://snappshoppy.com/index.php?route=product/product&amp;product_id=64">{{ $item->part_number ?? '' }}</a></td>
