@@ -109,6 +109,16 @@ $specification = Product_part_number::with(['specification'=>function($query){
                 $part_number = Product_part_number::where('product_id',$request->get('prod_id'))->get();
             }
 
+            if($request->get('spec_type')){
+                $spec_type = $request->get('spec_type');
+
+
+
+                $part_number = Product_part_number::query()->whereHas('filterspec_type',function($q) use($spec_type){
+                    $q->whereIn('specification_type_id',$spec_type);
+                })->whereIn('product_id',$product_ids)->get();
+            }
+
 
             $data = $part_number;
             return Datatables::of($data)
@@ -132,9 +142,9 @@ $specification = Product_part_number::with(['specification'=>function($query){
         }
 
            $childcategory = [];
+           $specification = Specification::all();
 
-
-           return view('frontend.product_bychild')->with(compact('products','childcategory'));
+           return view('frontend.product_bychild')->with(compact('products','childcategory','specification'));
 
 
    }
