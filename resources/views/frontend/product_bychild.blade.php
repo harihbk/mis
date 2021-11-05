@@ -28,7 +28,9 @@
         @endforeach
     </div>
     <div class="col-md-3">
+
         @include('frontend.parentlist.filters')
+
     </div>
     <div class="col-md-8">
         @include('frontend.parentlist.datatables')
