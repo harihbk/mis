@@ -193,3 +193,60 @@ Route::get('wishlists',[App\Http\Controllers\WishlistController::class,'wishlist
 Route::post('unwish',[App\Http\Controllers\WishlistController::class,'unwish'])->name('unwish');
 
 
+
+Breadcrumbs::register('home', function ($breadcrumbs) {
+    $breadcrumbs->push('Home', route('home'));
+
+});
+
+Breadcrumbs::register('subcat', function ($breadcrumbs,$subcat) {
+
+
+
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push($subcat->name, route('website.parentcats',['subcat_id' => $subcat->id]));
+});
+
+Breadcrumbs::register('products', function ($breadcrumbs,$pc) {
+
+
+
+    //this is calling below
+    if(isset($pc->product) && $pc->product){
+
+        echo "<pre>";
+        print_r($pc->product);
+        exit();
+
+
+        $breadcrumbs->parent('subcat',$pc->product->childcategory);
+        $breadcrumbs->push($pc->product->name,  route('website.products',['childategory_id' => $pc->product->childcategory]) );
+    }
+
+    if(isset($pc->parentcategory) && $pc->parentcategory){
+
+        $breadcrumbs->parent('subcat',$pc->parentcategory->subcategory);
+        $breadcrumbs->push($pc->name,  route('website.products',['childategory_id' => $pc->id]) );
+    } else{
+        //listparents
+        $breadcrumbs->parent('subcat',$pc->subcategory);
+        $breadcrumbs->push($pc->name, route('website.listparents',['childategory_id' => $pc->id]) );
+    }
+});
+
+
+Breadcrumbs::register('partnumber', function ($breadcrumbs,$partnumber) {
+
+
+
+    $breadcrumbs->parent('products',$partnumber);
+    $breadcrumbs->push($partnumber->part_number,'');
+});
+
+
+
+
+
+
+
+

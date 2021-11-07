@@ -1,6 +1,8 @@
 @extends('frontend.theme')
 @section('content')
 
+{{ Breadcrumbs::render('partnumber',$part_number) }}
+
 <div class="container">
     <div class="row">
         <div class="col-sm-5">

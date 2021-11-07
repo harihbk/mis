@@ -1,6 +1,7 @@
 @extends('frontend.theme')
 @section('content')
 
+{{ Breadcrumbs::render('products',$pc) }}
 
 <div class="container">
     <div class="my-3">

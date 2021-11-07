@@ -1,5 +1,7 @@
 @extends('frontend.theme')
+
 @section('content')
+{{ Breadcrumbs::render('home') }}
     <div class="container">
 
         @if (Session::has('message'))
