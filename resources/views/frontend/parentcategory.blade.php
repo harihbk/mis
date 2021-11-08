@@ -1,6 +1,7 @@
 @extends('frontend.theme')
 @section('content')
 
+{{ Breadcrumbs::render('subcat',$subcat) }}
 
 <div class="container">
     <div class="row">

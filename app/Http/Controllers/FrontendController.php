@@ -70,6 +70,7 @@ $specification = Product_part_number::with(['specification'=>function($query){
        $parent_categorys = Parentcategory::where(['subcategory_id'=>$subcat_id])->get();
 
        $subcatname = Subcategory::where('id','=',$subcat_id)->first();
+       $subcat = Subcategory::find($subcat_id);
 
     //    if ($request->ajax()) {
     //     $view = view('frontend.loadcategory',compact('category'))->render();
@@ -77,7 +78,7 @@ $specification = Product_part_number::with(['specification'=>function($query){
     // }
 
 
-       return view('frontend.parentcategory')->with(compact('parent_categorys','subcatname'));
+       return view('frontend.parentcategory')->with(compact('parent_categorys','subcatname','subcat'));
     }
 
 
@@ -95,6 +96,10 @@ $specification = Product_part_number::with(['specification'=>function($query){
     }
 
     public function listparents(Request $request,$parentcategory){
+
+        $pc = Parentcategory::find($parentcategory);
+
+
         // parentcategory is id
         $child = Childcategory::where('parentcategory_id','=',$parentcategory)->get();
         $childids =  $child->pluck('id')->toArray();
@@ -144,7 +149,7 @@ $specification = Product_part_number::with(['specification'=>function($query){
            $childcategory = [];
            $specification = Specification::all();
 
-           return view('frontend.product_bychild')->with(compact('products','childcategory','specification'));
+           return view('frontend.product_bychild')->with(compact('products','childcategory','specification','pc'));
 
 
    }
@@ -152,6 +157,8 @@ $specification = Product_part_number::with(['specification'=>function($query){
 
 
     public function products(Route $route, Request $request , $childategory_id  ){
+
+        $pc = Childcategory::find($childategory_id);
 
 
        $products = Product::where('childcategory_id','=',$childategory_id)->get();
@@ -203,7 +210,7 @@ $specification = Product_part_number::with(['specification'=>function($query){
 
        $childcategory = Childcategory::where('id','=',$childategory_id)->first();
        $specification = Specification::all();
-       return view('frontend.product_bychild')->with(compact('products','childcategory','specification'));
+       return view('frontend.product_bychild')->with(compact('products','childcategory','specification','pc'));
 
     }
 
