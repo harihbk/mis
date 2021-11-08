@@ -1,6 +1,7 @@
 
 @include('frontend.header')
 
+
 <!--
     <span class="clearfix">
         <a href="{{ route('cartdata') }}">Cart</a>
@@ -20,3 +21,12 @@
 
 @include('frontend.footer')
 
+<style>
+    .breadcrumb-item{
+        color: black !important;
+    }
+
+    .breadcrumb-item a {
+    color: black !important;
+}
+</style>
