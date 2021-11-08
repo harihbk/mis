@@ -200,9 +200,8 @@ Breadcrumbs::register('home', function ($breadcrumbs) {
 });
 
 Breadcrumbs::register('subcat', function ($breadcrumbs,$subcat) {
-
-
-
+ 
+   
     $breadcrumbs->parent('home');
     $breadcrumbs->push($subcat->name, route('website.parentcats',['subcat_id' => $subcat->id]));
 });
@@ -210,28 +209,29 @@ Breadcrumbs::register('subcat', function ($breadcrumbs,$subcat) {
 Breadcrumbs::register('products', function ($breadcrumbs,$pc) {
 
 
-
     //this is calling below
     if(isset($pc->product) && $pc->product){
 
-        echo "<pre>";
-        print_r($pc->product);
-        exit();
+        // echo "<pre>";
+        // print_r();
+        // exit();
 
+        $breadcrumbs->parent('subcat',$pc->product->childcategory->parentcategory->subcategory);
+        $breadcrumbs->push($pc->product->name,  route('website.products',['childategory_id' => $pc->product->childcategory->id ]) );
+    } else {
 
-        $breadcrumbs->parent('subcat',$pc->product->childcategory);
-        $breadcrumbs->push($pc->product->name,  route('website.products',['childategory_id' => $pc->product->childcategory]) );
+        if(isset($pc->parentcategory) && $pc->parentcategory){
+
+            $breadcrumbs->parent('subcat',$pc->parentcategory->subcategory);
+            $breadcrumbs->push($pc->name,  route('website.products',['childategory_id' => $pc->id]) );
+        } else{
+            //listparents
+            $breadcrumbs->parent('subcat',$pc->subcategory);
+            $breadcrumbs->push($pc->name, route('website.listparents',['childategory_id' => $pc->id]) );
+        }
     }
 
-    if(isset($pc->parentcategory) && $pc->parentcategory){
 
-        $breadcrumbs->parent('subcat',$pc->parentcategory->subcategory);
-        $breadcrumbs->push($pc->name,  route('website.products',['childategory_id' => $pc->id]) );
-    } else{
-        //listparents
-        $breadcrumbs->parent('subcat',$pc->subcategory);
-        $breadcrumbs->push($pc->name, route('website.listparents',['childategory_id' => $pc->id]) );
-    }
 });
 
 
