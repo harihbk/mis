@@ -95,6 +95,12 @@ Route::group(['middleware' => ['auth','role:Admin|vendor']], function(){
     Route::get('getOrders/{order_status_id?}',  [App\Http\Controllers\OrderController::class,'getOrders'])->name('order.list');
     Route::get('view/{order_id}',  [App\Http\Controllers\OrderController::class,'orderview'])->name('order.view');
     Route::post('confirmorder',  [App\Http\Controllers\OrderController::class,'confirmorder'])->name('confirm.order');
+    Route::get('reqprofile',  [App\Http\Controllers\UserController::class,'reqprofile'])->name('reqprofile');
+    Route::get('profileupdate/{id}',  [App\Http\Controllers\UserController::class,'profileupdate'])->name('profileupdate');
+    Route::post('updateprofilebyid',[App\Http\Controllers\UserController::class,'updateprofilebyid'])->name('updateprofilebyid');
+
+    
+    
 });
 
 
@@ -109,7 +115,13 @@ Route::prefix('website')->group(function () {
     Route::get('/listparents/{childategory_id}', [App\Http\Controllers\FrontendController::class, 'listparents'])->name('website.listparents');
     Route::get('/login',[App\Http\Controllers\UserController::class, 'login'])->name('website.userlogin');
     Route::get('/profile',[App\Http\Controllers\UserController::class, 'profile'])->name('website.profile');
+    Route::get('/viewprofile',[App\Http\Controllers\UserController::class, 'viewprofile'])->name('website.viewprofile');
+    Route::get('/editprofile',[App\Http\Controllers\UserController::class, 'editprofile'])->name('website.editprofile');
+    Route::post('/updatefrofile',[App\Http\Controllers\UserController::class, 'updatefrofile'])->name('website.updatefrofile');
 
+
+    
+    
 });
 
 Route::post('partno',[ App\Http\Controllers\Product_part_numberController::class,'partno'])->name('search');
@@ -212,9 +224,6 @@ Breadcrumbs::register('products', function ($breadcrumbs,$pc) {
     //this is calling below
     if(isset($pc->product) && $pc->product){
 
-        // echo "<pre>";
-        // print_r();
-        // exit();
 
         $breadcrumbs->parent('subcat',$pc->product->childcategory->parentcategory->subcategory);
         $breadcrumbs->push($pc->product->name,  route('website.products',['childategory_id' => $pc->product->childcategory->id ]) );
