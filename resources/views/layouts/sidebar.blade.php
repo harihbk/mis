@@ -203,6 +203,27 @@
             </ul>
         </div>
     </li>
+
+
+    <li class="mb-1">
+        <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#proflrs-collapse1"
+            aria-expanded="false">
+            <svg style="color: #1761fd; fill: rgba(23,97,253,0.12); margin-right: 8px;"
+                xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-home align-self-center menu-icon">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg> Profiles
+        </button>
+        <div class="collapse" id="proflrs-collapse1">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="{{ route('reqprofile') }}"><i class="ti-control-record"></i> Profile </a></li>
+            </ul>
+        </div>
+    </li>
+
+
     </ul>
 </div>
 </div>

@@ -15,8 +15,10 @@ use App\Notifications\UserCreationNotification;
 use App\Http\Requests\UserTypeRequest;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use DataTables;
+use App\Models\Profilechanges;
 
+use DataTables;
+use Session;
 
 class UserController extends Controller
 {
@@ -84,6 +86,53 @@ class UserController extends Controller
     public function profile(){
 
       return view('frontend.profile');
+    }
+
+    public function viewprofile(Request $request){
+        $user = Auth::user();
+       
+        return view('frontend.viewprofile',compact('user'));
+    }
+
+    public function editprofile(){
+        $user = Auth::user();
+       
+        return view('frontend.editprofile',compact('user'));
+    }
+
+    public function updatefrofile(Request $request){
+
+        $user = Auth::user();
+        Profilechanges::create($request->all());
+        Session::flash('message', 'Your Profile submitted,please wait Admin will change your profile'); 
+
+        return view('frontend.editprofile',compact('user'));
+    }
+
+    public function reqprofile(){
+        $Profilechanges = Profilechanges::where('status',0)->get();
+      return view('admin.listprofiles',compact('Profilechanges'));
+    }
+
+
+    public function profileupdate(Request $request){
+        $id = $request->id;
+        $profile = Profilechanges::find($id);
+       
+        return view('admin.listprofileview',compact('profile'));
+      
+    }
+
+    public function updateprofilebyid(Request $request){
+       
+       $data = $request->only('name','email','mobileno','userCompany','userCompanyGST','newsletter');
+       
+        User::where('id',$request->only('user_id'))->update($data);
+        Profilechanges::where('id',$request->only('id'))->update(['status'=>1]);
+        Session::flash('message', 'Record Updated'); 
+
+
+       return $this->reqprofile();
     }
 
     public function passwordResetEmail($email){
