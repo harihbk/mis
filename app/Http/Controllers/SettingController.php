@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Setting;
 use Session;
 use Promocodes;
+use Carbon\Carbon;
+use Redirect;
+
+use Gabievi\Promocodes\Models\Promocode;
+
+//use App\Models\Promocodes;
 class SettingController extends Controller
 {
 
@@ -41,13 +47,40 @@ class SettingController extends Controller
       //
     }
 
+
+    public function getExpiresIn($request)
+    {
+        return $request !== null ? $request : $this->expires_in;
+    }
+
     public function promocodesave(Request $request){
         //$request->only('amount','reward','expires_in','quantity');
+        $expires_ins = $request->post('expires_in');
+
         $amount =  $request->post('amount');
         $reward =  $request->post('reward');
-        $expires_in =  $request->post('expires_in');
+        $expires_in = Carbon::now()->addDays($expires_ins) ;
         $quantity =  $request->post('quantity');
-        Promocodes::create($amount, $reward ,  $data = [], $expires_in , $quantity , $is_disposable = false);
+        $code = $request->post('code');
+
+        if(Promocodes::check($code)){
+
+            return Redirect::back()->with(['warning' => 'Your Promocode already exist']);
+
+        }
+
+
+
+        Promocode::create(
+            ['amount' => $amount,
+            'reward' => $reward ,
+            'data' => [],
+             'expires_at' => $expires_in ,
+             'quantity' => $quantity ,
+             'is_disposable' => false,
+             'code' => $code
+             ]
+            );
         return redirect()->route('couponlist');
     }
 
