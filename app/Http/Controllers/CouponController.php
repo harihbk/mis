@@ -21,6 +21,7 @@ class CouponController extends Controller
     {
         $coupon = Promocodes::check($request->post('coupon_code'));
 
+
         if (!$coupon) {
             return back()->withErrors('Invalid coupon code. Please try again.');
         }

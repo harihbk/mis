@@ -85,7 +85,7 @@
         <div class="row product_data">
             <input type="hidden" class="product_id" value="{{ $part_number->id }}">
             <button type="button" id="sub" class="sub">-</button>
-            <input type="number" id="1" value="1" min="1" max="{{ $part_number->quantity}}" class="qty-input prod_id_{{ $part_number->id }}"/>
+            <input type="number" id="1" value="1" minlength="{{ $part_number->minimum ?  $part_number->minimum : 1}}" max="{{ $part_number->quantity}}" class="qty-input prod_id_{{ $part_number->id }}" step="{{ $part_number->step == 0 ? 1 : $part_number->step }}"/>
             <button type="button" id="add" class="add">+</button>
             <button type="button" class="add-to-cart-btn btn btn-primary">Add to Cart</button>
 
@@ -132,6 +132,13 @@ $(document).ready(function(){
                 },
                 success: function (response) {
 
+                    jQuery.ajax({
+            url: "{{ route('countwhistlist') }}",
+            method: "GET",
+            success: function(response) {
+                jQuery('span.whistlistcount').text(response);
+            }
+        });
 
                     alertify.set('notifier','position','top-right');
                     alertify.success("Wishlist Added Successfully");
