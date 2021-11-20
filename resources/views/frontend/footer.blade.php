@@ -207,7 +207,22 @@ if (page === 'home.php') {
 
 
 
+jQuery.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+        jQuery.ajax({
+            url: "{{ route('countwhistlist') }}",
+            method: "GET",
+            success: function(response) {
+
+               // jQuery('.basket-item-count').html('');
+
+                jQuery('span.whistlistcount').text(response);
+            }
+        });
 
 
 

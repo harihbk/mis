@@ -4,9 +4,18 @@
 
  <div class="container">
       <h1>Create Coupon</h1>
-
+      @if (\Session::has('warning'))
+      <div class="alert alert-warning">
+             {!! \Session::get('warning') !!}
+      </div>
+  @endif
     <form action="{{ route('promocode') }}" method="post">
         @csrf()
+        <div class="form-group">
+            <label for="no_of_promocode">Promocode</label>
+            <input type="text" name="code" id="code" class="form-control">
+         </div>
+
         <div class="form-group">
                 <label for="no_of_promocode">No Of Promocode</label>
                 <input type="text" name="amount" id="amount" class="form-control">

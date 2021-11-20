@@ -78,6 +78,18 @@ trait HasWishlists
      * wishlist.
      * @return void
      */
+
+    public function countwishlist(string $collectionName = 'default')
+    {
+        $items = DB::table('wishlist')
+            ->where('user_id', $this->id)
+            ->where('model_type', 'App\Models\Product_part_number')
+            ->count();
+
+        return $items;
+    }
+
+
     public function wishlist(string $collectionName = 'default')
     {
         $items = DB::table('wishlist')

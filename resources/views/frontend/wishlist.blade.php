@@ -30,7 +30,7 @@
                 <td class="text-center"><img src="{{ url('')."/uploads/$item->icon" }}" width="50" height="50">
                 <input type="hidden" value="{{ $item->id ?? '' }}" class="product_id">
                 </td>
-                <td class="text-left"><a href="https://snappshoppy.com/index.php?route=product/product&amp;product_id=64">{{ $item->part_number ?? '' }}</a></td>
+                <td class="text-left"><a href="{{ route('website.partnumberpage',$item->id) }}">{{ $item->part_number ?? '' }}</a></td>
                 <td class="text-left">{{ $item->weight->description ?? '' }}</td>
                 <td class="text-left">{{ $item->original_price ?? '' }}</td>
                 <td class="text-right">
@@ -136,20 +136,37 @@ $('.remove_wishlist').click(function(e){
             });
 
             var product_id = $(this).closest('tr').find('.product_id').val();
-
+            $(this).closest('tr').hide();
 
             $.ajax({
                 url: "{{ route('unwish') }}",
                 method: "POST",
+                async : false,
                 data: {
-
                     'product_id': product_id,
                 },
                 success: function (response) {
 
+
+                    jQuery.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        jQuery.ajax({
+            url: "{{ route('countwhistlist') }}",
+            method: "GET",
+            success: function(response) {
+                jQuery('span.whistlistcount').text(response);
+            }
+        });
+
+
+
                     alertify.set('notifier','position','top-right');
                     alertify.success(`${response.status} Removed from Wishlist`);
-                    $(this).closest('tr').hide();
+
                 },
             });
 

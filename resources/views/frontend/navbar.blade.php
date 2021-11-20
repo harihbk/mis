@@ -88,6 +88,9 @@ name="n_id" value="{{ request()->segment(3) ?? '' }}">
                 <a href="{{ route('wishlists')}}">
                 <button type="button" class="btn btn-link btn-head-icon"><i class="fa fa-heart-o"
                         aria-hidden="true"></i></button>
+                        <span class="whistlistcount-item">
+                            <span class="whistlistcount badge badge-pill red"> 0 </span>
+                        </span>
                 </a>
             </li>
             <li class="nav-item">

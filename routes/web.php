@@ -99,8 +99,8 @@ Route::group(['middleware' => ['auth','role:Admin|vendor']], function(){
     Route::get('profileupdate/{id}',  [App\Http\Controllers\UserController::class,'profileupdate'])->name('profileupdate');
     Route::post('updateprofilebyid',[App\Http\Controllers\UserController::class,'updateprofilebyid'])->name('updateprofilebyid');
 
-    
-    
+
+
 });
 
 
@@ -120,8 +120,8 @@ Route::prefix('website')->group(function () {
     Route::post('/updatefrofile',[App\Http\Controllers\UserController::class, 'updatefrofile'])->name('website.updatefrofile');
 
 
-    
-    
+
+
 });
 
 Route::post('partno',[ App\Http\Controllers\Product_part_numberController::class,'partno'])->name('search');
@@ -203,6 +203,9 @@ Route::resource('pricings', App\Http\Controllers\PricingController::class);
 Route::post('wishlist',[App\Http\Controllers\WishlistController::class,'addtowishlist'])->name('add-to-wishlist');
 Route::get('wishlists',[App\Http\Controllers\WishlistController::class,'wishlists'])->name('wishlists');
 Route::post('unwish',[App\Http\Controllers\WishlistController::class,'unwish'])->name('unwish');
+Route::get('countwhistlist',[App\Http\Controllers\WishlistController::class,'countwhistlist'])->name('countwhistlist');
+
+
 
 
 
@@ -212,8 +215,8 @@ Breadcrumbs::register('home', function ($breadcrumbs) {
 });
 
 Breadcrumbs::register('subcat', function ($breadcrumbs,$subcat) {
- 
-   
+
+
     $breadcrumbs->parent('home');
     $breadcrumbs->push($subcat->name, route('website.parentcats',['subcat_id' => $subcat->id]));
 });

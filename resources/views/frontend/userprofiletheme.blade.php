@@ -59,8 +59,8 @@
                         <h3>Account</h3>
 
                         <a href="{{ route('history') }}"><h6>Order History</h6></a>
-                        <a href="{{ route('website.viewprofile') }}"><h6>View History</h6></a>
-                        <a href="{{ route('website.editprofile') }}"><h6>Edit History</h6></a>
+                        <a href="{{ route('website.viewprofile') }}"><h6>View Profile</h6></a>
+                        <a href="{{ route('website.editprofile') }}"><h6>Edit Profile</h6></a>
 
                     </div>
                   </div>
@@ -73,7 +73,7 @@
                     @endif
                     <div class="container-fluid">
                         <div class="row mb-2">
-                           
+
                             <div class="col-sm-6">
                                 <h1>{{ $title ?? ''}}</h1>
                             </div>
@@ -87,7 +87,7 @@
 
 
                     <div class="container mt-5">
-                      
+
                         @yield('content')
 
 
