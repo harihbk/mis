@@ -110,7 +110,8 @@
                         <div class="row">
                             <div class="col-md-8 col-sm-12 estimate-ship-tax">
                                 <div>
-                                    <a href="{{ url('website') }}" class="btn btn-upper btn-warning outer-left-xs">Continue
+                                    <a href="{{ url('website') }}"
+                                        class="btn btn-upper btn-warning outer-left-xs">Continue
                                         Shopping</a>
                                 </div>
                             </div><!-- /.estimate-ship-tax -->
@@ -235,7 +236,4 @@ $('.changeQuantity').click(function (e) {
 
 });
 </script>
-
-
-
 @endsection
