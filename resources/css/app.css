@@ -8,8 +8,7 @@
     width: 150px;
 }
 .addShadow {
-    box-shadow: rgb(0 0 0 / 20%) 0px 3px 3px -2px,
-        rgb(0 0 0 / 14%) 0px 3px 4px 0px, rgb(0 0 0 / 12%) 0px 1px 8px 0px;
+    box-shadow: 0 3px 9px 0 rgb(169 184 200 / 15%);
 }
 .head-search-box {
     width: 370px !important;
@@ -36,17 +35,16 @@
     padding: 0;
     text-align: center;
     font-size: 0.875rem;
-    background: #0343bf;
 }
 .breadcrumb-wrapper .breadcrumb {
     margin-bottom: 0;
 }
 .breadcrumb-item,
 .breadcrumb-item a {
-    color: #ffffff !important;
+    color: #76839a !important;
 }
 .breadcrumb-item + .breadcrumb-item::before {
-    color: #ffffff;
+    color: #76839a;
 }
 .navbar-brand {
     height: unset;

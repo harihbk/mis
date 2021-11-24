@@ -95,12 +95,12 @@ name="n_id" value="{{ request()->segment(3) ?? '' }}">
             </li>
             <li class="nav-item">
 
-            <span class="clearfix">
+            <span class="clearfix position-relative">
                 <a href="{{ route('cartdata')}}">
                     <button type="button" class="btn btn-link btn-head-icon"><i class="fa fa-shopping-basket"
                         aria-hidden="true"></i></button>
-                    <span class="basket-item-count">
-                        <span class="badge badge-pill red"> 0 </span>
+                    <span class="basket-item-count position-absolute">
+                        <span class="badge badge-pill badge-primary"> 0 </span>
                     </span>
                 </a>
 

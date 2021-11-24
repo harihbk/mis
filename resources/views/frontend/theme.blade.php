@@ -20,13 +20,3 @@
 
 
 @include('frontend.footer')
-
-<style>
-    .breadcrumb-item{
-        color: black !important;
-    }
-
-    .breadcrumb-item a {
-    color: black !important;
-}
-</style>
