@@ -18,7 +18,6 @@
         <div class="row">
             <div class="col-md-12">
                 @if(isset($cart_data))
-<<<<<<< HEAD
 
                         @php $total="0" @endphp
                         <div class="shopping-cart">
@@ -123,108 +122,8 @@
 
 
 
-=======
-                @php $total="0" @endphp
-                <div class="shopping-cart">
-                    <div class="shopping-cart-table">
-                        <div class="table-responsive">
-                            <div class="col-md-12 text-right mb-3">
-                                <a href="javascript:void(0)" class="clear_cart font-weight-bold">Clear Cart</a>
->>>>>>> 662fcc2b15892cb0ea6be68fe4dba61938b8f7ce
-                            </div>
-                            <table class="table table-bordered my-auto  text-center">
-                                <thead>
-                                    <tr>
-                                        <th class="cart-description">Image</th>
-                                        <th class="cart-product-name">Product Name</th>
-                                        <th class="cart-price">SQB</th>
-                                        <th class="cart-price">Price</th>
-                                        <th class="cart-qty">Quantity</th>
-                                        <th class="cart-total">Total</th>
-                                        <th class="cart-romove">Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="my-auto">
-                                    @foreach ($cart_data as $data)
-                                    <tr class="cartpage cartpage" id="{{ $data['id'] }}">
-                                        <td class="cart-image">
-                                            <input type="hidden" class="product_id" value="{{ $data->id ?? '' }}">
-                                            <a class="entry-thumbnail" href="javascript:void(0)">
-                                                <img src="{{url('')}}/uploads/{{ $data->associatedModel->icon ?? '' }}"
-                                                    width="70px" alt="">
-                                            </a>
-                                        </td>
-                                        <td class="cart-product-name-info">
-                                            <h4 class='cart-product-description'>
-                                                <a href="javascript:void(0)">{{ $data->name ?? '' }}</a>
-                                            </h4>
-                                        </td>
-                                        <td>
-                                            <span class="cart-sub-total-price">{{
-                                                $data->associatedModel->weight->description ?? '' }}</span>
-                                        </td>
-                                        <td class="cart-product-sub-total">
-                                            <span class="cart-sub-total-price">{{ $data->price ?? '' }}</span>
-                                        </td>
-                                        <td class="cart-product-quantity" width="130px">
-                                            <div class="input-group quantity">
-                                                <div class="input-group-prepend decrement-btn changeQuantity"
-                                                    style="cursor: pointer">
-                                                    <span class="input-group-text">-</span>
-                                                </div>
-                                                <input type="text" class="qty-input form-control"
-                                                    step="{{ $data->associatedModel->step == 0 ? 1 : $data->associatedModel->step }}"
-                                                    minlength="{{ $data->associatedModel->minimum }}"
-                                                    maxlength="{{ $data->associatedModel->maximum }}"
-                                                    max="{{ $data['quantity'] }}" value="{{ $data->quantity ?? '' }}">
-                                                <div class="input-group-append increment-btn changeQuantity"
-                                                    style="cursor: pointer">
-                                                    <span class="input-group-text">+</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        {{-- <td class="cart-product-quantity">
-                                            <input type="number" class="qty-input form-control"
-                                                value="{{ $data['item_quantity'] }}" min="1" max="100" />
-                                        </td> --}}
-                                        <td class="cart-product-grand-total">
-                                            @if (isset($data->associatedModel->weight->name))
-                                            <span class="cart-grand-total-price">{{ $data->quantity * $data->price *
-                                                $data->associatedModel->weight->name }}</span>
-                                            @else
-                                            <span class="cart-grand-total-price">{{ $data->quantity * $data->price * 0
-                                                }}</span>
-                                            @endif
-                                        </td>
-                                        <td style="font-size: 20px;">
-                                            <button type="button" class="delete_cart_data">
-                                                <li class="fa fa-trash-o"></li> Delete
-                                            </button>
-                                        </td>
-                                        @if (isset($data->associatedModel->weight->name))
-                                        @php $total = $total + ($data->quantity * $data->price *
-                                        $data->associatedModel->weight->name) @endphp
-                                        @else
-                                        @php $total = $total + ($data->quantity * $data->price * 0) @endphp
-                                        @endif
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table><!-- /table -->
-                        </div>
-                    </div><!-- /.shopping-cart-table -->
-                    <div class="clearfix">
-                        <div class="row">
-                            <div class="col-md-8 col-sm-12 estimate-ship-tax">
-                                <div>
-                                    <a href="{{ url('website') }}" class="btn btn-upper btn-warning outer-left-xs">Continue
-                                        Shopping</a>
-                                </div>
-                            </div><!-- /.estimate-ship-tax -->
-                            @include('frontend.cart_total')
-                        </div>
-                    </div>
-                </div><!-- /.shopping-cart -->
+
+
                 @else
                 <div class="row">
                     <div class="col-md-12 mycard py-5 text-center">
