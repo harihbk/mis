@@ -1,13 +1,12 @@
 @extends('frontend.theme')
 @section('content')
-
 {{ Breadcrumbs::render('partnumber',$part_number) }}
 
 <div class="container">
     <div class="row">
         <div class="col-sm-5">
             <div class="card my-3 p-3">
-                <img src="{{ url('')."/uploads/$part_number->icon" }}" alt="" width="500px">
+                <img src="{{ url('')." /uploads/$part_number->icon" }}" alt="product" width="500px">
             </div>
 
         </div>
@@ -15,7 +14,7 @@
             <div class="card my-3 p-3">
                 <h3 class="nav-category-title">Specification</h3>
 
-                <table class="table table-striped">
+                <table class="table table-bordered table-striped">
                     <tbody>
                         <tr>
                             <th scope="row">Part Number</th>
@@ -76,42 +75,33 @@
                     </tbody>
                 </table>
             </div>
-
+            <div class="product_data mb-4">
+                <input type="hidden" class="product_id" value="{{ $part_number->id }}">
+                <div style="display: inline-block">
+                    <div class="input-group" style="width: 140px;">
+                        <button type="button" id="sub" class="sub btn btn-primary no-border-top-right">-</button>
+                        <input type="number"
+                            style="width: 65px; height: 35px; border-left: none; border-right: none; border-radius: 0; text-align: center; overflow: hidden; display: block; padding-left: 20px;"
+                            id="1" value="1" min="1" max="{{ $part_number->quantity}}"
+                            class="qty-input form-control prod_id_{{ $part_number->id }}" />
+                        <button type="button" id="add" class="add btn btn-primary no-border-top-left">+</button>
+                    </div>
+                </div>
+                <button type="button" class="add-to-cart-btn btn btn-primary mx-2">Add to Cart</button>
+                @if (Auth::user())
+                <button type="button" class="add-to-wishlist-btn btn btn-primary">Add to Wish List</button>
+                @else
+                <a href="{{ url('login') }}" class="btn btn-primary">Add to Wish List</a>
+                @endif
+            </div>
         </div>
-
-
-
-
-        <div class="row product_data">
-            <input type="hidden" class="product_id" value="{{ $part_number->id }}">
-            <button type="button" id="sub" class="sub">-</button>
-            <input type="number" id="1" value="1" minlength="{{ $part_number->minimum ?  $part_number->minimum : 1}}" max="{{ $part_number->quantity}}" class="qty-input prod_id_{{ $part_number->id }}" step="{{ $part_number->step == 0 ? 1 : $part_number->step }}"/>
-            <button type="button" id="add" class="add">+</button>
-            <button type="button" class="add-to-cart-btn btn btn-primary">Add to Cart</button>
-
-
-            @if (Auth::user())
-            <button type="button" class="add-to-wishlist-btn btn btn-primary">Add to Wish List</button>
-
-        @else
-            <a href="{{ url('login') }}" class="bbtn btn-primary">Add to Wish List</a>
-
-        @endif
-
-        </div>
-
-
-
-
-        {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $part_number->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p> --}}
-
     </div>
+    {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $part_number->id) }}"
+            class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p> --}}
 </div>
 
 <script>
-
-
-$(document).ready(function(){
+    $(document).ready(function(){
     $('.add-to-wishlist-btn').click(function(e){
         e.preventDefault();
         $.ajaxSetup({
@@ -148,20 +138,14 @@ $(document).ready(function(){
 
     })
 })
-
-
-
     $('.add').click(function () {
-
     	$(this).prev().val(+$(this).prev().val() + 1);
-
-});
-$('.sub').click(function () {
+    });
+    $('.sub').click(function () {
 		if ($(this).next().val() > 1) {
-    	if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+    	    if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
 		}
-});
-
+    });
 
     $(document).ready(function () {
         $('.add-to-cart-btn').click(function (e) {
@@ -171,10 +155,8 @@ $('.sub').click(function () {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
             var product_id = $(this).closest('.product_data').find('.product_id').val();
             var quantity = $(this).closest('.product_data').find('.qty-input').val();
-
             $.ajax({
                 url: "{{ route('add-to-cart') }}",
                 method: "POST",
@@ -189,14 +171,9 @@ $('.sub').click(function () {
                     alertify.success(response.status);
                 },
             });
-
         });
 
-
-
 // load cart data
-
-
 function cartload() {
         jQuery.ajaxSetup({
             headers: {
@@ -216,24 +193,13 @@ function cartload() {
                     });
                 }
 
-
-
                 jQuery('.basket-item-count').html('');
-
                 var value = parsed; //Single Data Viewing
-                jQuery('.basket-item-count').append(jQuery('<span class="badge badge-pill red">' + value[
+                jQuery('.basket-item-count').append(jQuery('<span class="badge badge-pill badge-primary">' + value[
                     'totalcart'] + '</span>'));
             }
         });
     }
-
-
-
-
-
-
-
     });
 </script>
-
 @endsection

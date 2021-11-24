@@ -10,57 +10,60 @@
         @else
 
 
-              <div class="table-responsive">
-          <table class="table table-bordered table-hover">
-            <thead>
-              <tr>
-                <td class="text-center">Image</td>
-                <td class="text-left">Product Name</td>
-                <td class="text-left">SQB</td>
-                <td class="text-right">Price</td>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <td class="text-center">Image</td>
+                        <td class="text-left">Product Name</td>
+                        <td class="text-left">SQB</td>
+                        <td class="text-right">Price</td>
 
-                <td class="text-right">Action</td>
-              </tr>
-            </thead>
-            <tbody>
+                        <td class="text-right">Action</td>
+                    </tr>
+                </thead>
+                <tbody>
 
-               @foreach ($wishlist as $item)
-               <tr>
+                    @foreach ($wishlist as $item)
+                    <tr>
 
-                <td class="text-center"><img src="{{ url('')."/uploads/$item->icon" }}" width="50" height="50">
-                <input type="hidden" value="{{ $item->id ?? '' }}" class="product_id">
-                </td>
-                <td class="text-left"><a href="{{ route('website.partnumberpage',$item->id) }}">{{ $item->part_number ?? '' }}</a></td>
-                <td class="text-left">{{ $item->weight->description ?? '' }}</td>
-                <td class="text-left">{{ $item->original_price ?? '' }}</td>
-                <td class="text-right">
-                    <button type="button"  data-toggle="tooltip" title="" class="btn btn-primary add-to-cart-btn" data-original-title="Add to Cart"><i class="fa fa-shopping-cart"></i></button>
-                 <button type="button" class="btn btn-danger remove_wishlist"><i class="fa fa-times"></i></button>
-                </td>
+                        <td class="text-center"><img src="{{ url('')." /uploads/$item->icon" }}" width="50" height="50">
+                            <input type="hidden" value="{{ $item->id ?? '' }}" class="product_id">
+                        </td>
+                        <td class="text-left"><a
+                                href="https://snappshoppy.com/index.php?route=product/product&amp;product_id=64">{{
+                                $item->part_number ?? '' }}</a></td>
+                        <td class="text-left">{{ $item->weight->description ?? '' }}</td>
+                        <td class="text-left">{{ $item->original_price ?? '' }}</td>
+                        <td class="text-right">
+                            <button type="button" data-toggle="tooltip" title="" class="btn btn-primary add-to-cart-btn"
+                                data-original-title="Add to Cart"><i class="fa fa-shopping-cart"></i></button>
+                            <button type="button" class="btn btn-danger remove_wishlist"><i
+                                    class="fa fa-times"></i></button>
+                        </td>
 
 
-               </tr>
+                    </tr>
 
-                @endforeach
+                    @endforeach
 
-                        </tbody>
+                </tbody>
 
-          </table>
+            </table>
         </div>
 
         @endif
 
 
-              <div class="buttons clearfix">
-          <div class="pull-right"><a href="{{ route('home') }}" class="btn btn-primary">Continue</a></div>
+        <div class="buttons clearfix">
+            <div class="pull-right"><a href="{{ route('home') }}" class="btn btn-primary">Continue</a></div>
         </div>
-        </div>
+    </div>
 
 </div>
 
 <script>
-
-$(document).ready(function () {
+    $(document).ready(function () {
         $('.add-to-cart-btn').click(function (e) {
             e.preventDefault();
             $.ajaxSetup({
@@ -113,12 +116,10 @@ function cartload() {
                     });
                 }
 
-
-
                 jQuery('.basket-item-count').html('');
 
                 var value = parsed; //Single Data Viewing
-                jQuery('.basket-item-count').append(jQuery('<span class="badge badge-pill red">' + value[
+                jQuery('.basket-item-count').append(jQuery('<span class="badge badge-pill badge-primary">' + value[
                     'totalcart'] + '</span>'));
             }
         });
