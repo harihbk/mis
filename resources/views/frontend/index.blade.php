@@ -5,11 +5,11 @@
 <div class="container">
 
     @if (Session::has('message'))
-    <div class="alert alert-dark">{{Session::get('message')}}</div>
+    <div class="alert alert-danger alert-message">{{Session::get('message')}}</div>
     @endif
 
     @if (Session::has('success'))
-    <div class="alert alert-success">{{Session::get('success')}}</div>
+    <div class="alert alert-success alert-message">{{Session::get('success')}}</div>
     @endif
 
     <div class="row">
@@ -58,7 +58,7 @@
                 <div class="banner-login-wrapper">
                     <h1>LOGIN</h1>
                     @if (Session::has('message'))
-                    <div class="alert alert-warning">{{Session::get('message')}}</div>
+                    <div class="alert alert-danger">{{Session::get('message')}}</div>
                     @endif
                     <form action="{{ url('authlogin') }}" id="loginfrm" name="loginfrm" method="post" target="_top">
                         @csrf
@@ -121,8 +121,8 @@
 </div>
 
 <script>
-    $(".alert-dark").fadeTo(2000, 500).slideUp(1000, function(){
-    $(".alert-dark").slideUp(1000);
+    $(".alert-message").fadeTo(2000, 500).slideUp(1000, function(){
+    $(".alert-message").slideUp(1000);
 });
 </script>
 
