@@ -1,5 +1,5 @@
 <div class="row my-4">
-    <div class="col">
+    <div class="col text-center">
         <img class="img-fluid" src="./images/build-banner.jpg" alt="banner">
     </div>
 </div>
