@@ -1,7 +1,3 @@
-
-
-
-
 <footer class="footer">
     <div class="container">
         <div class="row">
@@ -65,7 +61,7 @@
 
 
 <script>
-const getDate = new Date();
+    const getDate = new Date();
 const currentYear = getDate.getFullYear();
 document.getElementById('footerCurrentYear').innerHTML = currentYear;
 
@@ -73,7 +69,7 @@ var path = window.location.pathname;
 var page = path.split("/").pop();
 console.log(page);
 if (page === 'home.php') {
-    jQuery('.breadcrumb-wrapper').hide();
+    jQuery('.breadcrumb').hide();
 }
 </script>
 
@@ -81,8 +77,6 @@ if (page === 'home.php') {
 
 
 <script>
-
-
     jQuery(document).ready(function() {
 
         cartload();
@@ -116,7 +110,7 @@ if (page === 'home.php') {
                 jQuery('.basket-item-count').html('');
 
                 var value = parsed; //Single Data Viewing
-                jQuery('.basket-item-count').append(jQuery('<span class="badge badge-pill red">' + value[
+                jQuery('.basket-item-count').append(jQuery('<span class="badge badge-pill badge-primary">' + value[
                     'totalcart'] + '</span>'));
             }
         });
@@ -204,21 +198,6 @@ if (page === 'home.php') {
 //     minLength: 2
 //  });
 // });
-
-
-
-
-
-
-
 </script>
-
-
-
-
-
 </body>
-
 </html>
-
-

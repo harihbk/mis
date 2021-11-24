@@ -207,8 +207,8 @@
 .our-channel-list {
     padding: 16px;
     display: flex;
-    background: #f1f1f1;
-    border: 1px solid #c5c5c5;
+    background: #ffffff;
+    border: 1px solid #eaedf1;
     justify-content: space-between;
 }
 .our-channel {
@@ -296,6 +296,9 @@
     text-align: center;
     border: 1px solid #c5c5c5;
 }
+.product-list img{
+    width: 100%;
+}
 .product-list .title {
     height: 42px;
     display: flex;
@@ -348,3 +351,4 @@
 .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev, .owl-carousel button.owl-dot {
     background: #0443c0 !important;
 }
+
