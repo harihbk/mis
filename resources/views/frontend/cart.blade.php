@@ -236,4 +236,6 @@ $('.changeQuantity').click(function (e) {
 });
 </script>
 
+
+
 @endsection
