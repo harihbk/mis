@@ -137,20 +137,37 @@ $('.remove_wishlist').click(function(e){
             });
 
             var product_id = $(this).closest('tr').find('.product_id').val();
-
+            $(this).closest('tr').hide();
 
             $.ajax({
                 url: "{{ route('unwish') }}",
                 method: "POST",
+                async : false,
                 data: {
-
                     'product_id': product_id,
                 },
                 success: function (response) {
 
+
+                    jQuery.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        jQuery.ajax({
+            url: "{{ route('countwhistlist') }}",
+            method: "GET",
+            success: function(response) {
+                jQuery('span.whistlistcount').text(response);
+            }
+        });
+
+
+
                     alertify.set('notifier','position','top-right');
                     alertify.success(`${response.status} Removed from Wishlist`);
-                    $(this).closest('tr').hide();
+
                 },
             });
 

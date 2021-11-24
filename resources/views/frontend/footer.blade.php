@@ -198,6 +198,31 @@ if (page === 'home.php') {
 //     minLength: 2
 //  });
 // });
+<<<<<<< HEAD
+=======
+
+
+
+jQuery.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        jQuery.ajax({
+            url: "{{ route('countwhistlist') }}",
+            method: "GET",
+            success: function(response) {
+
+               // jQuery('.basket-item-count').html('');
+
+                jQuery('span.whistlistcount').text(response);
+            }
+        });
+
+
+
+>>>>>>> 15409fb0d7389393056c539837cec4e62affe8dc
 </script>
 </body>
 </html>

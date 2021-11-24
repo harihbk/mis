@@ -26,6 +26,20 @@ class WishlistController extends Controller
          return "dsf";
     }
 
+    public function countwhistlist(){
+        if(Auth::id()){
+            $user = User::find(Auth::id());
+            $data = $user->countwishlist();
+
+
+            $wishlist = $data;
+
+        } else {
+            $wishlist = 0;
+        }
+        return $wishlist;
+    }
+
 
     public function wishlists(Request $request){
         if(Auth::id()){
