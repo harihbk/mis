@@ -19,6 +19,7 @@
             <div class="col-md-12">
                 @if(isset($cart_data))
 
+
                         @php $total="0" @endphp
                         <div class="shopping-cart">
                             <div class="shopping-cart-table">
@@ -107,6 +108,16 @@
                                             @endforeach
                                         </tbody>
                                     </table><!-- /table -->
+
+              
+                    <div class="clearfix">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-12 estimate-ship-tax">
+                                <div>
+                                    <a href="{{ url('website') }}"
+                                        class="btn btn-upper btn-warning outer-left-xs">Continue
+                                        Shopping</a>
+
                                 </div>
                             </div><!-- /.shopping-cart-table -->
                             <div class="row">
@@ -241,7 +252,4 @@ $('.changeQuantity').click(function (e) {
 
 });
 </script>
-
-
-
 @endsection
