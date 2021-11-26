@@ -1,5 +1,4 @@
 @extends('frontend.userprofiletheme',['title' => 'View Order']);
-
 @section('content')
                         <table class="table table-bordered yajra-datatable">
                             <thead>
@@ -19,7 +18,7 @@
 
                         <script>
                             $(function () {
-                       
+
                        var table = $('.yajra-datatable').DataTable({
                            processing: true,
                            serverSide: true,

@@ -1,63 +1,56 @@
 @extends('frontend.theme')
 @section('content')
-
-<div class="container">
+<div class="container py-4">
     <h2>My Wish List</h2>
-    <div class="row">
-        <div id="content" class="col-sm-12 py-4">
-            @if ( !$wishlist)
-            <h2 class="text-center">No Wish List Found</h2>
-            @else
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Product Name</th>
-                            <th>SQB</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach ($wishlist as $item)
-                        <tr>
-
-                            <td class="text-center"><img src="{{ url('')." /uploads/$item->icon" }}" width="50" height="50">
-                                <input type="hidden" value="{{ $item->id ?? '' }}" class="product_id">
-                            </td>
-                            <td class="text-left"><a
-                                href="{{ route('website.partnumberpage',$item->id) }}">{{
-                                    $item->part_number ?? '' }}</a></td>
-                            <td class="text-left">{{ $item->weight->description ?? '' }}</td>
-                            <td class="text-left">{{ $item->original_price ?? '' }}</td>
-                            <td class="text-right">
-                                <button type="button" data-toggle="tooltip" title="" class="btn btn-primary add-to-cart-btn"
-                                    data-original-title="Add to Cart"><i class="fa fa-shopping-cart"></i></button>
-                                <button type="button" class="btn btn-danger remove_wishlist"><i
-                                        class="fa fa-times"></i></button>
-                            </td>
-
-
-                        </tr>
-
-                        @endforeach
-
-                    </tbody>
-
-                </table>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div id="content" class="col-sm-12 py-4">
+                    @if ( !$wishlist)
+                    <h2 class="text-center">No Wish List Found</h2>
+                    @else
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>SQB</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($wishlist as $item)
+                                <tr>
+                                    <td class="text-center"><img src="{{ url('')." /uploads/$item->icon" }}" width="50"
+                                        height="50">
+                                        <input type="hidden" value="{{ $item->id ?? '' }}" class="product_id">
+                                    </td>
+                                    <td class="text-left"><a href="{{ route('website.partnumberpage',$item->id) }}">{{
+                                            $item->part_number ?? '' }}</a></td>
+                                    <td class="text-left">{{ $item->weight->description ?? '' }}</td>
+                                    <td class="text-left">{{ $item->original_price ?? '' }}</td>
+                                    <td class="text-right">
+                                        <button type="button" data-toggle="tooltip" title=""
+                                            class="btn btn-primary add-to-cart-btn" data-original-title="Add to Cart"><i
+                                                class="fa fa-shopping-cart"></i></button>
+                                        <button type="button" class="btn btn-danger remove_wishlist"><i
+                                                class="fa fa-times"></i></button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="buttons clearfix">
+                        <div class="pull-right"><a href="{{ route('home') }}" class="btn btn-primary">Continue</a></div>
+                    </div>
+                </div>
+                @endif
             </div>
-    </div>
-
-        @endif
-
-
-        <div class="buttons clearfix">
-            <div class="pull-right"><a href="{{ route('home') }}" class="btn btn-primary">Continue</a></div>
         </div>
     </div>
-
 </div>
 
 <script>
