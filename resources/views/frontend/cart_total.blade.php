@@ -98,10 +98,10 @@
             <div class="col-md-12">
                 <div class="cart-checkout-btn text-center">
                     @if (Auth::user())
-                    <a href="{{ route('checkout') }}" class="btn btn-success btn-block checkout-btn">PROCCED TO
+                    <a href="{{ route('checkout') }}" class="btn btn-primary btn-block checkout-btn">PROCCED TO
                         CHECKOUT</a>
                     @else
-                    <a href="{{ url('login') }}" class="btn btn-success btn-block checkout-btn">PROCCED TO CHECKOUT</a>
+                    <a href="{{ url('login') }}" class="btn btn-primary btn-block checkout-btn">PROCCED TO CHECKOUT</a>
                     @endif
                 </div>
             </div>
