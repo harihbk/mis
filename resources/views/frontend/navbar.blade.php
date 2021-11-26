@@ -65,7 +65,7 @@ name="n_id" value="{{ request()->segment(3) ?? '' }}">
                 <form method="POST" action="{{ route('authlogout') }}">
                     @csrf
                     {{ auth()->user()->email }}
-                    <button type="submit">Logout</button>
+                    <button class="btn btn-link" type="submit">Logout</button>
                   </form>
                 @endauth
                 @guest
@@ -85,13 +85,15 @@ name="n_id" value="{{ request()->segment(3) ?? '' }}">
             @endauth
 
             <li class="nav-item">
+                <span class="clearfix position-relative">
                 <a href="{{ route('wishlists')}}">
                 <button type="button" class="btn btn-link btn-head-icon"><i class="fa fa-heart-o"
                         aria-hidden="true"></i></button>
-                        <span class="whistlistcount-item">
-                            <span class="whistlistcount badge badge-pill red"> 0 </span>
+                        <span class="whistlistcount-item position-absolute">
+                            <span class="whistlistcount badge badge-pill badge-primary"> 0 </span>
                         </span>
                 </a>
+                </span>
             </li>
             <li class="nav-item">
 
