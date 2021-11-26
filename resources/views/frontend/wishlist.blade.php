@@ -2,55 +2,53 @@
 @section('content')
 
 <div class="container">
+    <h2>My Wish List</h2>
+    <div class="row">
+        <div id="content" class="col-sm-12 py-4">
+            @if ( !$wishlist)
+            <h2 class="text-center">No Wish List Found</h2>
+            @else
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>SQB</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-    <div id="content" class="col-sm-9">
-        <h2>My Wish List</h2>
-        @if ( !$wishlist)
-        <h2 class="text-center">No Wish List Found</h2>
-        @else
+                        @foreach ($wishlist as $item)
+                        <tr>
 
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <td class="text-center">Image</td>
-                        <td class="text-left">Product Name</td>
-                        <td class="text-left">SQB</td>
-                        <td class="text-right">Price</td>
-
-                        <td class="text-right">Action</td>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach ($wishlist as $item)
-                    <tr>
-
-                        <td class="text-center"><img src="{{ url('')." /uploads/$item->icon" }}" width="50" height="50">
-                            <input type="hidden" value="{{ $item->id ?? '' }}" class="product_id">
-                        </td>
-                        <td class="text-left"><a
-                                href="{{ route('website.partnumberpage',$item->id) }}">{{
-                                $item->part_number ?? '' }}</a></td>
-                        <td class="text-left">{{ $item->weight->description ?? '' }}</td>
-                        <td class="text-left">{{ $item->original_price ?? '' }}</td>
-                        <td class="text-right">
-                            <button type="button" data-toggle="tooltip" title="" class="btn btn-primary add-to-cart-btn"
-                                data-original-title="Add to Cart"><i class="fa fa-shopping-cart"></i></button>
-                            <button type="button" class="btn btn-danger remove_wishlist"><i
-                                    class="fa fa-times"></i></button>
-                        </td>
+                            <td class="text-center"><img src="{{ url('')." /uploads/$item->icon" }}" width="50" height="50">
+                                <input type="hidden" value="{{ $item->id ?? '' }}" class="product_id">
+                            </td>
+                            <td class="text-left"><a
+                                    href="{{ route('website.partnumberpage',$item->id) }}">{{
+                                    $item->part_number ?? '' }}</a></td>
+                            <td class="text-left">{{ $item->weight->description ?? '' }}</td>
+                            <td class="text-left">{{ $item->original_price ?? '' }}</td>
+                            <td class="text-right">
+                                <button type="button" data-toggle="tooltip" title="" class="btn btn-primary add-to-cart-btn"
+                                    data-original-title="Add to Cart"><i class="fa fa-shopping-cart"></i></button>
+                                <button type="button" class="btn btn-danger remove_wishlist"><i
+                                        class="fa fa-times"></i></button>
+                            </td>
 
 
-                    </tr>
+                        </tr>
 
-                    @endforeach
+                        @endforeach
 
-                </tbody>
+                    </tbody>
 
-            </table>
-        </div>
+                </table>
+            </div>
+    </div>
 
         @endif
 

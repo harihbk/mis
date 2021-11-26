@@ -98,7 +98,7 @@
                 <div class="card-body px-5  ">
                     <h1 class="text-center login-title mt-3 mb-4">Login</h1>
                     @if (Session::has('message'))
-                    <div class="alert alert-warning">{{Session::get('message')}}</div>
+                    <div class="alert alert-danger">{{Session::get('message')}}</div>
                     @endif
                     <div class="row">
                         <div class="col-md-12">
@@ -137,7 +137,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Default checkbox
+                                    Remember me
                                 </label>
                             </div>
                         </div>

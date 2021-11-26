@@ -259,7 +259,7 @@ table.dataTable tbody td {
   width: 150px;
 }
 
-.basket-item-count {
+.basket-item-count, .whistlistcount-item {
     right: 5px;
 }
 
@@ -340,7 +340,7 @@ table.dataTable tbody td {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 163px);
+  min-height: calc(100vh - 163px);
 }
 
 .login-card {
