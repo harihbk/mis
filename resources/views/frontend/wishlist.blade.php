@@ -31,7 +31,7 @@
                             <input type="hidden" value="{{ $item->id ?? '' }}" class="product_id">
                         </td>
                         <td class="text-left"><a
-                                href="https://snappshoppy.com/index.php?route=product/product&amp;product_id=64">{{
+                                href="{{ route('website.partnumberpage',$item->id) }}">{{
                                 $item->part_number ?? '' }}</a></td>
                         <td class="text-left">{{ $item->weight->description ?? '' }}</td>
                         <td class="text-left">{{ $item->original_price ?? '' }}</td>
