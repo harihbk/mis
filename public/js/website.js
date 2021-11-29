@@ -16,7 +16,7 @@
 
         $('.fastiner-slider').owlCarousel({
             nav: true,
-            loop: false,
+            loop: true,
             margin: 10,
             items:1,
             autoplay: true,
@@ -30,6 +30,26 @@
                 },
                 1000: {
                     items: 4
+                }
+            }
+        });
+
+        $('.deals-slider').owlCarousel({
+            nav: true,
+            loop: true,
+            margin: 10,
+            items:1,
+            autoplay: true,
+            navContainer: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 4
+                },
+                1000: {
+                    items: 5
                 }
             }
         });
