@@ -94,24 +94,23 @@ if (page === 'home.php') {
             method: "GET",
             success: function(response) {
 
-                var parsed = jQuery.parseJSON(response)
+//                 var parsed = jQuery.parseJSON(response)
+// console.log(parsed);
+//                 if(parsed.cartdata){
 
-                if(parsed.cartdata){
 
-
-                    Object.values(parsed.cartdata).forEach(element => {
-                        $(`.prod_id_${element.item_id}`).val(element.item_quantity)
-                           console.log(`.prod_id_${element.item_id}`)
-                    });
-                }
+//                     Object.values(parsed.cartdata).forEach(element => {
+//                         $(`.prod_id_${element.item_id}`).val(element.item_quantity)
+//                            console.log(`.prod_id_${element.item_id}`)
+//                     });
+//                 }
 
 
 
                 jQuery('.basket-item-count').html('');
 
-                var value = parsed; //Single Data Viewing
-                jQuery('.basket-item-count').append(jQuery('<span class="badge badge-pill badge-primary">' + value[
-                    'totalcart'] + '</span>'));
+              //  var value = parsed; //Single Data Viewing
+                jQuery('.basket-item-count').append(jQuery('<span class="badge badge-pill badge-primary">' + response?.totalcart + '</span>'));
             }
         });
     }
@@ -198,8 +197,6 @@ if (page === 'home.php') {
 //     minLength: 2
 //  });
 // });
-<<<<<<< HEAD
-=======
 
 
 
@@ -222,7 +219,6 @@ jQuery.ajaxSetup({
 
 
 
->>>>>>> 15409fb0d7389393056c539837cec4e62affe8dc
 </script>
 </body>
 </html>

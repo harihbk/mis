@@ -84,56 +84,27 @@
         </div>
     </div>
 </div>
-<div class="product-wrapper text-center">
-    <h2>Deals of the day</h2>
-    <div class="deals-list-wrapper">
-        <div class="deals-slider owl-carousel">
-            <div>
-                <div class="deals-list">
-                    <img class="img-fluid" src="./images/tools/banner-1.jpg" alt="banner">
-                    <p>BLIND RIVETING</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
-                </div>
-            </div>
-            <div>
-                <div class="deals-list">
-                    <img class="img-fluid" src="./images/tools/banner-3.jpg" alt="banner">
-                    <p>BATTERY RIVETING</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
-                </div>
-            </div>
-            <div>
-                <div class="deals-list">
-                    <img class="img-fluid" src="./images/tools/banner-5.jpg" alt="banner">
-                    <p>BOLTGRIP</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
-                </div>
-            </div>
-            <div>
-                <div class="deals-list">
-                    <img class="img-fluid" src="./images/tools/banner-7.jpg" alt="banner">
-                    <p>ELECTRIC RIVETING</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
-                </div>
-            </div>
-            <div>
-                <div class="deals-list">
-                    <img class="img-fluid" src="./images/tools/banner-1.jpg" alt="banner">
-                    <p>BOLTS</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
-                </div>
-            </div>
-            <div>
-                <div class="deals-list">
-                    <img class="img-fluid" src="./images/tools/banner-3.jpg" alt="banner">
-                    <p>BOLTS</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
-                </div>
+
+
+<div class="product-wrapper">
+    <h2 class="text-center">Deal Of the Day</h2>
+    <div class="row row-cols-md-5 row-cols-sm-1">
+
+        @foreach ($deal_of_the_day as $item)
+        <div class="col">
+            <div class="product-list">
+                <img class="img-fluid" src="{{url('/uploads/'.$item->icon)}}" alt="banner">
+                <div class="title">{{$item->part_number}}</div>
             </div>
         </div>
+        @endforeach
+
     </div>
 </div>
-{{-- <div class="product-wrapper">
+
+
+{{--
+<div class="product-wrapper">
     <h2 class="text-center">OUR OTHER PRODUCTS</h2>
     <div class="row row-cols-md-5 row-cols-sm-1">
         <div class="col">
@@ -198,7 +169,18 @@
         </div>
     </div>
 </div> --}}
+<<<<<<< HEAD
+
+
+
+
+
+
+
+<div class="other-services-wrapper">
+=======
 {{-- <div class="other-services-wrapper">
+>>>>>>> a598cce78673bbf7128620b901a5e7f69821a98b
     <h2>OTHER KEY SERVICES</h2>
     <div class="row">
         <div class="col-md-4">

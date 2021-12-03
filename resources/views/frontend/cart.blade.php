@@ -70,6 +70,7 @@
 
 
                                         <td class="cart-product-quantity" width="130px">
+
                                             <div class="input-group quantity">
                                                 <div class="input-group-prepend decrement-btn changeQuantity"
                                                     style="cursor: pointer">
@@ -181,34 +182,43 @@
             var minm_val = $(this).parents('.quantity').find('.qty-input').attr('minlength');
             var step = $(this).parents('.quantity').find('.qty-input').attr("step") ;
             // var value = parseInt(decre_value, 10);
+           // alert($(this).parents('.quantity').find('.qty-input').val())
             if($(this).parents('.quantity').find('.qty-input').attr("step") > 0){
                value =  parseInt(decre_value)-parseInt($(this).parents('.quantity').find('.qty-input').attr("step"));
             } else {
                value--;
             }
+
             value = isNaN(value) ? 0 : value;
-            if(value>1){
+
+            if(value>=1){
                 $(this).parents('.quantity').find('.qty-input').val(value);
             }
         });
 
     $('.qty-input').blur(function(e){
-        plusminus();
+        var p_id = $(this).closest("tr").find(".product_id").val();
+        let quantity = $(this).closest("tr").find('.qty-input').val();
+
+        plusminus(p_id,quantity);
     })
 
 $('.changeQuantity').click(function (e) {
             e.preventDefault();
-            plusminus();
+            var p_id = $(this).closest("tr").find(".product_id").val();
+            let quantity = $(this).closest("tr").find('.qty-input').val();
+
+            plusminus(p_id,quantity);
         });
 
 
-  function plusminus(){
-        var quantity = $('.qty-input').val();
-            var product_id = $('.product_id').val();
+  function plusminus(p_id,quantity){
+       // var quantity = $('.qty-input').val();
+         //   var product_id = $('.product_id').val();
             var data = {
-                '_token': $('input[name=_token]').val(),
+                "_token": "{{ csrf_token() }}",
                 'quantity':quantity,
-                'product_id':product_id,
+                'product_id':p_id,
             };
 
             $.ajax({
@@ -217,12 +227,15 @@ $('.changeQuantity').click(function (e) {
                 data: data,
                 success: function (response) {
 
-                   window.location.reload();
-                    alertify.set('notifier','position','top-right');
-                    alertify.success(response.status);
+                // window.location.reload();
+                 //   alertify.set('notifier','position','top-right');
+                   //    alertify.success(response.status);
                 }
             });
     }
+
+
+
 
 
         $('.delete_cart_data').click(function (e) {

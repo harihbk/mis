@@ -3,10 +3,12 @@
 {{ Breadcrumbs::render('partnumber',$part_number) }}
 
 <div class="container">
+    <h3>{{ $part_number->part_number }}</h3>
     <div class="row">
+
         <div class="col-sm-5">
             <div class="card my-3 p-3">
-                <img src="{{ url('')." /uploads/$part_number->icon" }}" alt="product" width="500px">
+                <img src="{{ url('/uploads/'.$part_number->icon) }}" alt="product" width="500px">
             </div>
 
         </div>
@@ -96,6 +98,28 @@
             </div>
         </div>
     </div>
+
+    <h4>Releated Product</h4>
+
+
+<div class="product-wrapper">
+    <h2 class="text-center">Deal Of the Day</h2>
+    <div class="row row-cols-md-5 row-cols-sm-1">
+
+        @foreach ($related_data as $item)
+        <div class="col">
+            <div class="product-list">
+               <a href="{{ route('website.partnumberpage',$item->id) }}" class="href">
+                <img class="img-fluid" src="{{url('/uploads/'.$item->icon)}}" alt="banner">
+                <div class="title">{{$item->part_number}}</div>
+                   </a>
+
+            </div>
+        </div>
+        @endforeach
+
+    </div>
+</div>
     {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $part_number->id) }}"
             class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p> --}}
 </div>
@@ -165,7 +189,12 @@
                     'product_id': product_id,
                 },
                 success: function (response) {
-                    cartload()
+
+
+                    jQuery('.basket-item-count').html('');
+
+  jQuery('.basket-item-count').append(jQuery('<span class="badge badge-pill badge-primary">' + response?.cartcount?.totalcart + '</span>'));
+                    //cartload()
                     $('span > .badge-pill').html(response.count);
                     alertify.set('notifier','position','top-right');
                     alertify.success(response.status);

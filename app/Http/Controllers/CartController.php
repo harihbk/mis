@@ -79,7 +79,7 @@ class CartController extends Controller
                     ]);
 
 
-                     return response()->json(['status'=>'"'.$values->name.'" Already Added to Cart','status2'=>'2']);
+                     return response()->json(['status'=>'"'.$values->name.'" Already Added to Cart' , 'cartcount'=>$this->cartloadbyajax()]);
                  }
             }
 
@@ -124,7 +124,7 @@ class CartController extends Controller
 
               //  Cookie::queue(Cookie::make('shopping_cart', $item_data, $minutes));
 
-                return response()->json(['status'=>'"'.$prod_name.'" Added to Cart']);
+                return response()->json(['status'=>'"'.$prod_name.'" Added to Cart','cartcount'=>$this->cartloadbyajax()]);
             }
         }
     }
@@ -138,15 +138,17 @@ class CartController extends Controller
         if(\Cart::isEmpty())
         {
             $totalcart = "0";
-            echo json_encode(array('totalcart' => $totalcart,'cartdata'=>'')); die;
-            return;
+            $arr = array('totalcart' => $totalcart,'cartdata'=>'');
+
         }
         else
         {
             $totalcart = $items->count();
-            echo json_encode(array('totalcart' => $totalcart,'cartdata'=>array())); die;
-            return;
+            $arr = array('totalcart' => $totalcart,'cartdata'=>array());
+
         }
+        return $arr;
+
     }
 
     public function cartdata()
@@ -168,8 +170,8 @@ class CartController extends Controller
     public function clearcart()
     {
 
-        \Cart::remove();
-       // Cookie::queue(Cookie::forget('shopping_cart'));
+        \Cart::clear();
+        // Cookie::queue(Cookie::forget('shopping_cart'));
         return response()->json(['status'=>'Your Cart is Cleared']);
     }
 
@@ -190,7 +192,7 @@ class CartController extends Controller
 
            $cart =  \Cart::get($prod_id);
 
-        return response()->json(['status'=>'"'.$cart->name.'" Quantity Updated']);
+        return response()->json(['status'=>'"'.$cart->name.'" Quantity Updated','cart'=>$this->cartloadbyajax()]);
 
 
 

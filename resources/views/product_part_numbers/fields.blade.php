@@ -268,6 +268,23 @@
     {!! Form::text('step', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
+<div class="form-group col-sm-6">
+    {!! Form::label('Deal of the Day', 'Deal of the Day:') !!}
+    {{ Form::hidden('deal_of_the_day', 0) }}
+
+
+    @if (isset($productPartNumber) && $productPartNumber['deal_of_the_day'] == 1)
+    {{ Form::checkbox('deal_of_the_day',1,true, array('id'=>'deal_of_the_day')) }}
+
+    @else
+    {{ Form::checkbox('deal_of_the_day',1,false, array('id'=>'deal_of_the_day')) }}
+
+    @endif
+</div>
+
+
+
+
 
 
 <style>

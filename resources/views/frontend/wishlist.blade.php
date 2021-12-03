@@ -23,7 +23,7 @@
                             <tbody>
                                 @foreach ($wishlist as $item)
                                 <tr>
-                                    <td class="text-center"><img src="{{ url('')." /uploads/$item->icon" }}" width="50"
+                                    <td class="text-center"><img src="{{ url('/uploads/'.$item->icon) }}" width="50"
                                         height="50">
                                         <input type="hidden" value="{{ $item->id ?? '' }}" class="product_id">
                                     </td>

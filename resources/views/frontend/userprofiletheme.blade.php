@@ -16,16 +16,24 @@
         </div>
     </div>
     <div class="clearfix">
-        <button class="btn btn-change-profile btn-success border-0 rounded-0" data-toggle="modal"
-            data-target="#myModal">Change Profile</button>
-        <!-- Modal starts -->
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                        <h4 class="modal-title">Change Profile</h4>
+        <hr>
+    {{-- <button class="btn btn-change-profile btn-success border-0 rounded-0" data-toggle="modal" data-target="#myModal">Change Profile</button> --}}
+    <!-- Modal starts -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+            <h4 class="modal-title">Change Profile</h4>
+          </div>
+          <div class="modal-body">
+                <form action="?action=upload" method="post" enctype="multipart/form-data">
+                    <b>Profile Photo:</b>
+                    <div class="custom-file mb-3">
+                      <input type="file" class="custom-file-input" id="profilepicture" name="profilepicture" required>
+                      <br/><small>To change profile photo upload new picture.</small>
+                      <br/><small>Supported Image Formats are .jpg, .jpeg, .png..</small>
                     </div>
                     <div class="modal-body">
                         <form action="?action=upload" method="post" enctype="multipart/form-data">
