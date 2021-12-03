@@ -3,53 +3,65 @@
 
 {{ Breadcrumbs::render('products',$pc) }}
 
-<div class="container">
-    <div class="my-3">
-        <div class="row">
-            <div class="col-md-6">
-                <h3 class="nav-category-title">{{ $childcategory->name ?? '' }}</h3>
-            </div>
-            <div class="col-md-6 text-right">
-                <button type="button" id="0" class="btn btn-primary product_id btn-sm">See All</button>
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+
+            @include('frontend.parentlist.filters')
+
         </div>
-    </div>
-    <div class="row mt-4 mb-3">
-        @foreach ($products as $product)
-        <div class="col-md-3 product_list">
-            <div class="card">
-                <div class="child-product-card p-3">
-                    <a href="#" class="product_id" id="{{ $product->id }}">
-                        <img class="center-block" src="{{url('')}}/uploads/{{ $product->image }}" alt="" width="50%">
-                        <div class="text-center">{{ $product->name }}</div>
-                    </a>
+        <div class="col-md-9">
+
+
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <h3 class="nav-category-title">{{ $childcategory->name ?? '' }}</h3>
+                        </div>
+                        <div class="pull-right">
+                            <button type="button" id="0" class="btn btn-primary product_id btn-sm">See All</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div class="row mb-3">
+                @foreach ($products as $product)
+                <div class="col-md-3 product_list">
+                    <div class="card">
+                        <div class="child-product-card p-3">
+                            <a href="#" class="product_id" id="{{ $product->id }}">
+                                <img class="center-block" src="{{url('')}}/uploads/{{ $product->image }}" alt=""
+                                    width="50%">
+                                <div class="text-center">{{ $product->name }}</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div class="mb-5">
+                @include('frontend.parentlist.datatables')
+            </div>
         </div>
-        @endforeach
-    </div>
-    <div class="col-md-3">
-
-        @include('frontend.parentlist.filters')
-
-    </div>
-    <div class="col-md-8">
-        @include('frontend.parentlist.datatables')
     </div>
 </div>
 <style>
-.product_list {
-    display: flex
-}
-.product {
-    width: 17%;
-}
-.product:hover {
-    border: 1px solid #8580e0;
-}
+    .product_list {
+        display: flex
+    }
+
+    .product {
+        width: 17%;
+    }
+
+    .product:hover {
+        border: 1px solid #8580e0;
+    }
 </style>
 <script>
-//datatables
+    //datatables
 $(function() {
     var currenturl = "{{ Route::currentRouteAction() }}";
      url = currenturl.split('@')[1];
