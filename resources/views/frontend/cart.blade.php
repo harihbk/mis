@@ -17,7 +17,10 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                @if(isset($cart_data))
+
+
+
+                @if(isset($cart_data) && !$cart_data->isEmpty())
                 @php $total="0" @endphp
                 <div class="shopping-cart">
                     <div class="shopping-cart-table">
