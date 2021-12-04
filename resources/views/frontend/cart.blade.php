@@ -44,15 +44,14 @@
                                     <tr class="cartpage cartpage" id="{{ $data['id'] }}">
 
                                         <td class="cart-image">
-                                            <input type="hidden" class="product_id" value="{{ $data->id ?? '' }}">
+                                        <input type="hidden" class="product_id" value="{{ $data->id ?? '' }}">
 
                                             <a class="entry-thumbnail" href="javascript:void(0)">
                                                 <img src="{{url('')}}/uploads/{{ $data->associatedModel->icon ?? '' }}"
                                                     width="70px" alt="">
                                             </a>
                                         </td>
-
-
+s
                                         <td class="cart-product-name-info">
                                             <h4 class='cart-product-description'>
                                                 <a href="javascript:void(0)">{{ $data->name ?? '' }}</a>

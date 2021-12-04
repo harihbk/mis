@@ -169,18 +169,7 @@
         </div>
     </div>
 </div> --}}
-<<<<<<< HEAD
-
-
-
-
-
-
-
-<div class="other-services-wrapper">
-=======
 {{-- <div class="other-services-wrapper">
->>>>>>> a598cce78673bbf7128620b901a5e7f69821a98b
     <h2>OTHER KEY SERVICES</h2>
     <div class="row">
         <div class="col-md-4">
