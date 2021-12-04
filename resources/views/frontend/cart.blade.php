@@ -44,7 +44,7 @@
                                     <tr class="cartpage cartpage" id="{{ $data['id'] }}">
 
                                         <td class="cart-image">
-                                            <input type="text" class="product_id" value="{{ $data->id ?? '' }}">
+                                            <input type="hidden" class="product_id" value="{{ $data->id ?? '' }}">
 
                                             <a class="entry-thumbnail" href="javascript:void(0)">
                                                 <img src="{{url('')}}/uploads/{{ $data->associatedModel->icon ?? '' }}"

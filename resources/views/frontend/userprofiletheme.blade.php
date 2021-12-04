@@ -16,7 +16,8 @@
         </div>
     </div>
     <div class="clearfix">
-    <button class="btn btn-change-profile btn-success border-0 rounded-0" data-toggle="modal" data-target="#myModal">Change Profile</button>
+        <hr>
+    {{-- <button class="btn btn-change-profile btn-success border-0 rounded-0" data-toggle="modal" data-target="#myModal">Change Profile</button> --}}
     <!-- Modal starts -->
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
