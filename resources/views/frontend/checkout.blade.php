@@ -48,7 +48,7 @@
                 @csrf()
 
 
-                <input type="radio" id="html" name="radio_address" value="exist" class="radioclass" >
+                <input type="radio" id="html" name="radio_address" value="exist" class="radioclass" checked>
                 <label for="html">I want to use an existing address</label><br>
 
 
@@ -448,8 +448,6 @@
 
 
 
-
-
     // Wait for the DOM to be ready
     $(function() {
   // Initialize form validation on the registration form.
@@ -559,6 +557,14 @@
         var SITEURL = '{{URL::to('')}}';
 
 
+
+        $.LoadingOverlay("show", {
+    image       : "",
+    fontawesome : "fa fa-spinner fa-pulse fa-fw"
+});
+
+
+
    //     jQuery('.completed_order').click(function(e){
 
                $.ajaxSetup({
@@ -579,11 +585,20 @@
               'phone' : $('[name="phone"]').val(),
           }
 
+
+
                jQuery.ajax({
                   url: "{{ route('checkout.store') }}",
                   method: 'post',
                   data: data,
                   success: function(result){
+
+
+
+                    $.LoadingOverlay("hide");
+
+
+
                       var result = JSON.parse(result);
                       console.log(result.status);
                      if(result.status == 200){

@@ -204,12 +204,25 @@ class CheckoutController extends Controller
 
          $items = \Cart::getContent();
             foreach ($items as $item){
-                if($item->associatedModel->unit->description == "gm"){
+                if($item->associatedModel->unit->description ?? null == "gm"){
                     $weight += ($item->associatedModel->weight->name * $item->associatedModel->product_weight *  $item->quantity) /1000;
                 } else {
-                    $weight += $item->associatedModel->weight->name * $item->associatedModel->product_weight *  $item->quantity;
+                    if(isset($item->associatedModel->weight->name ) && $item->associatedModel->weight->name !=null){
+                        $weight += $item->associatedModel->weight->name * $item->associatedModel->product_weight *  $item->quantity;
+
+                    } else {
+                        $weight += 0;
+
+                    }
                 }
-                $total = $total + ($item->quantity * $item->price * $item->associatedModel->weight->name);
+
+                if(isset($item->associatedModel->weight->name) && $item->associatedModel->weight->name !=null){
+                    $total = $total + ($item->quantity * $item->price * $item->associatedModel->weight->name);
+
+                } else {
+                    $total = $total + ($item->quantity * $item->price * 0);
+
+                }
 
 
             }
@@ -291,12 +304,26 @@ class CheckoutController extends Controller
 
              $items = \Cart::getContent();
                 foreach ($items as $item){
-                    if($item->associatedModel->unit->description == "gm"){
+                    if($item->associatedModel->unit->description ?? null == "gm"){
                         $weight += ($item->associatedModel->weight->name * $item->associatedModel->product_weight *  $item->quantity) /1000;
                     } else {
-                        $weight += $item->associatedModel->weight->name * $item->associatedModel->product_weight *  $item->quantity;
+                        if(isset($item->associatedModel->weight->name) && $item->associatedModel->weight->name!=null){
+                            $weight += $item->associatedModel->weight->name * $item->associatedModel->product_weight *  $item->quantity;
+
+                        } else {
+                            $weight += 0;
+
+                        }
+
                     }
-                    $total = $total + ($item->quantity * $item->price * $item->associatedModel->weight->name);
+                       if(isset($item->associatedModel->weight->name) && $item->associatedModel->weight->name !=null){
+                        $total = $total + ($item->quantity * $item->price * $item->associatedModel->weight->name);
+
+                       } else {
+                        $total = $total + ($item->quantity * $item->price * 0);
+
+                       }
+
                 }
 
 

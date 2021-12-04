@@ -223,12 +223,11 @@ class Product_part_numberController extends AppBaseController
 if($request->hasFile('icon')) {
 $icon = time().'_'.$request->icon->getClientOriginalName();
 $request->icon->move(public_path('uploads'), $icon);
-} else {
-$icon = "";
+$productPartNumber->update(['icon'=>$icon]);
+
 }
 
-        $productPartNumber = $this->productPartNumberRepository->update($input, $id);
-        $productPartNumber->update(['icon'=>$icon]);
+$productPartNumber = $this->productPartNumberRepository->update($input, $id);
 
 
         $productPartNumber->specification()->sync([]);

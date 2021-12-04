@@ -42,9 +42,10 @@ class FrontendController extends Controller
     ->where('category.id','=',1)
     ->get();
 
+    $deal_of_the_day = Product_part_number::where('deal_of_the_day',1)->get();
 
 
-       return view('frontend.index')->with(compact('category','product_part_number'));
+       return view('frontend.index')->with(compact('category','product_part_number','deal_of_the_day'));
     }
 
     public function product($childcategory_id){
@@ -217,9 +218,14 @@ $specification = Product_part_number::with(['specification'=>function($query){
 
     public function partnumberpage($partno_id){
 
+
         $part_number = Product_part_number::where('id',$partno_id)->first();
 
-        return view('frontend.singlepartnopage')->with(compact('part_number'));
+
+
+       $related_data = Product_part_number::select('icon','part_number','id')->where('product_id',$part_number->product->id)->whereNotIn('id',[$partno_id])->take(5)->get();
+
+        return view('frontend.singlepartnopage')->with(compact('part_number','related_data'));
     }
 
 

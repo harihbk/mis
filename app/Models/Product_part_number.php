@@ -97,6 +97,7 @@ class Product_part_number extends Model
         'step',
         'product_weight',
           'unit_id',
+          'deal_of_the_day'
 
     ];
 

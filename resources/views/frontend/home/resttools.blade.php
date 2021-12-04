@@ -84,6 +84,26 @@
         </div>
     </div>
 </div>
+
+
+<div class="product-wrapper">
+    <h2 class="text-center">Deal Of the Day</h2>
+    <div class="row row-cols-md-5 row-cols-sm-1">
+
+        @foreach ($deal_of_the_day as $item)
+        <div class="col">
+            <div class="product-list">
+                <img class="img-fluid" src="{{url('/uploads/'.$item->icon)}}" alt="banner">
+                <div class="title">{{$item->part_number}}</div>
+            </div>
+        </div>
+        @endforeach
+
+    </div>
+</div>
+
+
+{{--
 <div class="product-wrapper">
     <h2 class="text-center">OUR OTHER PRODUCTS</h2>
     <div class="row row-cols-md-5 row-cols-sm-1">
@@ -148,7 +168,14 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
+
+
+
+
+
+
 <div class="other-services-wrapper">
     <h2>OTHER KEY SERVICES</h2>
     <div class="row">
