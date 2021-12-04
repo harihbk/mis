@@ -13,72 +13,72 @@
                 <div class="fastiner-list">
                     <img class="img-fluid" src="./images/tools/banner-1.jpg" alt="banner">
                     <p>BLIND RIVETING</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
                 <div class="fastiner-list mt-4">
                     <img class="img-fluid" src="./images/tools/banner-2.jpg" alt="banner">
                     <p>BLIND RIVET NUT</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
             </div>
             <div>
                 <div class="fastiner-list">
                     <img class="img-fluid" src="./images/tools/banner-3.jpg" alt="banner">
                     <p>BATTERY RIVETING</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
                 <div class="fastiner-list mt-4">
                     <img class="img-fluid" src="./images/tools/banner-4.jpg" alt="banner">
                     <p>HAND TOOLS</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
             </div>
             <div>
                 <div class="fastiner-list">
                     <img class="img-fluid" src="./images/tools/banner-5.jpg" alt="banner">
                     <p>BOLTGRIP</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
                 <div class="fastiner-list mt-4">
                     <img class="img-fluid" src="./images/tools/banner-6.jpg" alt="banner">
                     <p>SELF PIERCING</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
             </div>
             <div>
                 <div class="fastiner-list">
                     <img class="img-fluid" src="./images/tools/banner-7.jpg" alt="banner">
                     <p>ELECTRIC RIVETING</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
                 <div class="fastiner-list mt-4">
                     <img class="img-fluid" src="./images/tools/banner-8.jpg" alt="banner">
                     <p>BLIND RIVETING</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
             </div>
             <div>
                 <div class="fastiner-list">
                     <img class="img-fluid" src="./images/tools/banner-1.jpg" alt="banner">
                     <p>BOLTS</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
                 <div class="fastiner-list mt-4">
                     <img class="img-fluid" src="./images/tools/banner-2.jpg" alt="banner">
                     <p>BOLTS</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
             </div>
             <div>
                 <div class="fastiner-list">
                     <img class="img-fluid" src="./images/tools/banner-3.jpg" alt="banner">
                     <p>BOLTS</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
                 <div class="fastiner-list mt-4">
                     <img class="img-fluid" src="./images/tools/banner-4.jpg" alt="banner">
                     <p>BOLTS</p>
-                    <img src="./images/grip-product-logo.png" alt="logo">
+                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="logo">
                 </div>
             </div>
         </div>
@@ -169,6 +169,7 @@
         </div>
     </div>
 </div> --}}
+<<<<<<< HEAD
 
 
 
@@ -177,6 +178,9 @@
 
 
 <div class="other-services-wrapper">
+=======
+{{-- <div class="other-services-wrapper">
+>>>>>>> a598cce78673bbf7128620b901a5e7f69821a98b
     <h2>OTHER KEY SERVICES</h2>
     <div class="row">
         <div class="col-md-4">
@@ -209,4 +213,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

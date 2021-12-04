@@ -8,7 +8,7 @@
                     @if (isset($product_part_number[$i]->icon) && $product_part_number[$i]->icon)
                         <div>
                             <div class="fastiner-list">
-                                <img class="img-fluid" src="{{ URL::asset('uploads') }}/{{ $product_part_number[$i]->icon }}" alt="banner">
+                                <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $product_part_number[$i]->icon }}" alt="banner">
                                 <p>BOLTS</p>
                                 <img src="./images/grip-product-logo.png" alt="logo">
                             </div>
@@ -17,7 +17,7 @@
                                 @endphp
                     @if (isset($product_part_number[$var]->icon) && isset($product_part_number[$var]->icon))
                         <div class="fastiner-list mt-4">
-                            <img class="img-fluid" src="{{ URL::asset('uploads') }}/{{ $product_part_number[$var]->icon }}" alt="banner">
+                            <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $product_part_number[$var]->icon }}" alt="banner">
                             <p>BOLTS</p>
                             <img src="./images/grip-product-logo.png" alt="logo">
                         </div>
