@@ -228,10 +228,10 @@ $('.changeQuantity').click(function (e) {
                 type: 'POST',
                 data: data,
                 success: function (response) {
+                   // alertify.set('notifier','position','top-right');
+                     //  alertify.success(response.status);
+                 window.location.reload();
 
-                // window.location.reload();
-                 //   alertify.set('notifier','position','top-right');
-                   //    alertify.success(response.status);
                 }
             });
     }
