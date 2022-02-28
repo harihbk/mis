@@ -52,6 +52,9 @@ class OrderController extends Controller
                 ->addColumn('billing_phone', function($row){
                     return  $row->getCustomer->billing_phone ?? '';
                 })
+                ->addColumn('paymentid', function($row){
+                    return  $row->razorpay_id ?? '';
+                })
 
                 ->addColumn('action', function($row){
 

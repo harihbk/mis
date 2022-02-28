@@ -407,6 +407,7 @@
 
 
 
+
             <hr>
             @if (!session()->has('coupon'))
                 <form action="{{ route('coupon.store') }}" method="POST">
@@ -440,7 +441,6 @@
 
 
 <script>
-
 
 
 
@@ -592,19 +592,12 @@
                   method: 'post',
                   data: data,
                   success: function(result){
-
-
-
                     $.LoadingOverlay("hide");
-
-
-
                       var result = JSON.parse(result);
                       console.log(result.status);
                      if(result.status == 200){
                     var orderid = result.order_id;
                     let amount = result.total;
-
 
                     //payment gateway
                     var SITEURL = '{{URL::to('')}}';
@@ -617,7 +610,7 @@
                                     "name": "BestIndiaKart",
                                     "description": "Transaction",
                                     "image": "{{ asset('/images/logo.svg') }}",
-                                    "order_id": "", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                                    "order_id": '', //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                                     "handler": function (response){
                                         $.ajaxSetup({
                                             headers: {

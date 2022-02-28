@@ -189,6 +189,7 @@
               {data: 'billing_city', name: 'billing_city'},
               {data: 'billing_phone', name: 'billing_phone'},
               {data: 'order_status_id', name: 'order_status_id' },
+              {data: 'paymentid', name: 'paymentid' },
               {
                   data: 'action',
                   name: 'action',
