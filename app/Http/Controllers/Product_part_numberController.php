@@ -219,20 +219,30 @@ class Product_part_numberController extends AppBaseController
 // }
 
 
-// upload image to the public directory.
-if($request->hasFile('icon')) {
-$icon = time().'_'.$request->icon->getClientOriginalName();
-$request->icon->move(public_path('uploads'), $icon);
-$productPartNumber->update(['icon'=>$icon]);
 
-}
+        // // upload image to the public directory.
+        // if($request->hasFile('icon')) {
+        // $icon = time().'_'.$request->icon->getClientOriginalName();
+        // $request->icon->move(public_path('uploads'), $icon);
+        // //$productPartNumber->update(['icon'=>$icon]);
+
+        // }
+
+
 
 $productPartNumber = $this->productPartNumberRepository->update($input, $id);
-
 
         $productPartNumber->specification()->sync([]);
 
 
+
+        if($request->hasFile('icon')) {
+            $icon = time().'_'.$request->icon->getClientOriginalName();
+            $request->icon->move(public_path('uploads'), $icon);
+
+            Product_part_number::where('id', $id)->update(array('icon' => $icon));
+
+            }
 
 
         if(isset($request->only('specification_id')['specification_id']) && $request->only('specification_id')['specification_id']){

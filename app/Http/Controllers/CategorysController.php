@@ -141,17 +141,16 @@ class CategorysController extends AppBaseController
                  }
             }
 
+            $categorys = $this->categorysRepository->update($request->all(), $id);
 
         // upload image to the public directory.
         if($request->hasFile('icon')) {
             $icon = time().'_'.$request->icon->getClientOriginalName();
             $request->icon->move(public_path('uploads'), $icon);
-            } else {
-            $icon = "";
+            $categorys->update(['icon'=>$icon]);
+
             }
 
-        $categorys = $this->categorysRepository->update($request->all(), $id);
-        $categorys->update(['icon'=>$icon]);
         Flash::success('Categorys updated successfully.');
 
         return redirect(route('categorys.index'));
