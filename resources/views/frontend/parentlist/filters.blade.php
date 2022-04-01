@@ -17,10 +17,10 @@
 
 <h2>Filter</h2>
 @foreach ($specification as $k=>$items)
-<button class="accordion filter-accordion">
+<button class="accordion filter-accordion active">
     {{ $items->name }}
 </button>
-<div class="panel">
+<div class="panel" style="max-height: unset">
     @foreach ($items->specificationTypes as $item)
     <div class="accordion-body-content">
         <div class="checkbox">

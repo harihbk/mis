@@ -15,7 +15,7 @@
         <div class="col-sm-7">
             <div class="card my-3 p-3">
                 <h3 class="nav-category-title">Specification</h3>
-
+                <div>
                 <table class="table table-bordered table-striped">
                     <tbody>
                         <tr>

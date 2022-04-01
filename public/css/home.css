@@ -245,6 +245,7 @@
 }
 .slider-logo {
     width: auto;
+    max-width: 35px;
 }
 .fastiner-list p {
     margin: 0;
@@ -381,9 +382,19 @@
 }
 
 @media screen and (max-width: 768px) {
+    .quantityWidth {
+        width: 105px;
+    }
+
+    .cart-product-description {
+        font-size: .85rem;
+    }
+
     .home-paginer {
         margin-left: 0;
         margin-top: 16px;
+        height: auto;
+        padding: 10px 16px;
     }
 
     .slider-wrapper {
@@ -443,6 +454,10 @@
 
     .fastiner-wrapper {
         flex-direction: column;
+    }
+
+    .fastiner-wrapper img{
+        width: 100%;
     }
 
     .our-channel {

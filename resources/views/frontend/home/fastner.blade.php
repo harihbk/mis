@@ -10,7 +10,7 @@
                             <div class="fastiner-list">
                                 <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $product_part_number[$i]->icon }}" alt="banner">
                                 <p>BOLTS</p>
-                                <img src="./images/grip-product-logo.png" alt="logo">
+                                <img src="./images/grip-product-logo.png" alt="logo" class="slider-logo">
                             </div>
                                 @php
                                 $var = $i+1;
@@ -19,7 +19,7 @@
                         <div class="fastiner-list mt-4">
                             <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $product_part_number[$var]->icon }}" alt="banner">
                             <p>BOLTS</p>
-                            <img src="./images/grip-product-logo.png" alt="logo">
+                            <img src="./images/grip-product-logo.png" alt="logo" class="slider-logo">
                         </div>
                     @endif
                             </div>

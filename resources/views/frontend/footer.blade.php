@@ -26,13 +26,14 @@
             <div class="col-md-3">
                 <h2>About Best Inidakart</h2>
                 <div class="footer-link-list">
-                    <a href="#">Company Profile</a>
-                    <a href="#">Code of Conduct</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Use</a>
-                    <a href="#">Eco-Friendly</a>
+                    <a href="https://bestindiakart.com/pages/about-us.php">About us</a>
+                    <a href="https://bestindiakart.com/pages/shipping-policy.php">Shipping Policy</a>
+                    <a href="https://bestindiakart.com/pages/refunds-and-cancellations-policy.php">Refunds & Cancellations</a>
+
+                    <a href="https://bestindiakart.com/pages/privacy-policy.php">Privacy Policy</a>
+                    <a href="https://bestindiakart.com/pages/terms-and-conditions.php">Terms of Conditions</a>
                     <a href="#">Blogs</a>
-                    <a href="#">Contact Us</a>
+                    <a href="https://bestindiakart.com/pages/contact-us.php">Contact Us</a>
                 </div>
             </div>
         </div>
