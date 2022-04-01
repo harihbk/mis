@@ -2021,6 +2021,20 @@ pre code {
     background-color: rgba(255, 255, 255, 0.075);
 }
 
+.collapsed.leftNav:before {
+   font-family: FontAwesome;
+   content: "\f067";
+   display: inline-block;
+   margin-right:6px;
+ }
+ .leftNav:before {
+    content: "\f068";
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-right:6px;
+ }
+
+
 @media (max-width: 575.98px) {
     .table-responsive-sm {
         display: block;
@@ -2071,8 +2085,9 @@ pre code {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
-.table-responsive > .table-bordered {
-    border: 0;
+
+.alignMiddle {
+    vertical-align: middle;
 }
 
 .form-control {

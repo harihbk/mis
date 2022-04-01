@@ -25,9 +25,6 @@
                     @include('frontend.loadcategory')
                 </ul>
                 <span class="ajax-load"></span>
-                <div class="d-grid">
-                    <button type="button" class="btn btn-primary more_product">More Products</button>
-                </div>
             </div>
         </div>
         <div class="col-md-9">
@@ -112,7 +109,7 @@
             </div>
         </div>
     </div>
-    @include('frontend.home.our_channel')
+    {{-- @include('frontend.home.our_channel') --}}
 
     @include('frontend.home.fastner')
 

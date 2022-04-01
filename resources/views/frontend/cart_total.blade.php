@@ -1,10 +1,10 @@
-<div class="col-md-4">
+<div class="col-md-4 mt-3 mt-md-0">
     <div class="cart-shopping-total">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col col-md-6">
                 <h6 class="cart-subtotal-name">Subtotal</h6>
             </div>
-            <div class="col-md-6">
+            <div class="col col-md-6">
                 <h6 class="cart-subtotal-price">
                     Rs.
                     <span class="cart-grand-price-viewajax">{{ number_format($total, 2) }}</span>
@@ -19,10 +19,10 @@
         $discount = $total * (1 - $settings->discount / 100);
         @endphp
         <div class="row">
-            <div class="col-md-6">
+            <div class="col col-md-6">
                 <h6 class="cart-subtotal-name">Discount({{ $settings->discount }})%</h6>
             </div>
-            <div class="col-md-6">
+            <div class="col col-md-6">
                 <h6 class="cart-subtotal-price">
                     Rs.
                     <span class="cart-grand-price-viewajax">{{ $total * (1 - $settings->discount / 100 )}}</span>
@@ -40,10 +40,10 @@
         $igst = ($total * $settings->igst) / 100 ;
         @endphp
         <div class="row">
-            <div class="col-md-6">
+            <div class="col col-md-6">
                 <h6 class="cart-subtotal-name">IGST({{ $settings->igst }})%</h6>
             </div>
-            <div class="col-md-6">
+            <div class="col col-md-6">
                 <h6 class="cart-subtotal-price">
                     Rs.
                     <span class="cart-grand-price-viewajax">{{ ($total * $settings->igst) / 100}}</span>
@@ -61,10 +61,10 @@
         $cgst = ($total * $settings->cgst) / 100 ;
         @endphp
         <div class="row">
-            <div class="col-md-6">
+            <div class="col col-md-6">
                 <h6 class="cart-subtotal-name">CGST({{ $settings->cgst }})%</h6>
             </div>
-            <div class="col-md-6">
+            <div class="col col-md-6">
                 <h6 class="cart-subtotal-price">
                     Rs.
                     <span class="cart-grand-price-viewajax">{{ ($total * $settings->cgst) / 100}}</span>
@@ -83,10 +83,10 @@
             @php
             $total = $discount + $igst + $cgst ;
             @endphp
-            <div class="col-md-6">
-                <h6 class="cart-grand-name">Grand Total</h6>
+            <div class="col col-md-6">
+                <h6 class="cart-grand-name text-bold"><strong>Grand Total</strong></h6>
             </div>
-            <div class="col-md-6">
+            <div class="col col-md-6">
                 <h6 class="cart-grand-price">
                     Rs.
                     <span class="cart-grand-price-viewajax">{{ number_format($total, 2) }}</span>

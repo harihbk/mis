@@ -1,6 +1,6 @@
 @foreach($parent_categorys as $k=>$cat)
 <li class="list-group-item">
-    <span class="nav-link collapsed" href="#" data-toggle="collapse" aria-expanded="false" aria-controls="first"
+    <span class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" aria-controls="first"
         data-target="#first{{$k}}"><strong>{{ $cat->name }}</strong></span>
     <div class="collapse" id="first{{$k}}">
         <ul class="nav flex-column ml-3" style="margin-left: 70px;">

@@ -54,11 +54,10 @@
                                                     width="70px" alt="">
                                             </a>
                                         </td>
-s
                                         <td class="cart-product-name-info">
-                                            <h4 class='cart-product-description'>
+                                            <strong class='cart-product-description'>
                                                 <a href="javascript:void(0)">{{ $data->name ?? '' }}</a>
-                                            </h4>
+                                            </strong>
                                         </td>
 
                                         <td>
@@ -73,7 +72,7 @@ s
 
                                         <td class="cart-product-quantity" width="130px">
 
-                                            <div class="input-group quantity">
+                                            <div class="input-group quantity quantityWidth">
                                                 <div class="input-group-prepend decrement-btn changeQuantity"
                                                     style="cursor: pointer">
                                                     <span class="input-group-text">-</span>
@@ -104,8 +103,8 @@ s
 
                                         </td>
                                         <td style="font-size: 20px;">
-                                            <button type="button" class="delete_cart_data">
-                                                <li class="fa fa-trash-o"></li> Delete
+                                            <button type="button" class="btn btn-danger delete_cart_data">
+                                                <li class="fa fa-trash-o mr-1"></li> Delete
                                             </button>
                                         </td>
                                         @if (isset($data->associatedModel->weight->name))
