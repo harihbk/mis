@@ -68,7 +68,7 @@ class ProductController extends AppBaseController
         $input['created_by'] = Auth::user()->id;
         if($request->hasFile('image')) {
             $image = time().'_'.$request->image->getClientOriginalName();
-            $request->image->move(public_path('uploads'), $image);
+            $request->image->move(base_path('uploads'), $image);
             $input['image'] = $image;
             }
 
@@ -152,7 +152,7 @@ class ProductController extends AppBaseController
 
         if($request->hasFile('image')) {
             $icon = time().'_'.$request->image->getClientOriginalName();
-            $request->image->move(public_path('uploads'), $icon);
+            $request->image->move(base_path('uploads'), $icon);
             } else {
            // $icon = "";
             }

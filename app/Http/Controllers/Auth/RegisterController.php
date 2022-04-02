@@ -137,4 +137,9 @@ class RegisterController extends Controller
         }
 
     }
+
+    protected function registered( Request $request, $user )
+{
+    Auth::logout(); // don't forget to import the facade at the top of the class use Auth;
+}
 }

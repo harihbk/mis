@@ -1,0 +1,58 @@
+html,
+body {
+  background-image: url("../images/login-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.login-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  color: #ffffff;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-logo {
+  width: 237px;
+  margin-right: 85px;
+}
+
+.login-logo img {
+  width: 100%;
+}
+
+.login-title {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.need-help {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.input-group-text {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.btn-login {
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  background: #ee4b31;
+}
+
+
+
+
+
+
+

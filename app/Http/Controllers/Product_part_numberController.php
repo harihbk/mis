@@ -55,6 +55,7 @@ class Product_part_numberController extends AppBaseController
      */
     public function create()
     {
+
         $product = Product::all();
         $dynamicfield = [];
         $specification = Specification::all();
@@ -73,11 +74,12 @@ class Product_part_numberController extends AppBaseController
     public function store(CreateProduct_part_numberRequest $request)
     {
 
+
         $input = $request->except(['specification_id','icon','addmore']);
 
         if($request->hasFile('icon')) {
             $icon = time().'_'.$request->icon->getClientOriginalName();
-            $request->icon->move(public_path('uploads'), $icon);
+            $request->icon->move(base_path('uploads'), $icon);
             $input['icon'] = $icon;
             }
 
@@ -201,6 +203,8 @@ class Product_part_numberController extends AppBaseController
      */
     public function update($id, UpdateProduct_part_numberRequest $request)
     {
+
+
         $productPartNumber = $this->productPartNumberRepository->find($id);
 
         if (empty($productPartNumber)) {
@@ -238,7 +242,7 @@ $productPartNumber = $this->productPartNumberRepository->update($input, $id);
 
         if($request->hasFile('icon')) {
             $icon = time().'_'.$request->icon->getClientOriginalName();
-            $request->icon->move(public_path('uploads'), $icon);
+            $request->icon->move(base_path('uploads'), $icon);
 
             Product_part_number::where('id', $id)->update(array('icon' => $icon));
 
@@ -325,7 +329,7 @@ $productPartNumber = $this->productPartNumberRepository->update($input, $id);
         $routeName = $request->prevurl;
         $n_id      = $request->n_id;
 
-        $filterData = Product_part_number::where('part_number','LIKE','%'.$search_partno.'%')
+        $filterData = Product_part_number::where('part_number','LIKE','%'.$search_partno.'%')->where('display_status',1)
         ->first();
          if($filterData == null){
             Session::flash('partno','Part number Doest not exist, search another product');

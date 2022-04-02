@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{ URL::to('/') }}/owl-slider/owl.carousel.min.css">
     <link rel="stylesheet" href="{{ URL::to('/') }}/owl-slider/owl.theme.default.min.css">
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('../resources/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('/resources/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/change-password.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/forgot-password.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/profile.css') }}">

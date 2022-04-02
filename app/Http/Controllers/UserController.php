@@ -90,13 +90,13 @@ class UserController extends Controller
 
     public function viewprofile(Request $request){
         $user = Auth::user();
-       
+
         return view('frontend.viewprofile',compact('user'));
     }
 
     public function editprofile(){
         $user = Auth::user();
-       
+
         return view('frontend.editprofile',compact('user'));
     }
 
@@ -104,7 +104,7 @@ class UserController extends Controller
 
         $user = Auth::user();
         Profilechanges::create($request->all());
-        Session::flash('message', 'Your Profile submitted,please wait Admin will change your profile'); 
+        Session::flash('message', 'Your Profile submitted,please wait Admin will change your profile');
 
         return view('frontend.editprofile',compact('user'));
     }
@@ -118,18 +118,18 @@ class UserController extends Controller
     public function profileupdate(Request $request){
         $id = $request->id;
         $profile = Profilechanges::find($id);
-       
+
         return view('admin.listprofileview',compact('profile'));
-      
+
     }
 
     public function updateprofilebyid(Request $request){
-       
+
        $data = $request->only('name','email','mobileno','userCompany','userCompanyGST','newsletter');
-       
+
         User::where('id',$request->only('user_id'))->update($data);
         Profilechanges::where('id',$request->only('id'))->update(['status'=>1]);
-        Session::flash('message', 'Record Updated'); 
+        Session::flash('message', 'Record Updated');
 
 
        return $this->reqprofile();
@@ -157,6 +157,7 @@ class UserController extends Controller
       }
 
       public function dashboard(){
+
         return view('dashboard');
       }
 

@@ -283,12 +283,90 @@
 </div>
 
 
+<div class="form-group col-sm-6">
+    {!! Form::label('Display Status', 'Display Status:') !!}
+    {{ Form::hidden('display_status', 0) }}
 
 
+    @if (isset($productPartNumber) && $productPartNumber['display_status'] == 1)
+    {{ Form::checkbox('display_status',1,true, array('id'=>'display_status')) }}
+
+    @else
+    {{ Form::checkbox('display_status',1,false, array('id'=>'display_status')) }}
+
+    @endif
+</div>
+
+
+
+<div class="form-group col-sm-6">
+    {!! Form::label('Write Notes', 'Write Notes:') !!}
+
+    <textarea class="ckeditor form-control" name="writenotes">{{$productPartNumber['writenotes'] }}</textarea>
+</div>
+
+
+
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
+</script>
 
 
 <style>
     .specul{
         list-style-type : none;
     }
-</style>
+
+    .material-switch > input[type="checkbox"] {
+      display: none;
+    }
+
+    .material-switch > label {
+      cursor: pointer;
+      height: 0px;
+      position: relative;
+      top: 2px;
+      width: 40px;
+    }
+
+    .material-switch > label::before {
+      background: rgb(0, 0, 0);
+      box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      content: '';
+      height: 16px;
+      margin-top: -8px;
+      position: absolute;
+      opacity: 0.3;
+      transition: all 0.4s ease-in-out;
+      width: 40px;
+    }
+
+    .material-switch > label::after {
+      background: rgb(255, 255, 255);
+      border-radius: 16px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+      content: '';
+      height: 24px;
+      left: -4px;
+      margin-top: -8px;
+      position: absolute;
+      top: -4px;
+      transition: all 0.3s ease-in-out;
+      width: 24px;
+    }
+
+    .material-switch > input[type="checkbox"]:checked + label::before {
+      background: inherit;
+      opacity: 0.5;
+    }
+
+    .material-switch > input[type="checkbox"]:checked + label::after {
+      background: inherit;
+      left: 20px;
+    }
+
+    </style>

@@ -98,31 +98,46 @@
             </div>
         </div>
     </div>
+</div>
+    <div class="row">
 
-    <h4>Releated Product</h4>
+    <div class="col-sm-6">
+        <label for="Product Descriptio">Product Description</label>
+        <div>
+            {!! $part_number->writenotes ?? '' !!}
+        </div>
+
+    </div>
+    </div>
 
 
-<div class="product-wrapper">
-    <h2 class="text-center">Deal Of the Day</h2>
-    <div class="row row-cols-md-5 row-cols-sm-1">
+    <div class="row">
+        <h4>Releated Product</h4>
 
-        @foreach ($related_data as $item)
-        <div class="col">
-            <div class="product-list">
-               <a href="{{ route('website.partnumberpage',$item->id) }}" class="href">
-                <img class="img-fluid" src="{{url('/uploads/'.$item->icon)}}" alt="banner">
-                <div class="title">{{$item->part_number}}</div>
-                   </a>
+
+        <div class="product-wrapper">
+            <h2 class="text-center">Deal Of the Day</h2>
+            <div class="row row-cols-md-5 row-cols-sm-1">
+
+                @foreach ($related_data as $item)
+                <div class="col">
+                    <div class="product-list">
+                       <a href="{{ route('website.partnumberpage',$item->id) }}" class="href">
+                        <img class="img-fluid" src="{{url('/uploads/'.$item->icon)}}" alt="banner">
+                        <div class="title">{{$item->part_number}}</div>
+                           </a>
+
+                    </div>
+                </div>
+                @endforeach
 
             </div>
         </div>
-        @endforeach
-
     </div>
-</div>
+
     {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $part_number->id) }}"
             class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p> --}}
-</div>
+
 
 <script>
     $(document).ready(function(){

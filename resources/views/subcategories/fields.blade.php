@@ -6,8 +6,8 @@
 
 <!-- Category Id Field -->
 <div class="form-group col-sm-6">
-   
-   
+
+
     <div class="form-group">
     {!! Form::label('category_id', 'Category:') !!}
   <select class="form-control" id="category_id" name="category_id">
@@ -16,5 +16,11 @@
     @endforeach
   </select>
 </div>
-   
+
+</div>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('icon', 'Icon:') !!}
+    {!! Form::file('icon') !!}
+
 </div>
