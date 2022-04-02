@@ -99,7 +99,10 @@ class Product_part_number extends Model
           'unit_id',
           'deal_of_the_day',
           'display_status',
-          'writenotes'
+          'writenotes',
+          'meta_title',
+          'meta_description',
+          'meta_key'
 
     ];
 

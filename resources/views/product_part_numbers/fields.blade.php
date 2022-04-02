@@ -305,6 +305,24 @@
     <textarea class="ckeditor form-control" name="writenotes">{{$productPartNumber['writenotes'] }}</textarea>
 </div>
 
+<div class="form-group col-sm-6">
+    {!! Form::label('Meta-title', 'Meta-title:') !!}
+
+    {!! Form::text('meta_title', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('Meta-key', 'Meta-key:') !!}
+
+    {!! Form::text('meta_key', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('Meta description', 'meta description:') !!}
+
+    {!! Form::text('meta_description', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
 
 
 <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>

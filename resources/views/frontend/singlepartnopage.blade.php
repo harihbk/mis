@@ -1,4 +1,4 @@
-@extends('frontend.theme')
+@extends('frontend.partnoheader')
 @section('content')
 {{ Breadcrumbs::render('partnumber',$part_number) }}
 
