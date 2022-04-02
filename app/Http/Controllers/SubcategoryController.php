@@ -63,7 +63,15 @@ class SubcategoryController extends AppBaseController
      */
     public function store(CreateSubcategoryRequest $request)
     {
-        $input = $request->all();
+       // $input = $request->all();
+
+        $input = $request->except('icon');
+
+        if($request->hasFile('icon')) {
+            $icon = time().'_'.$request->icon->getClientOriginalName();
+            $request->icon->move(base_path('uploads'), $icon);
+            $input['icon'] = $icon;
+            }
 
         $subcategory = $this->subcategoryRepository->create($input);
 
@@ -129,6 +137,9 @@ class SubcategoryController extends AppBaseController
     {
         $subcategory = $this->subcategoryRepository->find($id);
 
+
+
+
         if (empty($subcategory)) {
             Flash::error('Subcategory not found');
 
@@ -136,6 +147,14 @@ class SubcategoryController extends AppBaseController
         }
 
         $subcategory = $this->subcategoryRepository->update($request->all(), $id);
+
+        if($request->hasFile('icon')) {
+
+            $icon = time().'_'.$request->icon->getClientOriginalName();
+            $request->icon->move(base_path('uploads'), $icon);
+            $subcategory->update(['icon'=>$icon]);
+
+            }
 
         Flash::success('Subcategory updated successfully.');
 

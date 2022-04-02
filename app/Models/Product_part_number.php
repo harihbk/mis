@@ -97,7 +97,9 @@ class Product_part_number extends Model
         'step',
         'product_weight',
           'unit_id',
-          'deal_of_the_day'
+          'deal_of_the_day',
+          'display_status',
+          'writenotes'
 
     ];
 
@@ -162,12 +164,15 @@ class Product_part_number extends Model
         'sale_discount' => 'nullable|string|max:255',
         'cad' => 'nullable|string|max:255',
         'specification_id' =>'required',
+        'display_status' => 'nullable',
        // 'modified_by' => 'nullable|string|max:255',
         'product_id' => 'required',
         'deleted_at' => 'nullable',
         'created_at' => 'nullable',
         'updated_at' => 'nullable'
     ];
+
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

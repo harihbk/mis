@@ -22,7 +22,7 @@ class Subcategory extends Model
     use HasFactory;
 
     public $table = 'subcategory';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -33,7 +33,8 @@ class Subcategory extends Model
 
     public $fillable = [
         'name',
-        'category_id'
+        'category_id',
+        'icon'
     ];
 
     /**
@@ -64,12 +65,12 @@ class Subcategory extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
     public function category()
-    {  
+    {
         return $this->belongsTo(\App\Models\Categorys::class, 'category_id');
     }
 
     public function parentcategory()
-    {  
+    {
         return $this->hasMany(\App\Models\Parentcategory::class, 'subcategory_id');
     }
 }

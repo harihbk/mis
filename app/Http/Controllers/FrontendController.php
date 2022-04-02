@@ -42,10 +42,12 @@ class FrontendController extends Controller
     ->where('category.id','=',1)
     ->get();
 
-    $deal_of_the_day = Product_part_number::where('deal_of_the_day',1)->get();
+    $deal_of_the_day = Product_part_number::where('deal_of_the_day',1)->where('display_status',1)->get();
+    $subcategory = Subcategory::where('category_id',1)->limit(20)->get();
 
 
-       return view('frontend.index')->with(compact('category','product_part_number','deal_of_the_day'));
+
+       return view('frontend.index')->with(compact('category','product_part_number','deal_of_the_day','subcategory'));
     }
 
     public function product($childcategory_id){
@@ -54,7 +56,7 @@ class FrontendController extends Controller
     }
 
     public function part($product_id){
-        $part_number = Product_part_number::where('product_id',$product_id)->get();
+        $part_number = Product_part_number::where('product_id',$product_id)->where('display_status',1)->get();
 
 
 
@@ -85,7 +87,7 @@ $specification = Product_part_number::with(['specification'=>function($query){
 
 
     public function productpartnumber($product_id){
-        $part_number = Product_part_number::where('product_id',$product_id)->get();
+        $part_number = Product_part_number::where('product_id',$product_id)->where('display_status',1)->get();
 
         $specification = Product_part_number::with(['specification'=>function($query){
             $query->groupBy('specification_id');
@@ -106,13 +108,13 @@ $specification = Product_part_number::with(['specification'=>function($query){
         $childids =  $child->pluck('id')->toArray();
         $products = Product::wherein('childcategory_id',$childids)->get();
         $product_ids =  $products->pluck('id')->toArray();
-        $part_number = Product_part_number::whereIn('product_id',$product_ids)->get();
+        $part_number = Product_part_number::whereIn('product_id',$product_ids)->where('display_status',1)->get();
 
 
 
         if ($request->ajax()) {
             if($request->get('prod_id')){
-                $part_number = Product_part_number::where('product_id',$request->get('prod_id'))->get();
+                $part_number = Product_part_number::where('product_id',$request->get('prod_id'))->where('display_status',1)->get();
             }
 
             if($request->get('spec_type')){
@@ -122,7 +124,7 @@ $specification = Product_part_number::with(['specification'=>function($query){
 
                 $part_number = Product_part_number::query()->whereHas('filterspec_type',function($q) use($spec_type){
                     $q->whereIn('specification_type_id',$spec_type);
-                })->whereIn('product_id',$product_ids)->get();
+                })->whereIn('product_id',$product_ids)->where('display_status',1)->get();
             }
 
 
@@ -164,14 +166,14 @@ $specification = Product_part_number::with(['specification'=>function($query){
 
        $products = Product::where('childcategory_id','=',$childategory_id)->get();
        $product_ids =  $products->pluck('id')->toArray();
-       $part_number = Product_part_number::whereIn('product_id',$product_ids)->get();
+       $part_number = Product_part_number::whereIn('product_id',$product_ids)->where('display_status',1)->get();
 
 
 
 
        if ($request->ajax()) {
         if($request->get('prod_id')){
-            $part_number = Product_part_number::where('product_id',$request->get('prod_id'))->get();
+            $part_number = Product_part_number::where('product_id',$request->get('prod_id'))->where('display_status',1)->get();
         }
 
         if($request->get('spec_type')){
@@ -219,7 +221,7 @@ $specification = Product_part_number::with(['specification'=>function($query){
     public function partnumberpage($partno_id){
 
 
-        $part_number = Product_part_number::where('id',$partno_id)->first();
+        $part_number = Product_part_number::where('id',$partno_id)->where('display_status',1)->first();
 
 
 
@@ -236,7 +238,7 @@ $specification = Product_part_number::with(['specification'=>function($query){
     {
 
         $data = Product_part_number::select(['id', 'part_number as name'])
-                ->where("part_number","LIKE","%{$request->query('query')}%")
+                ->where("part_number","LIKE","%{$request->query('query')}%")->where('display_status',1)
                 ->get();
 
             //    $filterData = Product_part_number::where('part_number','LIKE','%'.$search_partno.'%')

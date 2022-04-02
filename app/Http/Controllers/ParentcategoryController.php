@@ -65,7 +65,7 @@ class ParentcategoryController extends AppBaseController
         $input = $request->except('icon');
         if($request->hasFile('icon')) {
             $icon = time().'_'.$request->icon->getClientOriginalName();
-            $request->icon->move(public_path('uploads'), $icon);
+            $request->icon->move(base_path('uploads'), $icon);
             $input['icon'] = $icon;
             }
         $parentcategory = $this->parentcategoryRepository->create($input);
@@ -154,7 +154,7 @@ class ParentcategoryController extends AppBaseController
 
         if($request->hasFile('icon')) {
             $icon = time().'_'.$request->icon->getClientOriginalName();
-            $request->icon->move(public_path('uploads'), $icon);
+            $request->icon->move(base_path('uploads'), $icon);
             $parentcategory->update(['icon'=>$icon]);
             }
         Flash::success('Parentcategory updated successfully.');

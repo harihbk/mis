@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 // });
 Auth::routes(['verify' => true]);
 
+
+
 //Auth::routes();
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -71,6 +73,7 @@ Route::group(['middleware' => ['auth','role:Admin|vendor']], function(){
 
 
     Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
+    Route::get('dashboardreport/{view}', [App\Http\Controllers\DashboardController::class,'reportdashboard'])->name('dashboardreport');
 
 
     Route::resource('categorys', App\Http\Controllers\CategorysController::class);
@@ -118,10 +121,6 @@ Route::prefix('website')->group(function () {
     Route::get('/viewprofile',[App\Http\Controllers\UserController::class, 'viewprofile'])->name('website.viewprofile');
     Route::get('/editprofile',[App\Http\Controllers\UserController::class, 'editprofile'])->name('website.editprofile');
     Route::post('/updatefrofile',[App\Http\Controllers\UserController::class, 'updatefrofile'])->name('website.updatefrofile');
-
-
-
-
 });
 
 Route::post('partno',[ App\Http\Controllers\Product_part_numberController::class,'partno'])->name('search');
@@ -211,29 +210,21 @@ Route::get('countwhistlist',[App\Http\Controllers\WishlistController::class,'cou
 
 Breadcrumbs::register('home', function ($breadcrumbs) {
     $breadcrumbs->push('Home', route('home'));
-
 });
 
 Breadcrumbs::register('subcat', function ($breadcrumbs,$subcat) {
-
-
     $breadcrumbs->parent('home');
     $breadcrumbs->push($subcat->name, route('website.parentcats',['subcat_id' => $subcat->id]));
 });
 
 Breadcrumbs::register('products', function ($breadcrumbs,$pc) {
-
-
     //this is calling below
     if(isset($pc->product) && $pc->product){
-
-
         $breadcrumbs->parent('subcat',$pc->product->childcategory->parentcategory->subcategory);
         $breadcrumbs->push($pc->product->name,  route('website.products',['childategory_id' => $pc->product->childcategory->id ]) );
     } else {
 
         if(isset($pc->parentcategory) && $pc->parentcategory){
-
             $breadcrumbs->parent('subcat',$pc->parentcategory->subcategory);
             $breadcrumbs->push($pc->name,  route('website.products',['childategory_id' => $pc->id]) );
         } else{
@@ -248,9 +239,6 @@ Breadcrumbs::register('products', function ($breadcrumbs,$pc) {
 
 
 Breadcrumbs::register('partnumber', function ($breadcrumbs,$partnumber) {
-
-
-
     $breadcrumbs->parent('products',$partnumber);
     $breadcrumbs->push($partnumber->part_number,'');
 });

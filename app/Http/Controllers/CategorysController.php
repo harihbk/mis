@@ -65,7 +65,7 @@ class CategorysController extends AppBaseController
 
         if($request->hasFile('icon')) {
             $icon = time().'_'.$request->icon->getClientOriginalName();
-            $request->icon->move(public_path('uploads'), $icon);
+            $request->icon->move(base_path('uploads'), $icon);
             $input['icon'] = $icon;
             }
 
@@ -136,7 +136,7 @@ class CategorysController extends AppBaseController
 
         // if there is image found that image will unlink.
             if(isset($categorys->icon)){
-                if(file_exists(public_path()."/uploads/$categorys->icon")){
+                if(file_exists(base_path()."/uploads/$categorys->icon")){
                   //  unlink(public_path()."/uploads/$categorys->icon");
                  }
             }
@@ -146,7 +146,7 @@ class CategorysController extends AppBaseController
         // upload image to the public directory.
         if($request->hasFile('icon')) {
             $icon = time().'_'.$request->icon->getClientOriginalName();
-            $request->icon->move(public_path('uploads'), $icon);
+            $request->icon->move(base_path('uploads'), $icon);
             $categorys->update(['icon'=>$icon]);
 
             }

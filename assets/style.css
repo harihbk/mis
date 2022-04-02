@@ -1,0 +1,359 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+
+@font-face {
+    font-family: "poppins";
+    src: url("./fonts/poppins-thin-webfont.woff2") format("woff2"),
+        url("./fonts/poppins-thin-webfont.woff") format("woff");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "poppins";
+    src: url("./fonts/poppins-light-webfont.woff2") format("woff2"),
+        url("./fonts/poppins-light-webfont.woff") format("woff");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "poppins";
+    src: url("./fonts/poppins-regular-webfont.woff2") format("woff2"),
+        url("./fonts/poppins-regular-webfont.woff") format("woff");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "poppins";
+    src: url("./fonts/poppins-medium-webfont.woff2") format("woff2"),
+        url("./fonts/poppins-medium-webfont.woff") format("woff");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "poppins";
+    src: url("./fonts/poppins-semibold-webfont.woff2") format("woff2"),
+        url("./fonts/poppins-semibold-webfont.woff") format("woff");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "poppins";
+    src: url("./fonts/poppins-bold-webfont.woff2") format("woff2"),
+        url("./fonts/poppins-bold-webfont.woff") format("woff");
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: "poppinsextrabold";
+    src: url("./fonts/poppins-extrabold-webfont.woff2") format("woff2"),
+        url("./fonts/poppins-extrabold-webfont.woff") format("woff");
+    font-weight: 900;
+}
+
+@import url("./index.css");
+
+body {
+    font-weight: normal;
+    font-size: 14px !important;
+    font-family: "poppins" !important;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 1.75rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn-shadow {
+    box-shadow: #00000030 0 2px 5px;
+}
+
+.btn {
+    font-size: 14px !important;
+    font-family: "poppins" !important;
+}
+
+.removeWhiteSpace {
+    white-space: unset !important;
+}
+
+.alert-success {
+    color: #0f5132;
+    border-color: #badbcc;
+    background-color: #c9fbd2;
+}
+
+.btn-success {
+    background-color: #81b53f !important;
+}
+
+.padL16i {
+    padding-left: 16px !important;
+}
+
+.mrgB0 {
+    margin-bottom: 0;
+}
+
+.form-check-label {
+    cursor: pointer;
+}
+
+.thanksTitle {
+    font-size: 3rem;
+    font-weight: 300;
+    color: #464646;
+}
+
+.input-group-text {
+    border: none;
+    color: #ffffff;
+    background: #0443c0;
+}
+
+.input-group {
+    box-shadow: rgb(0 108 110 / 20%) 0 0 4px;
+}
+
+.form-select,
+.input-group-text,
+.form-control {
+    font-size: 0.875rem;
+}
+
+.form-select {
+    border: none;
+}
+
+.form-sub-title {
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.hei100Per {
+    height: 100%;
+}
+
+.btn-primary {
+    background-color: #0343bf;
+    border-color: #0343bf;
+}
+
+.form-control::-webkit-input-placeholder {
+    color: #939598;
+}
+.form-control::-moz-placeholder {
+    color: #939598;
+}
+.form-control::placeholder {
+    color: #939598;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25);
+}
+
+.btn-check:focus + .btn,
+.btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25);
+}
+
+.addShadow {
+    box-shadow: 0 3px 9px 0 rgb(169 184 200 / 15%);
+}
+
+.header-logo {
+    width: 150px;
+}
+
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+    background: #ffffff;
+}
+
+.head-search-box {
+    width: 370px !important;
+}
+
+.header-phone-wrapper {
+    padding-right: 16px;
+}
+
+.head-phone-title {
+    font-size: 12px;
+}
+
+.head-phone-number {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: arial;
+}
+
+.btn-head-icon i {
+    color: #2f3945;
+    font-size: 1.75rem;
+}
+
+.breadcrumb-wrapper {
+    color: #ffffff;
+    padding: 16px 0;
+    text-align: center;
+    font-size: 0.875rem;
+    background: #0343bf;
+}
+
+.breadcrumb-wrapper .breadcrumb {
+    margin-bottom: 0;
+}
+
+.breadcrumb-item,
+.breadcrumb-item a {
+    color: #ffffff !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: #ffffff;
+}
+
+/** Login **/
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 163px);
+}
+.login-card {
+    width: 570px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px 6px;
+}
+
+.login-title {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.login-input-wrapper {
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: #0343c120 0 0 16px;
+}
+
+.login-input-icon {
+    display: flex;
+    color: #95969a;
+    font-size: 25px;
+    align-item: center;
+}
+
+.login-input {
+    border: none;
+    padding: 16px;
+}
+
+.login-input-icon-wrapper {
+    display: flex;
+    text-align: center;
+    position: relative;
+    align-items: center;
+    width: 100px !important;
+    justify-content: center;
+}
+
+.login-input-icon-wrapper:before {
+    top: 0;
+    left: 0;
+    width: 4px;
+    content: "";
+    height: 100%;
+    position: absolute;
+    background: #0343bf;
+}
+.login-input-icon-wrapper:after {
+    top: 50%;
+    right: 2px;
+    width: 2px;
+    content: "";
+    height: 20px;
+    position: absolute;
+    background: #a4bacf;
+    transform: translateY(-50%);
+}
+.login-forgot {
+    color: #666666;
+    font-weight: 600;
+}
+.btn-login {
+    font-size: 14px;
+    font-weight: 500;
+}
+.btn-login span {
+    margin-right: 6px;
+}
+/** Footer **/
+.footer {
+    padding: 32px 0;
+    color: #ffffff;
+    font-size: 0.75rem;
+    background: #0443c0;
+}
+.footer h2 {
+    font-size: 1.255rem;
+}
+.footer-link-list {
+    width: 100%;
+    font-size: 0.875rem;
+}
+.footer-link-list a {
+    padding: 6px 0;
+    display: block;
+    font-weight: 400;
+    color: #ffffff;
+    text-decoration: none;
+}
+.link-text-white {
+    color: #ffffff;
+    text-decoration: none;
+}
+.footer-cards-wrapper {
+    margin-top: 8px;
+    padding: 6px 8px;
+    display: inline-block;
+    background: #ffffff;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+.side-nav li {
+    margin-bottom: 1px;
+}
+.side-nav li:last-child {
+    margin-bottom: none;
+}
+.side-nav li a {
+    padding: 12px;
+    display: block;
+    color: #ffffff;
+    background: #1450bf;
+}
+.side-nav .sub-nav {
+    margin: 0;
+    padding: 12px 0;
+    list-style: none;
+    background: #e6e6e6;
+}
+.side-nav .sub-nav li a {
+    color: #000000;
+    padding: 8px 12px;
+    background: transparent;
+}
+.side-nav .sub-nav li a:hover {
+    color: #1450bf;
+}
