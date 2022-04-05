@@ -80,12 +80,11 @@
             <div class="product_data mb-4">
                 <input type="hidden" class="product_id" value="{{ $part_number->id }}">
                 <div style="display: inline-block">
-                    <div class="input-group" style="width: 140px;">
+                    <div class="input-group quantityWrapper">
                         <button type="button" id="sub" class="sub btn btn-primary no-border-top-right">-</button>
                         <input type="number"
-                            style="width: 65px; height: 35px; border-left: none; border-right: none; border-radius: 0; text-align: center; overflow: hidden; display: block; padding-left: 20px;"
                             id="1" value="1" min="1" max="{{ $part_number->quantity}}"
-                            class="qty-input form-control prod_id_{{ $part_number->id }}" />
+                            class="qty-input quantityInput form-control prod_id_{{ $part_number->id }}" />
                         <button type="button" id="add" class="add btn btn-primary no-border-top-left">+</button>
                     </div>
                 </div>
@@ -98,47 +97,37 @@
             </div>
         </div>
     </div>
-</div>
-    <div class="row">
-
-    <div class="col-sm-6">
-        <label for="Product Descriptio">Product Description</label>
-        <div>
-            {!! $part_number->writenotes ?? '' !!}
-        </div>
-
-    </div>
-    </div>
-
-
-    <div class="row">
-        <h4>Releated Product</h4>
-
-
-        <div class="product-wrapper">
-            <h2 class="text-center">Deal Of the Day</h2>
-            <div class="row row-cols-md-5 row-cols-sm-1">
-
-                @foreach ($related_data as $item)
-                <div class="col">
-                    <div class="product-list">
-                       <a href="{{ route('website.partnumberpage',$item->id) }}" class="href">
-                        <img class="img-fluid" src="{{url('/uploads/'.$item->icon)}}" alt="banner">
-                        <div class="title">{{$item->part_number}}</div>
-                           </a>
-
-                    </div>
-                </div>
-                @endforeach
-
+        <div class="col-sm-12">
+            <label for="Product Descriptio">Product Description</label>
+            <div>
+                {!! $part_number->writenotes ?? '' !!}
             </div>
         </div>
-    </div>
+        <div class="col-sm-12">
+            <h4>Releated Product</h4>
+            <div class="product-wrapper">
+                <h2 class="text-center">Deal Of the Day</h2>
+                <div class="row row-cols-md-5 row-cols-sm-1">
 
+                    @foreach ($related_data as $item)
+                    <div class="col">
+                        <div class="product-list">
+                        <a href="{{ route('website.partnumberpage',$item->id) }}" class="href">
+                            <img class="img-fluid" src="{{url('/uploads/'.$item->icon)}}" alt="banner">
+                            <div class="title">{{$item->part_number}}</div>
+                            </a>
+
+                        </div>
+                    </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
     {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $part_number->id) }}"
             class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p> --}}
-
-
+</div>
+</div>
 <script>
     $(document).ready(function(){
     $('.add-to-wishlist-btn').click(function(e){

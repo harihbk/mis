@@ -1,10 +1,10 @@
 <div class="card">
-    <div class="card-body">
+    <div class="card-body" style="overflow: auto; width: 100%;">
         <table class="table data-table">
             <thead>
                 <tr>
                     <th></th>
-                    <th>Part NUmber</th>
+                    <th>Part Number</th>
                     <th>Nominal Thread M</th>
                     <th>Nominal Thread Inch</th>
                     <th>Product Length</th>
@@ -15,8 +15,10 @@
                     <th width="100px">Action</th> --}}
                 </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <div class="table-responsive">
+                <tbody>
+                </tbody>
+            </div>
         </table>
     </div>
 </div>
