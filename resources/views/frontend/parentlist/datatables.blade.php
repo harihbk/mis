@@ -1,5 +1,11 @@
+<style>
+    .scrollTable .col-sm-12 {
+        overflow: auto;
+    }
+    </style>
 <div class="card">
-    <div class="card-body" style="overflow: auto; width: 100%;">
+    <div class="card-body">
+        <div class="scrollTable">
         <table class="table data-table">
             <thead>
                 <tr>
@@ -15,10 +21,9 @@
                     <th width="100px">Action</th> --}}
                 </tr>
             </thead>
-            <div class="table-responsive">
-                <tbody>
-                </tbody>
-            </div>
+            <tbody>
+            </tbody>
         </table>
+        </div>
     </div>
 </div>

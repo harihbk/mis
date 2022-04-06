@@ -30,9 +30,9 @@
                     </div>
                     <div class="header-phone-wrapper">
                         <div class="head-phone-title">Call Us Now:</div>
-                        <div class="head-phone-number">
-                            0(800) 123-456
-                        </div>
+                        <a href="tel:+916383735782" class="head-phone-number">
+                            +91 63837 35782
+                        </a>
                     </div>
                 </div>
             </li>

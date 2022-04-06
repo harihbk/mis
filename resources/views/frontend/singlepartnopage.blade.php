@@ -8,14 +8,18 @@
 
         <div class="col-sm-5">
             <div class="card my-3 p-3">
-                <img src="{{ url('/uploads/'.$part_number->icon) }}" alt="product" width="500px">
+                @if (file_exists(public_path().'/uploads/'.$part_number->icon))
+                <img src="{{ url('/uploads/'.$part_number->icon) }}" class="product" alt="product">
+                @else
+                <img src="{{ url('/images/no-image.jpeg') }}" class="product" alt="product">
+                @endif
             </div>
 
         </div>
         <div class="col-sm-7">
             <div class="card my-3 p-3">
                 <h3 class="nav-category-title">Specification</h3>
-                <div>
+                <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <tbody>
                         <tr>
