@@ -28,7 +28,7 @@
                                 <?php
                                 if(isset($Rivertnut[$i+1])){
                                     ?>
-                                     <a href="#">
+                                     <a href="{{ route('revert',str_replace(' ', '_', $Rivertnut[$i+1]->name)) }}">
                                      <div class="fastiner-list mt-4">
                                         <img class="img-fluid" src="{{url('/uploads/')}}/{{ $Rivertnut[$i+1]->icon }}" alt="banner"  style="width:40%">
                                         <p>{{ (isset($Rivertnut[$i+1]->name) ? $Rivertnut[$i+1]->name : '') }} </p>
@@ -132,12 +132,14 @@
     <div class="row row-cols-md-5 row-cols-sm-1">
 
         @foreach ($deal_of_the_day as $item)
+        <a href="{{ route('website.partnumberpage',$item->id) }}">
         <div class="col">
             <div class="product-list">
                 <img class="img-fluid" src="{{url('/uploads/'.$item->icon)}}" alt="banner">
                 <div class="title">{{$item->part_number}}</div>
             </div>
         </div>
+        </a>
         @endforeach
 
     </div>

@@ -32,6 +32,42 @@
 
     <div class="fastiner-list-wrapper">
         <div class="fastiner-slider owl-carousel">
+
+{{--
+                <?php
+                        for( $i=0 ; $i < count($subcategory);$i+=2 ){
+
+                                ?>
+                                <a href="{{ route('website.parentcats',$subcategory[$i]->id) }}">
+                                    <div class="fastiner-list">
+                                        <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $subcategory[$i]->icon }}"  style="width:40%" alt="banner" >
+                                        <p>{{ (isset($subcategory[$i]->name) ? $subcategory[$i]->name : '') }} </p>
+                                        <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
+                                    </div>
+                                </a>
+
+                                <?php
+                                if(isset($subcategory[$i+1])){
+                                    ?>
+                                     <a href="{{ route('website.parentcats',$subcategory[$i+1]->id) }}">
+                                     <div class="fastiner-list mt-4">
+                                        <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $subcategory[$i+1]->icon }}" alt="banner"  style="width:40%">
+                                        <p>{{ (isset($subcategory[$i+1]->name) ? $subcategory[$i+1]->name : '') }} </p>
+                                        <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
+                                    </div>
+                                     </a>
+                                    <?php
+                                }
+                                ?>
+
+
+                            <?php
+
+
+                    }
+                ?> --}}
+
+
            @for ($i=0 ; $i <count($subcategory) ; $i+=2)
 
                     @if (isset($subcategory[$i]->icon) && $subcategory[$i]->icon)
@@ -42,7 +78,7 @@
 
                                         <div class="fastiner-list">
                                             <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $subcategory[$i]->icon }}" alt="banner">
-                                            <p>BOLTS</p>
+                                            <p>{{ $subcategory[$i]->name }}</p>
                                             <img src="./images/grip-product-logo.png" alt="logo" class="slider-logo">
                                         </div>
 
@@ -57,7 +93,7 @@
                             href="{{ route('website.parentcats',$subcategory[$var]->id) }}">
                                 <div class="fastiner-list mt-4">
                                     <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $subcategory[$var]->icon }}" alt="banner">
-                                    <p>BOLTS</p>
+                                    <p>{{ $subcategory[$var]->name }}</p>
                                     <img src="./images/grip-product-logo.png" alt="logo" class="slider-logo">
                                 </div>
 
