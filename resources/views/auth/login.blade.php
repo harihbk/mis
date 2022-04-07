@@ -9,6 +9,7 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('/') }}images/favicon.ico">
     <link href="{{ asset('/bootstrap/bootstrap.min.css') }}" rel="stylesheet" />
+
     <link rel="stylesheet" href="{{ asset('/bootstrap/bootstrap-icons.css') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
     <script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -40,6 +41,16 @@
         document.forgetfrm.submit();
     }
     </script>
+    <style>
+        @media only screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .navbar-nav {
+                flex-direction: row !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -49,7 +60,7 @@
             <a class="navbar-brand" href="#">
                 <img class="header-logo" src="./images/logo.svg" alt="bumaas">
             </a>
-            <form class="form-group">
+            <form class="form-group d-none d-sm-block">
                 <div class="input-group">
                     <input type="text" class="form-control head-search-box"
                         placeholder="Enter Product, part Number (English Only)">
@@ -69,9 +80,9 @@
                         </div>
                         <div class="header-phone-wrapper">
                             <div class="head-phone-title">Call Us Now:</div>
-                            <div class="head-phone-number">
-                                0(800) 123-456
-                            </div>
+                            <a href="tel:+916383735782" class="head-phone-number">
+                                +91 63837 35782
+                            </a>
                         </div>
                     </div>
                 </li>
@@ -89,7 +100,7 @@
     </nav>
     <ol class="breadcrumb justify-content-center">
         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Library</li>
+        <li class="breadcrumb-item active" aria-current="page">Login</li>
     </ol>
     <form action="{{ url('authlogin') }}" id="loginfrm" name="loginfrm" method="post" target="_top">
         @csrf

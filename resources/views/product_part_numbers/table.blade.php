@@ -1,18 +1,18 @@
-<div class="table-responsive">
-    <table class="table" id="productPartNumbers-table">
-        <thead>
-            <tr>
-        <th>Part Number</th>
-        <th>Dates To Ship</th>
-        <th>Nominal Thread M</th>
-        <th>Image</th>
+<table class="table" id="productPartNumbers-table">
+    <thead>
+        <tr>
+            <th>Part Number</th>
+            <th>Dates To Ship</th>
+            <th>Nominal Thread M</th>
+            <th>Image</th>
 
-        <th>Product</th>
-        <th>Specification</th>
-                <th colspan="3">Action</th>
-            </tr>
-        </thead>
-        <tbody>
+            <th>Product</th>
+            <th>Specification</th>
+            <th colspan="3">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+            <div class="table-responsive">
         @foreach($productPartNumbers as $productPartNumber)
             <tr>
                 <td>{{ $productPartNumber->part_number ?? '' }}</td>
