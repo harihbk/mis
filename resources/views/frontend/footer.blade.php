@@ -26,14 +26,14 @@
             <div class="col-md-3">
                 <h2>About Best Inidakart</h2>
                 <div class="footer-link-list">
-                    <a href="https://bestindiakart.com/pages/about-us.php">About us</a>
-                    <a href="https://bestindiakart.com/pages/shipping-policy.php">Shipping Policy</a>
-                    <a href="https://bestindiakart.com/pages/refunds-and-cancellations-policy.php">Refunds & Cancellations</a>
+                    <a href="{{ route('aboutus')}}">About us</a>
+                    <a href="{{ route('shippingypolicy')}}">Shipping Policy</a>
+                    <a href="{{ route('refundscancellations')}}">Refunds & Cancellations</a>
 
-                    <a href="https://bestindiakart.com/pages/privacy-policy.php">Privacy Policy</a>
-                    <a href="https://bestindiakart.com/pages/terms-and-conditions.php">Terms of Conditions</a>
+                    <a href="{{ route('privacypolicy')}}">Privacy Policy</a>
+                    <a href="{{ route('termsandconditions')}}">Terms of Conditions</a>
                     <a href="#">Blogs</a>
-                    <a href="https://bestindiakart.com/pages/contact-us.php">Contact Us</a>
+                    <a href="{{ route('contactus')}}">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -220,6 +220,22 @@ jQuery.ajaxSetup({
 
 
 
+</script>
+<!-- custom pages images and tooltip -->
+<script>
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+    $(".side-nav .collapse").on("hide.bs.collapse", function() {
+        $(this).prev().find(".fa").eq(1).removeClass("fa-angle-right").addClass("fa-angle-down");
+    });
+    $('.side-nav .collapse').on("show.bs.collapse", function() {
+        $(this).prev().find(".fa").eq(1).removeClass("fa-angle-down").addClass("fa-angle-right");
+    });
+    $("#toogleEnquiry").click(function() {
+        $("#enquiryForms").toggle();
+    });
+
+})
 </script>
 </body>
 </html>
