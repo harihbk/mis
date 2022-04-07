@@ -173,3 +173,59 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('reverts.index') }}"
+       class="nav-link {{ Request::is('reverts*') ? 'active' : '' }}">
+        <p>Reverts</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('revertsnuts.index') }}"
+       class="nav-link {{ Request::is('revertsnuts*') ? 'active' : '' }}">
+        <p>Revertsnuts</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('tests.index') }}"
+       class="nav-link {{ Request::is('tests*') ? 'active' : '' }}">
+        <p>Tests</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('revertNuts.index') }}"
+       class="nav-link {{ Request::is('revertNuts*') ? 'active' : '' }}">
+        <p>Revert Nuts</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('revertnuts.index') }}"
+       class="nav-link {{ Request::is('revertnuts*') ? 'active' : '' }}">
+        <p>Revertnuts</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('revertnutdds.index') }}"
+       class="nav-link {{ Request::is('revertnutdds*') ? 'active' : '' }}">
+        <p>Revertnutdds</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('rivertnuts.index') }}"
+       class="nav-link {{ Request::is('rivertnuts*') ? 'active' : '' }}">
+        <p>Rivertnuts</p>
+    </a>
+</li>
+
+

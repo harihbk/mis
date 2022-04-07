@@ -204,6 +204,8 @@ Route::get('wishlists',[App\Http\Controllers\WishlistController::class,'wishlist
 Route::post('unwish',[App\Http\Controllers\WishlistController::class,'unwish'])->name('unwish');
 Route::get('countwhistlist',[App\Http\Controllers\WishlistController::class,'countwhistlist'])->name('countwhistlist');
 
+Route::get('revert/{product}',[App\Http\Controllers\FrontendController::class,'revertpages'] )->name('revert');
+Route::post('enquiry',[App\Http\Controllers\FrontendController::class,'enquiry'] )->name('enquiry');
 
 
 
@@ -250,3 +252,18 @@ Breadcrumbs::register('partnumber', function ($breadcrumbs,$partnumber) {
 
 
 
+
+
+// Route::resource('reverts', App\Http\Controllers\RevertsController::class);
+
+// Route::resource('revertsnuts', App\Http\Controllers\RevertsnutController::class);
+
+
+// Route::resource('revertNuts', App\Http\Controllers\revert_nutsController::class);
+
+//  Route::resource('revertNuts', App\Http\Controllers\RevertController::class);
+
+// Route::resource('revertnutdds', App\Http\Controllers\RevertController::class);
+
+
+Route::resource('rivertnuts', App\Http\Controllers\RivertnutController::class);
