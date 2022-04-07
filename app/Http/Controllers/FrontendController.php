@@ -251,9 +251,81 @@ $specification = Product_part_number::with(['specification'=>function($query){
 
     public function revertpages(Request $request){
       $revert = $request->product;
+
+
+
       $revert_name = str_replace('_', ' ', $revert);
       $data = Rivertnut::where('name',$revert_name)->first();
       return view('frontend.revertpage')->with(compact('data'));
+
+    }
+
+    public function enquiry(Request $request){
+
+        $name = $request->name;
+        $email = $request->email;
+        $phoneno = $request->phoneno;
+        $product = $request->product;
+        $quantity = $request->quantity;
+        $writeanote = $request->writeanote;
+
+
+
+        $html = "<table id='customers' style='font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;'>
+        <tbody>
+        <tr>
+        <th style='border: 1px solid #ddd;
+        padding: 8px'>Company Name</th>
+        <td  style='border: 1px solid #ddd;
+        padding: 8px'>$name</td>
+        </tr>
+        <tr>
+        <th  style='border: 1px solid #ddd;
+        padding: 8px'>Email ID</th>
+        <td  style='border: 1px solid #ddd;
+        padding: 8px'>$email</td></tr>
+        <tr>
+        <th  style='border: 1px solid #ddd;
+        padding: 8px'>Phone No</th>
+        <td  style='border: 1px solid #ddd;
+        padding: 8px'>$phoneno</td></tr>
+        <tr>
+        <th  style='border: 1px solid #ddd;
+        padding: 8px'>Product</th>
+        <td  style='border: 1px solid #ddd;
+        padding: 8px'>$product</td></tr>
+        <tr>
+        <th  style='border: 1px solid #ddd;
+        padding: 8px'>Quantity</th>
+        <td  style='border: 1px solid #ddd;
+        padding: 8px'>$quantity</td>
+        </tr>
+        <tr>
+        <th  style='border: 1px solid #ddd;
+        padding: 8px'>Write a Note</th>
+        <td  style='border: 1px solid #ddd;
+        padding: 8px'>$writeanote</td></tr>
+        </tbody>
+        </table>
+
+
+        ";
+
+
+        $details = [
+            'title' => 'Mail from BestindiaKart',
+            'body' => "",
+            'htmltemplate' => $html,
+
+        ];
+
+        $useremail =  $email;
+        \Mail::to($useremail)->send(new \App\Mail\Enquirymail($details));
+        $revert_name = str_replace(' ', '_', $product);
+        return \Redirect::route('revert', $revert_name)->with('message', 'Enquiry Sent successfully!');
+
 
     }
 

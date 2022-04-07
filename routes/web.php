@@ -205,6 +205,7 @@ Route::post('unwish',[App\Http\Controllers\WishlistController::class,'unwish'])-
 Route::get('countwhistlist',[App\Http\Controllers\WishlistController::class,'countwhistlist'])->name('countwhistlist');
 
 Route::get('revert/{product}',[App\Http\Controllers\FrontendController::class,'revertpages'] )->name('revert');
+Route::post('enquiry',[App\Http\Controllers\FrontendController::class,'enquiry'] )->name('enquiry');
 
 
 

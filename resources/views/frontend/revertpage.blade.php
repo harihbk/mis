@@ -1,12 +1,23 @@
 @extends('frontend.theme')
 @section('content')
 
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css" />
 
 
 <div class="container py-5">
     <div class="clearfix">
+
+        @if (isset($message))
+        <div class="alert alert-primary" role="alert">
+            {{ $message }}
+          </div>
+        @endif
+
+
+
         <h1 class="profile-title text-center">{{ $data->name }}</h1>
         <!-- <h1>product no 2</h1> -->
+
         <div class="row">
             <div class="col-md-6">
                 <div class="container  ">
@@ -56,107 +67,117 @@
 
                 <h5>Product Details:</h5>
                 <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">weight</th>
-                            <td scope="col">2.1kg</td>
+                    <?php
+                    $datas = $data->getrevert;
+                        foreach ($datas as $key => $value) {
+                           ?>
+                            <tr>
+                                <th>{{ $value->title }}</th>
+                                <td>{{ $value->title_values }}</td>
+                            </tr>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Motor</th>
-                            <td>20v DC motor</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">Maximum Stroke</th>
-                            <td>27mm</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">Charging Time</th>
-                            <td scope="row">
-                                <=60mins< /td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">Drawing Force</th>
-                            <td scope="row">20000N</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">Battery Type</th>
-                            <td scope="row">li-on Battery</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">Input Voltage</th>
-                            <td scope="row">100-240V /50-60hz</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">Air Inlet</th>
-                            <td scope="row">1/4"</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">Rivet Diameter</th>
-                            <td scope="row">5/32", 3/16"</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">Part Number</th>
-                            <td scope="row">PR 2012</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">Stroke Length</th>
-                            <td scope="row">20</td>
-
-                        </tr>
-                        <!-- <tr>
-                            <th scope="row">Weight</th>
-                            <td scope="row">2.28kg</td>
-
-                        </tr> -->
-                        <!-- <tr>
-                            <th scope="row"> Stroke Length</th>
-                            <td scope="row">26mm</td>
-
-                        </tr> -->
-
-                    </tbody>
+            <?php
+                        }
+                        ?>
                 </table>
-                <!-- <h5>Additional Information</h5>
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <th scope="row">Delivery Time</th>
-                            <td scope="row">2-4 week</td>
 
-                        </tr>
-                        <tr>
-                            <th scope="row">Packaging Details</th>
-                            <td scope="row">special packaging boxes</td>
-
-                        </tr>
-                    </tbody>
-                </table> -->
-                <!-- <div>
-                <button  class="btn btn-primary rounded"><i class="bi bi-telephone-fill"></i>  Enquiry Now</button>
-                <button class="btn btn-primary rounded"><i class="bi bi-cart4"></i> ADD CART</button>
-                </div> -->
-                <button id="toogleEnquiry" class="btn btn-primary rounded"><i class="bi bi-telephone-fill"></i> Enquiry
+                <button id="toogleEnquiry" class="btn btn-primary rounded" data-toggle="modal" data-target="#myModal"><i class="bi bi-telephone-fill"></i> Enquiry
                     Now</button>
-                <button class="btn btn-primary rounded"><i class="bi bi-cart4"></i> ADD CART</button>
 
-                <!-- <a href="./enquiry-form.php" target="_parent">Enquiry Now</a> -->
+
+
+                      <!-- The Modal -->
+                      <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">Enquiry</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+
+                            <div class="modal-body">
+
+                                <form method="post" action="{{ route('enquiry') }}">
+                                    {!! csrf_field() !!}
+
+                                    <div class="row contact-details">
+                                        <div class="col-sm-6 mb-xs">
+                                            <input class="gray_bg input_mr checkValidation" type="text" id="textarea" name="name"
+                                                placeholder="Company Name" />
+
+                                        </div>
+                                    </div>
+                                    <div class="row contact-details">
+                                        <div class="col-sm-6 mb-xs">
+                                            <input class="gray_bg input_mr checkValidation" type="text" id="textarea" name="email"
+                                                placeholder="Company Email" />
+
+                                        </div>
+                                    </div>
+                                    <div class="row contact-details">
+                                        <div class="col-sm-6 mb-xs">
+                                            <input class="gray_bg input_mr checkValidation" type="text" id="textarea" name="phoneno"
+                                                placeholder="Company PhoneNo" />
+
+                                        </div>
+                                    </div>
+                                    <div class="row contact-details">
+                                        <div class="col-sm-6 mb-xs">
+                                            <input class="gray_bg input_mr checkValidation" type="text" id="textarea" name="product"
+                                                value="{{ $data->name }}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="row contact-details">
+                                        <div class="col-sm-6 mb-xs">
+                                            <input class="gray_bg input_mr checkValidation" type="text" id="textarea" name="quantity"
+                                            placeholder="No of Quantity" />
+
+                                        </div>
+                                    </div>
+                                    <div class="row contact-details">
+                                        <div class="col-sm-6 mb-xs">
+                                            <textarea class="gray_bg input_mr checkValidation" type="text" id="textarea" name="writeanote"
+                                            placeholder="Write a Notes" ></textarea>
+
+                                        </div>
+                                    </div>
+                                    <div class="row text-center">
+                                        <div class="col-sm-6 mb-xs">
+                                           <input type="submit" class="btn btn-primary" value="Submit">
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+
             </div>
         </div>
 
     </div>
 </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="{{ URL::to('/') }}/assetszoomer/zoom-image.js"></script>
+<script src="{{ URL::to('/') }}/assetszoomer/main.js"></script>
 
 <script>
     $(function() {
