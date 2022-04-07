@@ -55,3 +55,7 @@
 
     <script src="{{ URL::to('/') }}/owl-slider/owl.carousel.min.js"></script>
     <script src="{{ URL::to('/') }}/js/website.js"></script>
+    
+
+<script src="{{ asset('/assets/jquery/zoom-image.js') }}"></script>
+<script src="{{ asset('/assets/jquery/main.js') }}"></script>
