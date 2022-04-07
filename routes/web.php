@@ -205,7 +205,13 @@ Route::post('unwish',[App\Http\Controllers\WishlistController::class,'unwish'])-
 Route::get('countwhistlist',[App\Http\Controllers\WishlistController::class,'countwhistlist'])->name('countwhistlist');
 
 
-
+Route::get('aboutus',[App\Http\Controllers\FooterController::class,'aboutus'])->name('aboutus');
+Route::get('shippingypolicy',[App\Http\Controllers\FooterController::class,'shippingypolicy'])->name('shippingypolicy');
+Route::get('refundscancellations',[App\Http\Controllers\FooterController::class,'refundscancellations'])->name('refundscancellations');
+Route::get('privacypolicy',[App\Http\Controllers\FooterController::class,'privacypolicy'])->name('privacypolicy');
+Route::get('termsandconditions',[App\Http\Controllers\FooterController::class,'termsandconditions'])->name('termsandconditions');
+Route::get('contactus',[App\Http\Controllers\FooterController::class,'contactus'])->name('contactus');
+Route::get('airrivetingtool',[App\Http\Controllers\FooterController::class,'airrivetingtool'])->name('airrivetingtool');
 
 
 Breadcrumbs::register('home', function ($breadcrumbs) {
@@ -242,6 +248,8 @@ Breadcrumbs::register('partnumber', function ($breadcrumbs,$partnumber) {
     $breadcrumbs->parent('products',$partnumber);
     $breadcrumbs->push($partnumber->part_number,'');
 });
+
+
 
 
 
