@@ -302,7 +302,7 @@
 <div class="form-group col-sm-6">
     {!! Form::label('Write Notes', 'Write Notes:') !!}
 
-    <textarea class="ckeditor form-control" name="writenotes">{{$productPartNumber['writenotes'] }}</textarea>
+    <textarea class="ckeditor form-control" name="writenotes">{{ (isset($productPartNumber) && $productPartNumber['writenotes'] ? $productPartNumber['writenotes'] : '')  }}</textarea>
 </div>
 
 <div class="form-group col-sm-6">

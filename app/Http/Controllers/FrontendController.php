@@ -15,6 +15,7 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\URL;
 use App\Models\Specification;
 use App\Models\Partno_filters;
+use App\Models\Rivertnut;
 
 class FrontendController extends Controller
 {
@@ -44,10 +45,10 @@ class FrontendController extends Controller
 
     $deal_of_the_day = Product_part_number::where('deal_of_the_day',1)->where('display_status',1)->get();
     $subcategory = Subcategory::where('category_id',1)->limit(20)->get();
+    $Rivertnut = Rivertnut::get();
 
 
-
-       return view('frontend.index')->with(compact('category','product_part_number','deal_of_the_day','subcategory'));
+       return view('frontend.index')->with(compact('category','product_part_number','deal_of_the_day','subcategory','Rivertnut'));
     }
 
     public function product($childcategory_id){
@@ -248,6 +249,13 @@ $specification = Product_part_number::with(['specification'=>function($query){
         return response()->json($data);
     }
 
+    public function revertpages(Request $request){
+      $revert = $request->product;
+      $revert_name = str_replace('_', ' ', $revert);
+      $data = Rivertnut::where('name',$revert_name)->first();
+      return view('frontend.revertpage')->with(compact('data'));
+
+    }
 
 
 }

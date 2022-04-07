@@ -10,6 +10,47 @@
     <div class="fastiner-list-wrapper">
         <div class="fastiner-slider owl-carousel">
             <div>
+                <?php
+
+                    // foreach ($Rivertnut as $key => $value) {
+
+                        for( $i=0 ; $i < count($Rivertnut);$i+=2 ){
+
+                                ?>
+                                <a href="{{ route('revert',str_replace(' ', '_', $Rivertnut[$i]->name)) }}">
+                                    <div class="fastiner-list">
+                                        <img class="img-fluid" src="{{url('/uploads/')}}/{{ $Rivertnut[$i]->icon }}"  style="width:40%" alt="banner" >
+                                        <p>{{ (isset($Rivertnut[$i]->name) ? $Rivertnut[$i]->name : '') }} </p>
+                                        <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
+                                    </div>
+                                </a>
+
+                                <?php
+                                if(isset($Rivertnut[$i+1])){
+                                    ?>
+                                     <a href="#">
+                                     <div class="fastiner-list mt-4">
+                                        <img class="img-fluid" src="{{url('/uploads/')}}/{{ $Rivertnut[$i+1]->icon }}" alt="banner"  style="width:40%">
+                                        <p>{{ (isset($Rivertnut[$i+1]->name) ? $Rivertnut[$i+1]->name : '') }} </p>
+                                        <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
+                                    </div>
+                                     </a>
+                                    <?php
+                                }
+                                ?>
+
+
+                            <?php
+
+
+                    }
+                ?>
+            </div>
+
+
+
+
+            {{-- <div>
                 <div class="fastiner-list">
                     <img class="img-fluid" src="./images/tools/banner-1.jpg" alt="banner">
                     <p>BLIND RIVETING</p>
@@ -80,7 +121,7 @@
                     <p>BOLTS</p>
                     <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

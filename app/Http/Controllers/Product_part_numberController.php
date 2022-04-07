@@ -84,6 +84,7 @@ class Product_part_numberController extends AppBaseController
             }
 
 
+
             // form insert
         $productPartNumber = $this->productPartNumberRepository->create($input);
 
