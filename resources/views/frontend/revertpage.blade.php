@@ -44,24 +44,10 @@
                         <img src="images/online_icon_right@2x.png" class="icon-right" alt="" id="next-img" />
                     </div>
                 </div>
-                <!-- <h5 class="p-t-04">Product Description :</h5>
-                <strong>Key Features:</strong> -->
-                <!-- <ul class="list-unstyled">
-                    <li>&#10004; Option heavy duty jaw for Avdel Monobolt.</li> <br>
 
-                    <li> &#10004; Forging hydraulic section & hydraulic plunger with double O-ring to avoid oil leakage.
-                    </li> <br>
+                <strong>Key Features:</strong>
+                {!! $data->key_details !!}
 
-                    <li> &#10004; Integrated vacuum mandrel collection system.</li> <br>
-
-                    <li>&#10004; Adjustable vacuum regulator for the best efficiency in setting different size of blind
-                        rivets.</li> <br>
-                    <li> &#10004; 2 piece of ultra jaw for durability.</li> <br>
-                    <li> &#10004; 250???Swivel air inlet for great maneuverability of the tool.</li> <br>
-                    <li> &#10004; Rubber cushion for impact resistance and well protection.</li> <br>
-
-
-                </ul> -->
             </div>
             <div class="col-md-6">
 
