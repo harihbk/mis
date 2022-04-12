@@ -1,0 +1,6 @@
+[28-Feb-2022 05:22:09 UTC] PHP Warning:  require(/home1/bestinjt/public_html/mis/vendor/autoload.php): failed to open stream: No such file or directory in /home1/bestinjt/public_html/mis/artisan on line 18
+[28-Feb-2022 05:22:09 UTC] PHP Warning:  require(/home1/bestinjt/public_html/mis/vendor/autoload.php): failed to open stream: No such file or directory in /home1/bestinjt/public_html/mis/artisan on line 18
+[28-Feb-2022 05:22:09 UTC] PHP Fatal error:  require(): Failed opening required '/home1/bestinjt/public_html/mis/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/bestinjt/public_html/mis/artisan on line 18
+[28-Feb-2022 05:22:18 UTC] PHP Warning:  require(/home1/bestinjt/public_html/mis/vendor/autoload.php): failed to open stream: No such file or directory in /home1/bestinjt/public_html/mis/artisan on line 18
+[28-Feb-2022 05:22:18 UTC] PHP Warning:  require(/home1/bestinjt/public_html/mis/vendor/autoload.php): failed to open stream: No such file or directory in /home1/bestinjt/public_html/mis/artisan on line 18
+[28-Feb-2022 05:22:18 UTC] PHP Fatal error:  require(): Failed opening required '/home1/bestinjt/public_html/mis/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/bestinjt/public_html/mis/artisan on line 18
