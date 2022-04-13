@@ -26,8 +26,13 @@
 
 
                                         <div class="fastiner-list">
-                                            <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $Rivertnut[$i]->icon }}" alt="banner" style="width:40%;height:40%" >
-                                            <p>{{ $Rivertnut[$i]->name }}</p>
+                                            <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $Rivertnut[$i]->icon }}" alt="banner" style="    width: auto;
+    height: 80px;" >
+                                            <p style=" white-space: nowrap; 
+  width: 100%; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  ">{{ $Rivertnut[$i]->name }}</p>
                                             <img src="./images/grip-product-logo.png" alt="logo" class="slider-logo">
                                         </div>
 
@@ -42,8 +47,14 @@
                             <a class="nav-link"
                             href="{{ route('revert',str_replace(' ', '_', $Rivertnut[$i]->name)) }}">
                                 <div class="fastiner-list mt-4">
-                                    <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $Rivertnut[$var]->icon }}" alt="banner" style="width:40%;height:40%">
-                                    <p>{{ $Rivertnut[$var]->name }}</p>
+                                    <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $Rivertnut[$var]->icon }}" alt="banner" style="    width: auto;
+    height: 80px;">
+                                    <p
+                                    style=" white-space: nowrap; 
+  width: 100%; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  ">{{ $Rivertnut[$var]->name }}</p>
                                     <img src="./images/grip-product-logo.png" alt="logo" class="slider-logo">
                                 </div>
 

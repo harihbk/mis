@@ -8,11 +8,8 @@
 
         <div class="col-sm-5">
             <div class="card my-3 p-3">
-                @if (file_exists(public_path().'/uploads/'.$part_number->icon))
-                <img src="{{ url('/uploads/'.$part_number->icon) }}" class="product" alt="product">
-                @else
-                <img src="{{ url('/images/no-image.jpeg') }}" class="product" alt="product">
-                @endif
+                <img src="{{ url('/uploads/'.$part_number->icon) }}" class="product" alt="product" style="width: 100%;min-width: auto;">
+
             </div>
 
         </div>
@@ -108,9 +105,9 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <h4>Releated Product</h4>
+            <!--<h4>Releated Product</h4>-->
             <div class="product-wrapper">
-                <h2 class="text-center">Deal Of the Day</h2>
+                <h2 class="text-center">Releated Product</h2>
                 <div class="row row-cols-md-5 row-cols-sm-1">
 
                     @foreach ($related_data as $item)
