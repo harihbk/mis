@@ -602,7 +602,7 @@
                     //payment gateway
                     var SITEURL = '{{URL::to('')}}';
 
-                                var total_amount = 1 * 100;
+                                var total_amount = amount * 100;
                                 var options = {
                                     "key": "{{ env('RAZOR_KEY') }}", // Enter the Key ID generated from the Dashboard
                                     "amount": total_amount, // Amount is in currency subunits. Default currency is INR. Hence, 10 refers to 1000 paise
