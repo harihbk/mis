@@ -161,7 +161,21 @@ class RivertnutController extends AppBaseController
             return redirect(route('rivertnuts.index'));
         }
 
-        $rivertnut = $this->rivertnutRepository->update($request->all(), $id);
+
+
+        foreach($_POST['title'] as $k => $v){
+            $arr = array(
+                "title" => $v,
+                "title_values" => $_POST['title_values'][$k],
+                "revert_nuts_id" => $id
+            );
+            $idss = $_POST['hidden'][$k];
+           Revertvalue::updateOrCreate(['id'=>$idss],$arr);
+        }
+
+
+
+        $rivertnut = $this->rivertnutRepository->update($request->only(['name','key_details']), $id);
 
         Flash::success('Rivertnut updated successfully.');
 
