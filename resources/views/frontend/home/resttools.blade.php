@@ -7,123 +7,79 @@
     <div>
         <img src="./images/tools/banner.jpg" alt="banner">
     </div>
-    <div class="fastiner-list-wrapper">
+    
+    
+    
+    
+        <div class="fastiner-list-wrapper">
         <div class="fastiner-slider owl-carousel">
-            <div>
-                <?php
-
-                    // foreach ($Rivertnut as $key => $value) {
-
-                        for( $i=0 ; $i < count($Rivertnut);$i+=2 ){
-
-                                ?>
-                                <a href="{{ route('revert',str_replace(' ', '_', $Rivertnut[$i]->name)) }}">
-                                    <div class="fastiner-list">
-                                        <img class="img-fluid" src="{{url('/uploads/')}}/{{ $Rivertnut[$i]->icon }}"  style="width:40%" alt="banner" >
-                                        <p>{{ (isset($Rivertnut[$i]->name) ? $Rivertnut[$i]->name : '') }} </p>
-                                        <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                                    </div>
-                                </a>
-
-                                <?php
-                                if(isset($Rivertnut[$i+1])){
-                                    ?>
-                                     <a href="{{ route('revert',str_replace(' ', '_', $Rivertnut[$i+1]->name)) }}">
-                                     <div class="fastiner-list mt-4">
-                                        <img class="img-fluid" src="{{url('/uploads/')}}/{{ $Rivertnut[$i+1]->icon }}" alt="banner"  style="width:40%">
-                                        <p>{{ (isset($Rivertnut[$i+1]->name) ? $Rivertnut[$i+1]->name : '') }} </p>
-                                        <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                                    </div>
-                                     </a>
-                                    <?php
-                                }
-                                ?>
-
-
-                            <?php
-
-
-                    }
-                ?>
-            </div>
 
 
 
+           @for ($i=0 ; $i <count($Rivertnut) ; $i+=2)
 
-            {{-- <div>
-                <div class="fastiner-list">
-                    <img class="img-fluid" src="./images/tools/banner-1.jpg" alt="banner">
-                    <p>BLIND RIVETING</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-                <div class="fastiner-list mt-4">
-                    <img class="img-fluid" src="./images/tools/banner-2.jpg" alt="banner">
-                    <p>BLIND RIVET NUT</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-            </div>
-            <div>
-                <div class="fastiner-list">
-                    <img class="img-fluid" src="./images/tools/banner-3.jpg" alt="banner">
-                    <p>BATTERY RIVETING</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-                <div class="fastiner-list mt-4">
-                    <img class="img-fluid" src="./images/tools/banner-4.jpg" alt="banner">
-                    <p>HAND TOOLS</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-            </div>
-            <div>
-                <div class="fastiner-list">
-                    <img class="img-fluid" src="./images/tools/banner-5.jpg" alt="banner">
-                    <p>BOLTGRIP</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-                <div class="fastiner-list mt-4">
-                    <img class="img-fluid" src="./images/tools/banner-6.jpg" alt="banner">
-                    <p>SELF PIERCING</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-            </div>
-            <div>
-                <div class="fastiner-list">
-                    <img class="img-fluid" src="./images/tools/banner-7.jpg" alt="banner">
-                    <p>ELECTRIC RIVETING</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-                <div class="fastiner-list mt-4">
-                    <img class="img-fluid" src="./images/tools/banner-8.jpg" alt="banner">
-                    <p>BLIND RIVETING</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-            </div>
-            <div>
-                <div class="fastiner-list">
-                    <img class="img-fluid" src="./images/tools/banner-1.jpg" alt="banner">
-                    <p>BOLTS</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-                <div class="fastiner-list mt-4">
-                    <img class="img-fluid" src="./images/tools/banner-2.jpg" alt="banner">
-                    <p>BOLTS</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-            </div>
-            <div>
-                <div class="fastiner-list">
-                    <img class="img-fluid" src="./images/tools/banner-3.jpg" alt="banner">
-                    <p>BOLTS</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-                <div class="fastiner-list mt-4">
-                    <img class="img-fluid" src="./images/tools/banner-4.jpg" alt="banner">
-                    <p>BOLTS</p>
-                    <img class="slider-logo" src="./images/grip-product-logo.png" alt="slider-logo">
-                </div>
-            </div> --}}
+                    @if (isset($Rivertnut[$i]->icon) && $Rivertnut[$i]->icon)
+                        <div>
+                            <div style=" width:250px;max-width:250px;">
+                            <a class="nav-link"
+                                        href="{{ route('revert',str_replace(' ', '_', $Rivertnut[$i]->name)) }}">
+
+
+                                        <div class="fastiner-list">
+                                            <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $Rivertnut[$i]->icon }}" alt="banner" style="    width: auto;
+    height: 80px;" >
+                                            <p style=" white-space: nowrap; 
+  width: 100%; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  ">{{ $Rivertnut[$i]->name }}</p>
+                                            <img src="./images/grip-product-logo.png" alt="logo" class="slider-logo">
+                                        </div>
+
+                            </a>
+                            </div>
+
+                                @php
+                                $var = $i+1;
+                                @endphp
+                    @if (isset($Rivertnut[$var]->icon) && isset($Rivertnut[$var]->icon))
+
+                            <a class="nav-link"
+                            href="{{ route('revert',str_replace(' ', '_', $Rivertnut[$i]->name)) }}">
+                                <div class="fastiner-list mt-4">
+                                    <img class="img-fluid banner" src="{{ URL::asset('uploads') }}/{{ $Rivertnut[$var]->icon }}" alt="banner" style="    width: auto;
+    height: 80px;">
+                                    <p
+                                    style=" white-space: nowrap; 
+  width: 100%; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  ">{{ $Rivertnut[$var]->name }}</p>
+                                    <img src="./images/grip-product-logo.png" alt="logo" class="slider-logo">
+                                </div>
+
+                            </a>
+
+
+                    @endif
+                            </div>
+                    @else
+                      <div>
+                        <div class="fastiner-list mt-4">
+                            <img class="img-fluid banner" src="#" alt="banner">
+                            <p>BOLTS</p>
+                            <img src="./images/grip-product-logo.png" alt="logo" class="slider-logo" style="width:40%">
+                        </div>
+                      </div>
+                    @endif
+           @endfor
         </div>
     </div>
+    
+    
+    
+    
+    
 </div>
 
 

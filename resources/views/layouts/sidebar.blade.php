@@ -102,6 +102,10 @@
                         <li class=" {{ Request::is('productPartNumbers*') ? 'active' : '' }}"><a
                                 href="{{ route('productPartNumbers.index') }}"><i class="ti-control-record"></i> Product
                                 Part Number</a></li>
+                                
+                     <li class=" {{ Request::is('rivertnuts*') ? 'active' : '' }}"><a
+                                href="{{ route('rivertnuts.index') }}"><i class="ti-control-record"></i> Assembly tools</a></li>
+                                
                     </ul>
                 </div>
             </li>

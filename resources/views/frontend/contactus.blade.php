@@ -13,7 +13,7 @@
                 are not answered by this Privacy Statement and/or any complaints please contact us at <a
                     href="mailto: marketing@bumaas.com">marketing@bumaas.com</a>
             </p>
-            <strong>Alternatively you can contact us + 91 44 4421 8147 if you have any queries in relation to
+            <strong>Alternatively you can contact us <a href="tel:+91 63837 35782">+91 63837 35782</a>  if you have any queries in relation to
                 your data. Our offices are open Monday through Frday Or all of the ways!
             </strong> <br>
         </div>
@@ -26,7 +26,10 @@
                     <div class="card-body">
                         <h5 class="card-title"> <i class="bi bi-envelope-fill"></i></h5>
                         <p class="card-text text-primary"><strong>Contact Email : </strong></p>
-                        <a href="mailto:marketing@bumaas.com">marketing@bumaas.com</a>
+                        <!-- <a href="mailto:marketing@bumaas.com">marketing@bumaas.com</a> <br> -->
+                        <a href="mailto:sales@bestindiakart.com">sales@bestindiakart.com</a> <br>
+                        <a href="mailto:info@bestindiakart.com">info@bestindiakart.com</a><br>
+                        <a href="mailto:customersupport@bestindiakart.com">customersupport@bestindiakart.com</a>
                     </div>
                 </div>
             </div>
@@ -35,7 +38,8 @@
                     <div class="card-body">
                         <h5 class="card-title"> <i class="bi bi-telephone-fill "></i></h5>
                         <p class="card-text text-primary"><strong>Contact mobile :</strong></p>
-                        <p class="card-text"><strong>+91 7812810488 </strong></p>
+                        <!-- <p class="card-text"><strong> +91 63837 35782 </strong></p> -->
+                        <a class="card-text" href="tel:+91 63837 35782"><strong>+91 63837 35782</strong></a>
                     </div>
                 </div>
             </div>
@@ -113,7 +117,7 @@
                             Please Type a message.
                         </div>
                     </div>
-                    <button type="submit" onClick="getQuote() error text-danger" class="btn-orange">
+                    <button type="submit" onClick="getQuote() " class="btn-orange">
                         Request a Quote Now
                     </button>
                 </form>

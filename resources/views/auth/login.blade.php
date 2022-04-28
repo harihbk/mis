@@ -57,7 +57,7 @@
 
     <nav class="navbar navbar-expand-md sticky-top addShadow">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img class="header-logo" src="./images/logo.svg" alt="bumaas">
             </a>
             <form class="form-group d-none d-sm-block">

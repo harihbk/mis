@@ -13,6 +13,18 @@
                         Add New
                     </a>
                 </div>
+
+
+                <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" name="file" class="form-control">
+                    <br>
+                    <button class="btn btn-success">Import User Data</button>
+
+                </form>
+
+
+
             </div>
         </div>
     </section>
@@ -29,7 +41,7 @@
 
                 <div class="card-footer clearfix float-right">
                     <div class="float-right">
-                        
+
                     </div>
                 </div>
             </div>

@@ -58,7 +58,6 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 

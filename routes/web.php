@@ -148,6 +148,7 @@ Route::post('authlogin',[App\Http\Controllers\UserController::class, 'postlogin'
 //Route::post('authlogin',[App\Http\Controllers\UserController::class, 'postlogin'])->name('authlogin');
 Route::post('logout',[App\Http\Controllers\UserController::class, 'authlogout'])->name('authlogout');
 
+Route::post('import', [App\Http\Controllers\Product_part_numberController::class, 'import'])->name('import');
 
 
 Route::post('addtocart',[App\Http\Controllers\CartController::class, 'addtocart'])->name('add-to-cart');
