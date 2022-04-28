@@ -59,7 +59,7 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        $data = User::where('email','=', $credentials['email'])->where('status',0)->orWhere('status', 3)->get();
+        $data = User::where('email','=', $credentials['email'])->where('status',0)->orWhere('status', 3)->orWhere('status', 2)->get();
 
         if(!$data->count()){
             return redirect("adminlogin")->withSuccess('Oppes! You have entered invalid credentials');

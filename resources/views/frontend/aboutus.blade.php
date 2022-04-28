@@ -1,3 +1,8 @@
+<head>
+<title>About us | BestIndiakart </title> 
+<meta name="keywords" content="rivets, rivet nut, self-piercing rivets, self-clinching fasteners, miniature screws, thread locking fasteners, tamper resistance, antitheft fasteners" />
+<meta name="description" content="Bumaas Engineering solutions and technologies ( BEST ) is one of the fastening  and assembly technologies solution provider in india for the challenges which our customers faces for joiing two parts together." />
+</head>
 @extends('frontend.theme')
 @section('content')
 <div class="container py-3">

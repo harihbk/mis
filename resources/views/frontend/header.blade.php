@@ -2,7 +2,15 @@
 <html lang="en">
 
 <head>
-    <title>Bestindiakart</title>
+<title>BestIndiakart is the First Fasteners E-Commerce Platform in India</title> 
+<meta name="keywords" content="fasteners company in chennai, fasteners manufacturer in india, ecommerce platform in india, fasteners ecommerce, fasteners suppliers in india, rivet suppliers in india, rivet nut suppliers in india" />
+<meta name="description" content="BestIndiakart is the First Fasteners Ecommerce Platform in India. For Buyinng and Selling of Fasteners and Installtion Tools from the Manufacturer and Suppliers." />
+<meta name="robots" content="ALL" />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Bestindiakart" />
+<meta name="googlebot" content="all" />
+<meta name="Publisher" content="Bestindiakart" />
+<link rel="canonical" href="https://bestindiakart.com/">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -35,6 +43,15 @@
         <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('/css/home.css') }}">
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MNP105PW4K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MNP105PW4K');
+</script>
 </head>
 
 <body>

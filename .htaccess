@@ -1,3 +1,8 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^bestindiakart.com\.com [NC]
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://www.bestindiakart.com/$1 [R,L]
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
@@ -42,3 +47,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !^/public/
 RewriteRule ^(css|js|images|trainer-cv)/(.*)$ public/$1/$2 [L,NC]
+RewriteCond %{HTTP_HOST} ^www\.bestindiakart\.com$
+RewriteRule ^(.*)$ "http\:\/\/https\:\/\/$1" [R=301,L]
+
