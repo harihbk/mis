@@ -28,18 +28,38 @@ class ImportProduct_part_number implements ToModel ,WithHeadingRow
     {
 
 
+        $rowprod = $row['partnumber'];
 
-        return new Product_part_number([
-            'part_number'=>$row['partnumber'],
-        'nominal_thread_m'=>$row['nominal_thread_m'],
-        'product_length'=>$row['product_length'],
-        'basic_shape'=>$row['basic_shop'],
-        'additional_shape'=>$row['additional_shape'],
-        'manufacturer'=>$row['manufacturer'],
-        'original_price'=>$row['sales_price'],
-        'dash_price'=>$row['weight_price'],
-        "quantity" => $row['quantity'],
-        "product_id"=>$row['product'],
-        ]);
+
+        return Product_part_number::updateOrCreate(
+            [
+               'part_number'   => $rowprod,
+            ],
+            [
+                'part_number'=>$row['partnumber'],
+                'nominal_thread_m'=>$row['nominal_thread_m'],
+                'product_length'=>$row['product_length'],
+                'basic_shape'=>$row['basic_shop'],
+                'additional_shape'=>$row['additional_shape'],
+                'manufacturer'=>$row['manufacturer'],
+                'original_price'=>$row['sales_price'],
+                'dash_price'=>$row['weight_price'],
+                "quantity" => $row['quantity'],
+                "product_id"=>$row['product'],
+            ],
+        );
+
+        // return new Product_part_number([
+        // 'part_number'=>$row['partnumber'],
+        // 'nominal_thread_m'=>$row['nominal_thread_m'],
+        // 'product_length'=>$row['product_length'],
+        // 'basic_shape'=>$row['basic_shop'],
+        // 'additional_shape'=>$row['additional_shape'],
+        // 'manufacturer'=>$row['manufacturer'],
+        // 'original_price'=>$row['sales_price'],
+        // 'dash_price'=>$row['weight_price'],
+        // "quantity" => $row['quantity'],
+        // "product_id"=>$row['product'],
+        // ]);
     }
 }

@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\DB;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportProduct_part_number;
+use App\Exports\ProductPartnoExport;
+
 
 
 use Session;
@@ -376,4 +378,10 @@ $productPartNumber = $this->productPartNumberRepository->update($input, $id);
 
         return redirect()->back();
     }
+
+    public function exportUsers(Request $request){
+        return Excel::download(new ProductPartnoExport, 'partno.xlsx');
+    }
+
+
 }

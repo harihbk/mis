@@ -14,6 +14,8 @@
                     </a>
                 </div>
 
+                <a class="btn btn-success" href="{{ route('export-users') }}">Export Users</a>
+
 
                 <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
