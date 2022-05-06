@@ -50,3 +50,7 @@ RewriteRule ^(css|js|images|trainer-cv)/(.*)$ public/$1/$2 [L,NC]
 RewriteCond %{HTTP_HOST} ^www\.bestindiakart\.com$
 RewriteRule ^(.*)$ "http\:\/\/https\:\/\/$1" [R=301,L]
 
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# This domain inherits the “PHP” package.
+# php -- END cPanel-generated handler, do not edit

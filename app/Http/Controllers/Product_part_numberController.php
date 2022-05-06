@@ -17,6 +17,13 @@ use App\Models\Product_part_number;
 use App\Models\Weight;
 use App\Models\Unit;
 use Session;
+
+use Illuminate\Support\Facades\DB;
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ImportProduct_part_number;
+
+
 class Product_part_numberController extends AppBaseController
 {
 
@@ -358,4 +365,16 @@ $productPartNumber = $this->productPartNumberRepository->update($input, $id);
 
 
     }
+    
+      public function import(Request $request){
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        Excel::import(new ImportProduct_part_number, $request->file('file')->store('files'));
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        Flash::success('Product Part Number updated successfully.');
+
+        return redirect()->back();
+    }
+    
 }

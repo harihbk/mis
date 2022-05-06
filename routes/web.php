@@ -197,6 +197,10 @@ Route::resource('units', App\Http\Controllers\UnitController::class);
 Route::resource('pricings', App\Http\Controllers\PricingController::class);
 
 
+Route::post('import', [App\Http\Controllers\Product_part_numberController::class, 'import'])->name('import');
+
+
+
 //wishlist
 
 Route::post('wishlist',[App\Http\Controllers\WishlistController::class,'addtowishlist'])->name('add-to-wishlist');
